@@ -151,10 +151,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cl_device.cpp" />
     <ClCompile Include="cl_platform.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cl_device.h" />
     <ClInclude Include="cl_platform.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
