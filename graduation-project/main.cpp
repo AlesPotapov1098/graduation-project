@@ -1,12 +1,6 @@
-#include <windows.h>
-#include "resource.h"
+#include <iostream>
 
-int WINAPI WinMain(
-		HINSTANCE hInstance,
-		HINSTANCE hPrevInstance,
-		LPSTR     lpCmdLine,
-		int       nShowCmd) 
-{
-	
+int main() {
+	std::cout << "Hello World!!!" << std::endl;
 	return 0;
 }
