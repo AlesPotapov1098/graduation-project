@@ -3,11 +3,54 @@
 #include <Windows.h>
 #include <windowsx.h>
 
-#include "cl_platform.h"
+struct host
+{
+	cl_platform_id   platform;
+	cl_device_id     device;
+	cl_context	     contex;
+	cl_program	     program;
+	cl_kernel        kernel;
+	cl_command_queue command_queue;
+};
 
-typedef HWND (*__stdcall create_window)(HINSTANCE instance,LPCSTR window_name,LPCSTR class_windw_name);
+host pC;
 
-HWND __stdcall CreateEWindow(HINSTANCE inst,LPCSTR wndname, LPCSTR classname);
+LRESULT MainWindowProc(HWND window, UINT mess, WPARAM wparam, LPARAM lparam);
+
+BOOL InitWindow(HINSTANCE instance, LPCSTR classname);
+HWND CreateEWindow(HINSTANCE inst,LPCSTR wndname, LPCSTR classname);
+
+void InitHost()
+{
+	cl_uint count_platfroms = 0;
+	if (clGetPlatformIDs(0, nullptr, &count_platfroms) != CL_SUCCESS)
+	{
+		MessageBoxA(nullptr,"Not platfroms id!!!","Error",MB_OK);
+		return;
+	}
+
+	if (count_platfroms == 0)
+	{
+		MessageBoxA(nullptr, "Not platfroms id!!!", "Error", MB_OK);
+		return;
+	}
+
+	cl_platform_id * platfroms = new cl_platform_id[count_platfroms];
+	
+	if (clGetPlatformIDs(count_platfroms, platfroms, nullptr) != CL_SUCCESS)
+	{
+		MessageBoxA(nullptr, "Not platfroms id!!!", "Error", MB_OK);
+		return;
+	}
+
+	pC.platform = platfroms[1];
+
+	if (clGetDeviceIDs(pC.platform, CL_DEVICE_TYPE_GPU, 1, &pC.device, nullptr) != CL_SUCCESS)
+	{
+		MessageBoxA(nullptr, "Not device GPU!!!", "Error", MB_OK);
+		return;
+	}
+}
 
 int WINAPI WinMain(
 	HINSTANCE hInstance,
@@ -15,36 +58,81 @@ int WINAPI WinMain(
 	LPSTR cmdLine,
 	int count) 
 {
-	create_window start = &CreateEWindow;
-	if (!start(hInstance, "First Window", "GraduationProjectMainWindow")) {
-		MessageBoxExA(nullptr,"Что-то пошло не так","Error",0,RUSSIAN_CHARSET);
+	LPCSTR MainWindowClassName = "Graduation project";
+	LPCSTR MainWindowName = "Simple Windows App";
+	
+	if (!InitWindow(hInstance,MainWindowClassName))
+	{
 		return -1;
+	}
+
+	HWND hMainWindow = CreateEWindow(hInstance,MainWindowName,MainWindowClassName);
+	
+	if (!hMainWindow)
+	{
+		return -2;
+	}
+
+	MSG msg = {0};
+	while (GetMessageA(&msg, nullptr, 0, 0))
+	{
+		if (msg.message == WM_QUIT)
+		{
+			break;
+		}
+
+		TranslateMessage(&msg);
+		DispatchMessageA(&msg);
 	}
 	
 	return 0;
 }
 
-HWND __stdcall CreateEWindow(HINSTANCE inst, LPCSTR wndname, LPCSTR classname)
+BOOL InitWindow(HINSTANCE instance,LPCSTR classname)
 {
-	WNDCLASSEXA windowClass;
-	std::memset(&windowClass,0,sizeof(WNDCLASSEXA));
+	WNDCLASSEXA WindowClass;
+	std::memset(&WindowClass,0,sizeof(WNDCLASSEXA));
+	WindowClass.cbSize = sizeof(WNDCLASSEXA);
+	WindowClass.style = CS_HREDRAW | CS_VREDRAW;
+	WindowClass.hInstance = instance;
+	WindowClass.lpfnWndProc = &MainWindowProc;
+	WindowClass.lpszClassName = classname;
 
-	windowClass.cbSize = sizeof(WNDCLASSEXA);
-	windowClass.hInstance = inst;
-	windowClass.lpfnWndProc = DefWindowProcA;
-	windowClass.lpszClassName = classname;
+	return RegisterClassExA(&WindowClass);
+}
 
-	if (!RegisterClassExA(&windowClass)) {
-		return nullptr;
-	}
-
-	HWND hwnd = CreateWindowExA(
+HWND CreateEWindow(HINSTANCE inst, LPCSTR wndname, LPCSTR classname)
+{
+	return  CreateWindowExA(
 			0,
 			classname, 
 			wndname,
-			WS_OVERLAPPEDWINDOW | WS_VISIBLE,
+			WS_OVERLAPPEDWINDOW | WS_VISIBLE | WS_SIZEBOX,
 			500, 300, 500, 380,
 			NULL, NULL, inst, NULL);
-
-	return hwnd;
 }
+
+LRESULT MainWindowProc(HWND window, UINT mess, WPARAM wparam, LPARAM lparam)
+{
+	switch (mess)
+	{
+		case WM_CREATE:
+		{
+			InitHost();
+		} break;		
+		case WM_CLOSE:
+		{
+			PostQuitMessage(WM_QUIT);
+		} break;
+		case WM_DESTROY:
+			break;
+
+		default:
+			break;
+	}
+
+	return DefWindowProcA(window,mess,wparam,lparam);
+}
+
+
+

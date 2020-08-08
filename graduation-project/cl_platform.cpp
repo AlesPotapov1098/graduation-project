@@ -126,8 +126,6 @@ namespace gp
 
 	void platform::load_device()
 	{
-		count_devices = 0;
-		
 		if (clGetDeviceIDs(id, CL_DEVICE_TYPE_ALL, 0, nullptr, &count_devices) != CL_SUCCESS)
 		{
 			return;
@@ -149,6 +147,11 @@ namespace gp
 		{
 			devices.push_back(device(device_ids[i]));
 		}
+	}
+
+	const std::vector<device>& platform::get_devices() const
+	{
+		return devices;
 	}
 
 	const std::string& platform::get_extensions()
