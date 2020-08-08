@@ -1,4 +1,3 @@
-//#pragma comment(lib,"user32.lib")
 #include <CL/cl.h>
 #include <iostream>
 #include <Windows.h>
@@ -16,7 +15,6 @@ int WINAPI WinMain(
 	LPSTR cmdLine,
 	int count) 
 {
-
 	create_window start = &CreateEWindow;
 	if (!start(hInstance, "First Window", "GraduationProjectMainWindow")) {
 		MessageBoxExA(nullptr,"Что-то пошло не так","Error",0,RUSSIAN_CHARSET);

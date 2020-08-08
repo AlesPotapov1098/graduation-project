@@ -13,19 +13,19 @@ namespace gp
 	class device;
 	class platform;
 
-	enum type_info 
+	enum type_info : __int32
 	{
 		/*Common type info*/
 		ID_NAME = 0,
-		ID_VENDOR,
-		ID_VERSION,
-		ID_PROFILE,
+		ID_VENDOR = 1,
+		ID_VERSION = 2,
+		ID_PROFILE = 3,
 
 		/*Platfrom specific type info*/
-		ID_PLATFROM_EXTENSIONS,
+		ID_PLATFROM_EXTENSIONS = 4,
 
 		/*Device specific type info*/
-		ID_DEVICE_DRIVER_VERSION
+		ID_DEVICE_DRIVER_VERSION = 5
 	};
 
 	class information
@@ -36,8 +36,7 @@ namespace gp
 			virtual const std::string& __stdcall get_vendor();
 			virtual const std::string& __stdcall get_version();
 			virtual const std::string& __stdcall get_profile();
-		protected:
-			template<typename T> T __stdcall load_info(type_info type) {return T(); };
+			virtual void*  __stdcall load_info(type_info type) = 0;
 		protected:
 			std::string name;
 			std::string vendor;
@@ -48,48 +47,40 @@ namespace gp
 	class device : public information
 	{
 		public:
-			__stdcall device();
-			__stdcall ~device();
+			device();
+			device(cl_device_id devID);
+			~device();
+			const std::string& __stdcall get_driver_version();
+			void * __stdcall load_info(type_info type) override;
 	
 		private:
 			cl_device_id id;
-			
-		public:
-			const std::string& __stdcall get_driver_version();
-			
-		protected:
-			template<typename T> T __stdcall load_info(type_info type);
-
-		private:
 			std::string driver_version;
 	};
 
 	class platform : public information
 	{
 		public:
-			__stdcall platform();
-			__stdcall ~platform();
+			platform();
+			~platform();
 			
 			void __stdcall load_device();
 
 			const std::string& __stdcall get_extensions();
+			void* __stdcall load_info(type_info type) override;
 	
 		private:
 			cl_platform_id		id; 
-			cl_int				count_devices;
-			std::vector<device>	device;	
-
-		protected:
-			template<typename T> T __stdcall load_info(type_info type);
-		private:
+			cl_uint				count_devices;
+			std::vector<device>	devices;	
 			std::string extensions;
 	};
 
-	class platforom_loader
+	class platforom_unit
 	{
 		public:
-			platforom_loader();
-			~platforom_loader();
+			platforom_unit();
+			~platforom_unit();
 
 			const std::vector<platform>& get_platforms() const;
 			const platform& get_cpu_platforms() const;
@@ -99,115 +90,6 @@ namespace gp
 			std::vector<platform> _platforms;
 			std::size_t			  _count_platform;
 	};
-	
-
-
-
-
-
-
-
-
-
-	template<typename T>
-	inline T platform::load_info(type_info type)
-	{
-		cl_uint cl_type_info = 0;
-
-		switch (type)
-		{
-		case ID_NAME:
-			cl_type_info = CL_PLATFORM_NAME;
-			break;
-		case ID_PROFILE:
-			cl_type_info = CL_PLATFORM_PROFILE;
-			break;
-		case ID_VENDOR:
-			cl_type_info = CL_PLATFORM_VENDOR;
-			break;
-		case ID_VERSION:
-			cl_type_info = CL_PLATFORM_VERSION;
-			break;
-		case ID_PLATFROM_EXTENSIONS:
-			cl_type_info = CL_PLATFORM_EXTENSIONS;
-			break;
-		default:
-			cl_type_info = 0;
-			break;
-		}
-
-		if (cl_type_info == 0) {
-			throw std::exception("Bag!!!");
-		}
-
-		std::size_t info_size = 0;
-
-		if (clGetPlatformInfo(id, cl_type_info, 0, nullptr, &info_size)) {
-			throw std::exception("Bag!!!");
-		}
-
-		if (info_size == 0) {
-			throw std::exception("Bag!!!");
-		}
-
-		T* info = new T[info_size];
-
-		if (clGetPlatformInfo(id, cl_type_info, info_size, info, nullptr)) {
-			throw std::exception("Bag!!!");
-		}
-
-		return *info;
-	}
-	
-	template<typename T>
-	inline T __stdcall device::load_info(type_info type)
-	{
-		cl_uint cl_type_info = 0;
-
-		switch (type)
-		{
-		case ID_NAME:
-			cl_type_info = CL_DEVICE_NAME;
-			break;
-		case ID_PROFILE:
-			cl_type_info = CL_DEVICE_PROFILE;
-			break;
-		case ID_VENDOR:
-			cl_type_info = CL_DEVICE_VENDOR;
-			break;
-		case ID_VERSION:
-			cl_type_info = CL_DEVICE_VERSION;
-			break;
-		case ID_DEVICE_DRIVER_VERSION:
-			cl_type_info = CL_DEVICE_VENDOR;
-			break;
-		default:
-			cl_type_info = 0;
-			break;
-		}
-
-		if (cl_type_info == 0) {
-			return nullptr;
-		}
-
-		std::size_t info_size = 0;
-
-		if (clGetDeviceInfo(id, cl_type_info, 0, nullptr, &info_size)) {
-			throw std::exception("Bag!!!");
-		}
-
-		if (info_size == 0) {
-			throw std::exception("Bag!!!");
-		}
-
-		T* info = new T[info_size];
-
-		if (clGetDeviceInfo(id, cl_type_info, info_size, info, nullptr)) {
-			throw std::exception("Bag!!!");
-		}
-
-		return *info;
-	}
 }
 
 #endif // !CL_PROGRAM_H
