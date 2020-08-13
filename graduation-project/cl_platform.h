@@ -62,12 +62,13 @@ namespace gp
 	{
 		public:
 			platform();
+			platform(cl_platform_id id);
 			~platform();
 			
 			void __stdcall load_device();
 			const std::vector<device>& get_devices() const;
-// 			const device & get_cpu_device_id() const;
-// 			const device & get_gpu_device_id() const;
+// 			const device & get_cpu_device() const;
+// 			const device & get_gpu_device() const;
 
 			const std::string& __stdcall get_extensions();
 			void* __stdcall load_info(type_info type) override;

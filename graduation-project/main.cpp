@@ -1,7 +1,7 @@
-#include <CL/cl.h>
 #include <iostream>
 #include <Windows.h>
-#include <windowsx.h>
+
+#include "cl_platform.h"
 
 struct host
 {
@@ -15,12 +15,20 @@ struct host
 
 host pC;
 
+struct PainUIObject
+{
+	HDC			hDevContext;
+	HBITMAP		hBitMap;
+	BITMAPINFO	hBitmapInfo;
+	LPVOID		pPixels;
+};
+
 LRESULT MainWindowProc(HWND window, UINT mess, WPARAM wparam, LPARAM lparam);
 
-BOOL InitWindow(HINSTANCE instance, LPCSTR classname);
-HWND CreateEWindow(HINSTANCE inst,LPCSTR wndname, LPCSTR classname);
+BOOL OnInit(HINSTANCE instance, LPCSTR classname);
+HWND OnCreate(HINSTANCE inst,LPCSTR wndname, LPCSTR classname);
 
-void InitHost()
+void OnInitPlatformUnit()
 {
 	cl_uint count_platfroms = 0;
 	if (clGetPlatformIDs(0, nullptr, &count_platfroms) != CL_SUCCESS)
@@ -52,43 +60,32 @@ void InitHost()
 	}
 }
 
-int WINAPI WinMain(
-	HINSTANCE hInstance,
-	HINSTANCE hPrevInstance,
-	LPSTR cmdLine,
-	int count) 
+int main(int argc, char ** argv) 
 {
-	LPCSTR MainWindowClassName = "Graduation project";
-	LPCSTR MainWindowName = "Simple Windows App";
-	
-	if (!InitWindow(hInstance,MainWindowClassName))
-	{
-		return -1;
+	cl_uint count = 0;
+	cl_uint ErrorCode = clGetPlatformIDs(0, nullptr, &count);
+	if (ErrorCode) {
+		return ErrorCode;
 	}
 
-	HWND hMainWindow = CreateEWindow(hInstance,MainWindowName,MainWindowClassName);
-	
-	if (!hMainWindow)
-	{
+	if (count == 0) {
 		return -2;
 	}
 
-	MSG msg = {0};
-	while (GetMessageA(&msg, nullptr, 0, 0))
-	{
-		if (msg.message == WM_QUIT)
-		{
-			break;
-		}
-
-		TranslateMessage(&msg);
-		DispatchMessageA(&msg);
+	cl_platform_id * platforms = new cl_platform_id[count];
+	ErrorCode = clGetPlatformIDs(count, platforms, nullptr);
+	if (ErrorCode){
+		return ErrorCode;
 	}
+
+	
+
+	delete[] platforms;
 	
 	return 0;
 }
 
-BOOL InitWindow(HINSTANCE instance,LPCSTR classname)
+BOOL OnInit(HINSTANCE instance,LPCSTR classname)
 {
 	WNDCLASSEXA WindowClass;
 	std::memset(&WindowClass,0,sizeof(WNDCLASSEXA));
@@ -97,17 +94,18 @@ BOOL InitWindow(HINSTANCE instance,LPCSTR classname)
 	WindowClass.hInstance = instance;
 	WindowClass.lpfnWndProc = &MainWindowProc;
 	WindowClass.lpszClassName = classname;
+	WindowClass.hbrBackground = CreateSolidBrush(COLOR_WINDOW);
 
 	return RegisterClassExA(&WindowClass);
 }
 
-HWND CreateEWindow(HINSTANCE inst, LPCSTR wndname, LPCSTR classname)
+HWND OnCreate(HINSTANCE inst, LPCSTR wndname, LPCSTR classname)
 {
 	return  CreateWindowExA(
 			0,
 			classname, 
 			wndname,
-			WS_OVERLAPPEDWINDOW | WS_VISIBLE | WS_SIZEBOX,
+			WS_OVERLAPPEDWINDOW,
 			500, 300, 500, 380,
 			NULL, NULL, inst, NULL);
 }
@@ -118,8 +116,19 @@ LRESULT MainWindowProc(HWND window, UINT mess, WPARAM wparam, LPARAM lparam)
 	{
 		case WM_CREATE:
 		{
-			InitHost();
-		} break;		
+			OnInitPlatformUnit();
+		} break;	
+
+		case WM_SIZE:
+		{
+
+		} break;
+
+		case WM_PAINT:
+		{
+
+		} break;
+	
 		case WM_CLOSE:
 		{
 			PostQuitMessage(WM_QUIT);

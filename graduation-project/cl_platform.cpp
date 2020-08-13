@@ -113,9 +113,16 @@ namespace gp
 
 namespace gp
 {
+
 	platform::platform()
 	{
 		id = nullptr;
+		count_devices = 0;
+	}
+
+	platform::platform(cl_platform_id id)
+	{
+		id = id;
 		count_devices = 0;
 		/*extensions = nullptr;*/
 	}
@@ -183,14 +190,29 @@ namespace gp
 			break;
 
 		default:
-			platform_type_info = -1;
+			platform_type_info = 0;
 			break;
 		}
 
-		if (platform_type_info == -1)
+		if (platform_type_info == 0)
 		{
 			return nullptr;
 		}
+
+		std::size_t info_size = 0;
+		if (clGetPlatformInfo(id, platform_type_info, 0, nullptr, &info_size))
+		{
+			return nullptr;
+		}
+
+		void* info = std::malloc(info_size);
+
+		if (!clGetPlatformInfo(id, platform_type_info, info_size, info, nullptr))
+		{
+			return info;
+		}
+
+		return nullptr;
 
 		
 	}
