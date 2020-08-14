@@ -1,147 +1,107 @@
 #include <iostream>
 #include <Windows.h>
+#include <vector>
+#include <CL\cl.h>
 
-#include "cl_platform.h"
-
-struct host
+struct DeviceData
 {
-	cl_platform_id   platform;
-	cl_device_id     device;
-	cl_context	     contex;
-	cl_program	     program;
-	cl_kernel        kernel;
-	cl_command_queue command_queue;
+	cl_device_id DeviceID;
+
+	DeviceData() : DeviceID(nullptr) {};
+
+	DeviceData(cl_device_id id):DeviceID(id){};
 };
 
-host pC;
-
-struct PainUIObject
+struct PlatformData
 {
-	HDC			hDevContext;
-	HBITMAP		hBitMap;
-	BITMAPINFO	hBitmapInfo;
-	LPVOID		pPixels;
+	cl_platform_id PlatformID;
+
+	PlatformData() : PlatformID(nullptr) {};
+
+	PlatformData(cl_platform_id id) : PlatformID(id) {};
+
+	std::vector<DeviceData> DevicesStorage;
 };
 
-LRESULT MainWindowProc(HWND window, UINT mess, WPARAM wparam, LPARAM lparam);
+/// <summary>
+/// »нициализируем платформы и смежные им устройства
+/// </summary>
+/// <param name="size">[OUT] количество платформ на хосте</param>
+/// <returns>”казатель на PlatfromData, содержа€ ID платформы и устройства</returns>
+PlatformData* OnInitPlatformUnit(int& size);
 
-BOOL OnInit(HINSTANCE instance, LPCSTR classname);
-HWND OnCreate(HINSTANCE inst,LPCSTR wndname, LPCSTR classname);
-
-void OnInitPlatformUnit()
-{
-	cl_uint count_platfroms = 0;
-	if (clGetPlatformIDs(0, nullptr, &count_platfroms) != CL_SUCCESS)
-	{
-		MessageBoxA(nullptr,"Not platfroms id!!!","Error",MB_OK);
-		return;
-	}
-
-	if (count_platfroms == 0)
-	{
-		MessageBoxA(nullptr, "Not platfroms id!!!", "Error", MB_OK);
-		return;
-	}
-
-	cl_platform_id * platfroms = new cl_platform_id[count_platfroms];
+int main(int argc, char ** argv) {
 	
-	if (clGetPlatformIDs(count_platfroms, platfroms, nullptr) != CL_SUCCESS)
-	{
-		MessageBoxA(nullptr, "Not platfroms id!!!", "Error", MB_OK);
-		return;
-	}
+	int CountOfPlatforms = 0;
+	PlatformData * platforms = OnInitPlatformUnit(CountOfPlatforms);
 
-	pC.platform = platfroms[1];
-
-	if (clGetDeviceIDs(pC.platform, CL_DEVICE_TYPE_GPU, 1, &pC.device, nullptr) != CL_SUCCESS)
-	{
-		MessageBoxA(nullptr, "Not device GPU!!!", "Error", MB_OK);
-		return;
-	}
-}
-
-int main(int argc, char ** argv) 
-{
-	cl_uint count = 0;
-	cl_uint ErrorCode = clGetPlatformIDs(0, nullptr, &count);
-	if (ErrorCode) {
-		return ErrorCode;
-	}
-
-	if (count == 0) {
-		return -2;
-	}
-
-	cl_platform_id * platforms = new cl_platform_id[count];
-	ErrorCode = clGetPlatformIDs(count, platforms, nullptr);
-	if (ErrorCode){
-		return ErrorCode;
-	}
-
-	
-
-	delete[] platforms;
-	
 	return 0;
 }
 
-BOOL OnInit(HINSTANCE instance,LPCSTR classname)
-{
-	WNDCLASSEXA WindowClass;
-	std::memset(&WindowClass,0,sizeof(WNDCLASSEXA));
-	WindowClass.cbSize = sizeof(WNDCLASSEXA);
-	WindowClass.style = CS_HREDRAW | CS_VREDRAW;
-	WindowClass.hInstance = instance;
-	WindowClass.lpfnWndProc = &MainWindowProc;
-	WindowClass.lpszClassName = classname;
-	WindowClass.hbrBackground = CreateSolidBrush(COLOR_WINDOW);
-
-	return RegisterClassExA(&WindowClass);
-}
-
-HWND OnCreate(HINSTANCE inst, LPCSTR wndname, LPCSTR classname)
-{
-	return  CreateWindowExA(
-			0,
-			classname, 
-			wndname,
-			WS_OVERLAPPEDWINDOW,
-			500, 300, 500, 380,
-			NULL, NULL, inst, NULL);
-}
-
-LRESULT MainWindowProc(HWND window, UINT mess, WPARAM wparam, LPARAM lparam)
-{
-	switch (mess)
+PlatformData * OnInitPlatformUnit(int& size) {
+	cl_uint CountPlatforms = 0;
+	cl_int ErrorCode = clGetPlatformIDs(0, nullptr, &CountPlatforms);
+	if (ErrorCode)
 	{
-		case WM_CREATE:
-		{
-			OnInitPlatformUnit();
-		} break;	
-
-		case WM_SIZE:
-		{
-
-		} break;
-
-		case WM_PAINT:
-		{
-
-		} break;
-	
-		case WM_CLOSE:
-		{
-			PostQuitMessage(WM_QUIT);
-		} break;
-		case WM_DESTROY:
-			break;
-
-		default:
-			break;
+		return nullptr;
 	}
 
-	return DefWindowProcA(window,mess,wparam,lparam);
+	if (CountPlatforms == 0)
+	{
+		return nullptr;
+	}
+
+	cl_platform_id * platfroms = new cl_platform_id[CountPlatforms];
+	
+	if (clGetPlatformIDs(CountPlatforms, platfroms, nullptr))
+	{
+		delete[] platfroms;
+		return nullptr;
+	}
+
+	PlatformData * platforms = new PlatformData[CountPlatforms];
+	for (int i = 0; i < CountPlatforms; i++) {
+		platforms[i].PlatformID = platfroms[i];
+	}
+
+	for (int i = 0; i < CountPlatforms; i++) {
+		cl_uint CountDevicesOfPlatform = 0;
+		ErrorCode = clGetDeviceIDs(platforms[i].PlatformID,CL_DEVICE_TYPE_ALL,0,nullptr,&CountDevicesOfPlatform);
+		if (ErrorCode) {
+			delete[] platforms;
+			delete[] platfroms;
+			return nullptr;
+		}
+
+		if (CountDevicesOfPlatform == 0) {
+			delete[] platforms;
+			delete[] platfroms;
+			return nullptr;
+		}
+
+		platforms->DevicesStorage.resize(CountDevicesOfPlatform);
+		
+		cl_device_id * devices = new cl_device_id[CountDevicesOfPlatform];
+		ErrorCode = clGetDeviceIDs(platforms[i].PlatformID,CL_DEVICE_TYPE_ALL,CountDevicesOfPlatform,devices,nullptr);
+		if (ErrorCode){
+			delete[] devices;
+			delete[] platforms;
+			delete[] platfroms;
+			return nullptr;
+		}
+
+		for (int j = 0; j < CountDevicesOfPlatform; j++) {
+			platforms[i].DevicesStorage[j] = DeviceData(devices[j]);
+		}
+
+		delete[] devices;
+		
+	}
+
+	delete[] platfroms;
+
+	size = CountPlatforms;
+
+	return platforms;
 }
-
-
 
