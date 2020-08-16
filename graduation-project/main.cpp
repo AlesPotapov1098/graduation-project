@@ -6,18 +6,18 @@
 
 struct PlatformInfo
 {
-	const char *Name;
-	const char *Vendor;
-	const char *Profile;
-	const char *Version;
+	const char * Name;
+	const char * Vendor;
+	const char * Profile;
+	const char * Version;
 };
 
 struct DeviceInfo
 {
-	std::string Name;
-	std::string Vendor;
-	std::string Profile;
-	std::string Version;
+	const char * Name;
+	const char * Vendor;
+	const char * Profile;
+	const char * Version;
 };
 
 struct DeviceData
@@ -84,6 +84,13 @@ const char * GetPlatformVersion(const cl_platform_id& id);
 /// <returns>nullptr случае неудачи или константный указатель на строку типа char</returns>
 const char * GetPlatformProfile(const cl_platform_id& id);
 
+bool FillDeviceInfo(DeviceData* deviceData);
+
+const char * GetDeviceName(const cl_device_id& id);
+const char * GetDeviceVendor(const cl_device_id& id);
+const char * GetDeviceVersion(const cl_device_id& id);
+const char * GetDeviceProfile(const cl_device_id& id);
+
 int main(int argc, char ** argv) {
 	
 	int CountOfPlatforms = 0;
@@ -94,6 +101,18 @@ int main(int argc, char ** argv) {
 			std::cout << platforms[i].Info.Vendor << std::endl;
 			std::cout << platforms[i].Info.Version << std::endl;
 			std::cout << platforms[i].Info.Profile << std::endl;
+		}
+		for (std::vector<DeviceData>::iterator it = platforms[i].DevicesStorage.begin();
+			it < platforms[i].DevicesStorage.end(); 
+			it++)
+		{
+			if (FillDeviceInfo(&*it))
+			{
+				std::cout << it->Info.Name << std::endl;
+				std::cout << it->Info.Vendor << std::endl;
+				std::cout << it->Info.Version << std::endl;
+				std::cout << it->Info.Profile << std::endl;
+			}
 		}
 	}
 
@@ -316,6 +335,159 @@ const char * GetPlatformProfile(const cl_platform_id& id) {
 	}
 
 	return PlatformProfile;
+}
+
+bool FillDeviceInfo(DeviceData* deviceData)
+{
+	if (deviceData == nullptr) {
+		return false;
+	}
+
+	if (deviceData->DeviceID == nullptr) {
+		return false;
+	}
+
+	deviceData->Info.Name = GetDeviceName(deviceData->DeviceID);
+	deviceData->Info.Profile = GetDeviceProfile(deviceData->DeviceID);
+	deviceData->Info.Vendor	= GetDeviceVendor(deviceData->DeviceID);
+	deviceData->Info.Version = GetDeviceVersion(deviceData->DeviceID);
+
+	return (deviceData->Info.Name &&
+			deviceData->Info.Profile &&
+			deviceData->Info.Vendor &&
+			deviceData->Info.Version);
+}
+
+const char* GetDeviceName(const cl_device_id& id) {
+	if (id == nullptr) {
+		return nullptr;
+	}
+
+	cl_uint ErrorCode = 0;
+	std::size_t SizeName = 0;
+
+	ErrorCode = clGetDeviceInfo(id,
+		CL_DEVICE_NAME,
+		0, nullptr,
+		&SizeName);
+	if (ErrorCode) {
+		return nullptr;
+	}
+
+	if (SizeName == 0) {
+		return nullptr;
+	}
+
+	char* DeviceName = new char[SizeName];
+	ErrorCode = clGetDeviceInfo(id,
+		CL_DEVICE_NAME,
+		SizeName,
+		(void*)DeviceName,
+		nullptr);
+	if (ErrorCode) {
+		return nullptr;
+	}
+
+	return DeviceName;
+}
+
+const char* GetDeviceVendor(const cl_device_id& id) {
+	if (id == nullptr) {
+		return nullptr;
+	}
+
+	cl_uint ErrorCode = 0;
+	std::size_t SizeName = 0;
+
+	ErrorCode = clGetDeviceInfo(id,
+		CL_DEVICE_VENDOR,
+		0, nullptr,
+		&SizeName);
+	if (ErrorCode) {
+		return nullptr;
+	}
+
+	if (SizeName == 0) {
+		return nullptr;
+	}
+
+	char* DeviceVendor = new char[SizeName];
+	ErrorCode = clGetDeviceInfo(id,
+		CL_DEVICE_VENDOR,
+		SizeName,
+		(void*)DeviceVendor,
+		nullptr);
+	if (ErrorCode) {
+		return nullptr;
+	}
+
+	return DeviceVendor;
+}
+
+const char* GetDeviceVersion(const cl_device_id& id) {
+	if (id == nullptr) {
+		return nullptr;
+	}
+
+	cl_uint ErrorCode = 0;
+	std::size_t SizeName = 0;
+
+	ErrorCode = clGetDeviceInfo(id,
+		CL_DEVICE_VERSION,
+		0, nullptr,
+		&SizeName);
+	if (ErrorCode) {
+		return nullptr;
+	}
+
+	if (SizeName == 0) {
+		return nullptr;
+	}
+
+	char* DeviceVersion = new char[SizeName];
+	ErrorCode = clGetDeviceInfo(id,
+		CL_DEVICE_VERSION,
+		SizeName,
+		(void*)DeviceVersion,
+		nullptr);
+	if (ErrorCode) {
+		return nullptr;
+	}
+
+	return DeviceVersion;
+}
+
+const char* GetDeviceProfile(const cl_device_id& id) {
+	if (id == nullptr) {
+		return nullptr;
+	}
+
+	cl_uint ErrorCode = 0;
+	std::size_t SizeName = 0;
+
+	ErrorCode = clGetDeviceInfo(id,
+		CL_DEVICE_PROFILE,
+		0, nullptr,
+		&SizeName);
+	if (ErrorCode) {
+		return nullptr;
+	}
+
+	if (SizeName == 0) {
+		return nullptr;
+	}
+
+	char* DeviceProfile = new char[SizeName];
+	ErrorCode = clGetDeviceInfo(id,
+		CL_DEVICE_PROFILE,
+		SizeName,
+		(void*)DeviceProfile,
+		nullptr);
+	if (ErrorCode) {
+		return nullptr;
+	}
+
+	return DeviceProfile;
 }
 
 
