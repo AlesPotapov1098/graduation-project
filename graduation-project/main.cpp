@@ -6,10 +6,10 @@
 
 struct PlatformInfo
 {
-	std::string Name;
-	std::string Vendor;
-	std::string Profile;
-	std::string Version;
+	const char *Name;
+	const char *Vendor;
+	const char *Profile;
+	const char *Version;
 };
 
 struct DeviceInfo
@@ -56,10 +56,33 @@ PlatformData* InitPlatformUnit(int& size);
 /// <returns>true если удалось заполнить все поля PlatformInfo, false в противном случае</returns>
 bool FillPlatformInfo(PlatformData*);
 
-std::string GetPlatformName(const cl_platform_id& id);
-std::string GetPlatformVendor(const cl_platform_id& id);
-std::string GetPlatformVersion(const cl_platform_id& id);
-std::string GetPlatformProfile(const cl_platform_id& id);
+/// <summary>
+/// Выдает имя платформы
+/// </summary>
+/// <param name="id">Константная ссылка на ID платформы</param>
+/// <returns>nullptr случае неудачи или константный указатель на строку типа char</returns>
+const char * GetPlatformName(const cl_platform_id& id);
+
+/// <summary>
+/// Выдает производителя платформы
+/// </summary>
+/// <param name="id">Константная ссылка на ID платформы</param>
+/// <returns>nullptr случае неудачи или константный указатель на строку типа char</returns>
+const char * GetPlatformVendor(const cl_platform_id& id);
+
+/// <summary>
+/// Выдает версию платформы
+/// </summary>
+/// <param name="id">Константная ссылка на ID платформы</param>
+/// <returns>nullptr случае неудачи или константный указатель на строку типа char</returns>
+const char * GetPlatformVersion(const cl_platform_id& id);
+
+/// <summary>
+/// Выдает профиль платформы
+/// </summary>
+/// <param name="id">Константная ссылка на ID платформы</param>
+/// <returns>nullptr случае неудачи или константный указатель на строку типа char</returns>
+const char * GetPlatformProfile(const cl_platform_id& id);
 
 int main(int argc, char ** argv) {
 	
@@ -157,13 +180,13 @@ bool FillPlatformInfo(PlatformData* platformData){
 	platformData->Info.Vendor = GetPlatformVendor(platformData->PlatformID);
 	platformData->Info.Version = GetPlatformVersion(platformData->PlatformID);
 
-	return (!platformData->Info.Name.empty() &&
-			!platformData->Info.Profile.empty() &&
-			!platformData->Info.Vendor.empty() && 
-			!platformData->Info.Version.empty());
+	return (platformData->Info.Name &&
+			platformData->Info.Profile &&
+			platformData->Info.Vendor && 
+			platformData->Info.Version);
 }
 
-std::string GetPlatformName(const cl_platform_id& id) {
+const char * GetPlatformName(const cl_platform_id& id) {
 	if (id == nullptr) {
 		return nullptr;
 	}
@@ -196,7 +219,7 @@ std::string GetPlatformName(const cl_platform_id& id) {
 	return PlatformName;
 }
 
-std::string GetPlatformVendor(const cl_platform_id& id) {
+const char * GetPlatformVendor(const cl_platform_id& id) {
 	if (id == nullptr) {
 		return nullptr;
 	}
@@ -229,7 +252,7 @@ std::string GetPlatformVendor(const cl_platform_id& id) {
 	return PlatformVendor;
 }
 
-std::string GetPlatformVersion(const cl_platform_id& id) {
+const char * GetPlatformVersion(const cl_platform_id& id) {
 	if (id == nullptr) {
 		return nullptr;
 	}
@@ -262,7 +285,7 @@ std::string GetPlatformVersion(const cl_platform_id& id) {
 	return PlatformVersion;
 }
 
-std::string GetPlatformProfile(const cl_platform_id& id) {
+const char * GetPlatformProfile(const cl_platform_id& id) {
 	if (id == nullptr) {
 		return nullptr;
 	}
