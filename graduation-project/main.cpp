@@ -4,6 +4,13 @@
 #include <CL\cl.h>
 #include <string>
 
+struct ExecutionUnit
+{
+	cl_kernel KernelID;
+	cl_program Program;
+	cl_context ContextID;
+};
+
 struct PlatformInfo
 {
 	const char * Name;
