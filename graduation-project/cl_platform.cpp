@@ -2,246 +2,376 @@
 
 namespace gp
 {
-	information::information()
-	{
-		/*name	= nullptr;
-		profile	= nullptr;
-		vendor  = nullptr;
-		version = nullptr;*/
-	}
-
-	const std::string& information::get_name()
-	{
-		if(name.empty()) 
-			name = static_cast<const char*>(load_info(ID_NAME)); 
-		return name;
-	}
-
-	const std::string& information::get_vendor()
-	{
-		if(vendor.empty())
-			vendor = static_cast<const char*>(load_info(ID_VENDOR));
-		return vendor;
-	}
-	
-	const std::string& information::get_version()
-	{
-		if(version.empty())
-			version = static_cast<const char*>(load_info(ID_VERSION));
-		return version;
-	}
-	const std::string& information::get_profile()
-	{
-		if(profile.empty())
-			profile = static_cast<const char*>(load_info(ID_PROFILE));
-		return profile;
-	}
-}
-
-namespace gp
-{
-	device::device()
-	{
-		id = nullptr;
-		driver_version = nullptr;
-	}
-
-	device::device(cl_device_id devID)
-	{
-		id = devID;
-	}
-
-	device::~device()
-	{
-	}
-
-	const std::string& device::get_driver_version()
-	{
-		if(driver_version.empty())
-			driver_version = static_cast<const char*>(load_info(ID_DEVICE_DRIVER_VERSION));
-		return driver_version;
-	}
-
-	void* __stdcall device::load_info(type_info type)
-	{
-		cl_device_info device_type_info = 0;
-
-		switch (type)
-		{
-			case ID_NAME: 
-				device_type_info = CL_DEVICE_NAME; 
-				break;
-			case ID_PROFILE : 
-				device_type_info = CL_DEVICE_PROFILE; 
-				break;
-			case ID_VERSION : 
-				device_type_info = CL_DEVICE_VERSION; 
-				break;
-			case ID_VENDOR: 
-				device_type_info = CL_DEVICE_VENDOR; 
-				break;
-			case ID_DEVICE_DRIVER_VERSION: 
-				device_type_info = CL_DRIVER_VERSION; 
-				break;
-	
-			default: 
-				device_type_info = -1; 
-				break;
-		}
-
-		if (device_type_info == -1)
+	PlatformData* InitPlatformUnit(int& size) {
+		cl_uint CountPlatforms = 0;
+		cl_int ErrorCode = clGetPlatformIDs(0, nullptr, &CountPlatforms);
+		if (ErrorCode)
 		{
 			return nullptr;
 		}
 
-		std::size_t info_size = 0;
-		if (clGetDeviceInfo(id, device_type_info, 0, nullptr, &info_size) != CL_SUCCESS)
+		if (CountPlatforms == 0)
 		{
 			return nullptr;
 		}
 
-		void * info = std::malloc(info_size);
+		cl_platform_id* platfroms = new cl_platform_id[CountPlatforms];
 
-		if (clGetDeviceInfo(id, device_type_info, info_size, info, nullptr) == CL_SUCCESS)
+		if (clGetPlatformIDs(CountPlatforms, platfroms, nullptr))
 		{
-			return info;
-		}
-
-		return nullptr;
-	}
-}
-
-namespace gp
-{
-
-	platform::platform()
-	{
-		id = nullptr;
-		count_devices = 0;
-	}
-
-	platform::platform(cl_platform_id id)
-	{
-		id = id;
-		count_devices = 0;
-		/*extensions = nullptr;*/
-	}
-
-	platform::~platform()
-	{
-	}
-
-	void platform::load_device()
-	{
-		if (clGetDeviceIDs(id, CL_DEVICE_TYPE_ALL, 0, nullptr, &count_devices) != CL_SUCCESS)
-		{
-			return;
-		}
-		
-		if (count_devices == 0)
-		{
-			return;
-		}
-		
-		cl_device_id * device_ids = new cl_device_id[count_devices];
-		
-		if (clGetDeviceIDs(id, CL_DEVICE_TYPE_ALL, count_devices, device_ids, nullptr) != CL_SUCCESS)
-		{
-			return;
-		}
-
-		for (int i = 0; i < count_devices; i++)
-		{
-			devices.push_back(device(device_ids[i]));
-		}
-	}
-
-	const std::vector<device>& platform::get_devices() const
-	{
-		return devices;
-	}
-
-	const std::string& platform::get_extensions()
-	{
-		extensions = static_cast<const char*>(load_info(ID_PLATFROM_EXTENSIONS));
-		return extensions;
-	}
-
-	void* __stdcall platform::load_info(type_info type)
-	{
-		cl_platform_info platform_type_info = 0;
-		
-		switch (type)
-		{
-		case ID_NAME:
-			platform_type_info = CL_PLATFORM_NAME;
-			break;
-		case ID_PROFILE:
-			platform_type_info = CL_PLATFORM_PROFILE;
-			break;
-		case ID_VERSION:
-			platform_type_info = CL_PLATFORM_VERSION;
-			break;
-		case ID_VENDOR:
-			platform_type_info = CL_PLATFORM_VENDOR;
-			break;
-		case ID_PLATFROM_EXTENSIONS:
-			platform_type_info = CL_PLATFORM_EXTENSIONS;
-			break;
-
-		default:
-			platform_type_info = 0;
-			break;
-		}
-
-		if (platform_type_info == 0)
-		{
+			delete[] platfroms;
 			return nullptr;
 		}
 
-		std::size_t info_size = 0;
-		if (clGetPlatformInfo(id, platform_type_info, 0, nullptr, &info_size))
-		{
+		PlatformData* platforms = new PlatformData[CountPlatforms];
+		for (int i = 0; i < CountPlatforms; i++) {
+			platforms[i].PlatformID = platfroms[i];
+		}
+
+		for (int i = 0; i < CountPlatforms; i++) {
+			cl_uint CountDevicesOfPlatform = 0;
+			ErrorCode = clGetDeviceIDs(platforms[i].PlatformID, CL_DEVICE_TYPE_ALL, 0, nullptr, &CountDevicesOfPlatform);
+			if (ErrorCode) {
+				delete[] platforms;
+				delete[] platfroms;
+				return nullptr;
+			}
+
+			if (CountDevicesOfPlatform == 0) {
+				delete[] platforms;
+				delete[] platfroms;
+				return nullptr;
+			}
+
+			cl_device_id* devices = new cl_device_id[CountDevicesOfPlatform];
+			ErrorCode = clGetDeviceIDs(platforms[i].PlatformID, CL_DEVICE_TYPE_ALL, CountDevicesOfPlatform, devices, nullptr);
+			if (ErrorCode) {
+				delete[] devices;
+				delete[] platforms;
+				delete[] platfroms;
+				return nullptr;
+			}
+
+			for (int j = 0; j < CountDevicesOfPlatform; j++) {
+				platforms[i].DevicesStorage.push_back(DeviceData(devices[j]));
+			}
+
+			delete[] devices;
+
+		}
+
+		delete[] platfroms;
+
+		size = CountPlatforms;
+
+		return platforms;
+	}
+
+	bool FillPlatformInfo(PlatformData* platformData) {
+
+		if (platformData == nullptr) {
+			return false;
+		}
+
+		if (platformData->PlatformID == nullptr) {
+			return false;
+		}
+
+		platformData->Info.Name = GetPlatformName(platformData->PlatformID);
+		platformData->Info.Profile = GetPlatformProfile(platformData->PlatformID);
+		platformData->Info.Vendor = GetPlatformVendor(platformData->PlatformID);
+		platformData->Info.Version = GetPlatformVersion(platformData->PlatformID);
+
+		return (platformData->Info.Name &&
+			platformData->Info.Profile &&
+			platformData->Info.Vendor &&
+			platformData->Info.Version);
+	}
+
+	const char* GetPlatformName(const cl_platform_id& id) {
+		if (id == nullptr) {
 			return nullptr;
 		}
 
-		void* info = std::malloc(info_size);
+		cl_uint ErrorCode = 0;
+		std::size_t SizeName = 0;
 
-		if (!clGetPlatformInfo(id, platform_type_info, info_size, info, nullptr))
-		{
-			return info;
+		ErrorCode = clGetPlatformInfo(id,
+			CL_PLATFORM_NAME,
+			0, nullptr,
+			&SizeName);
+		if (ErrorCode) {
+			return nullptr;
 		}
 
-		return nullptr;
+		if (SizeName == 0) {
+			return nullptr;
+		}
 
-		
+		char* PlatformName = new char[SizeName];
+		ErrorCode = clGetPlatformInfo(id,
+			CL_PLATFORM_NAME,
+			SizeName,
+			(void*)PlatformName,
+			nullptr);
+		if (ErrorCode) {
+			return nullptr;
+		}
+
+		return PlatformName;
 	}
 
-	
+	const char* GetPlatformVendor(const cl_platform_id& id) {
+		if (id == nullptr) {
+			return nullptr;
+		}
+
+		cl_uint ErrorCode = 0;
+		std::size_t SizeVendor = 0;
+
+		ErrorCode = clGetPlatformInfo(id,
+			CL_PLATFORM_VENDOR,
+			0, nullptr,
+			&SizeVendor);
+		if (ErrorCode) {
+			return nullptr;
+		}
+
+		if (SizeVendor == 0) {
+			return nullptr;
+		}
+
+		char* PlatformVendor = new char[SizeVendor];
+		ErrorCode = clGetPlatformInfo(id,
+			CL_PLATFORM_VENDOR,
+			SizeVendor,
+			(void*)PlatformVendor,
+			nullptr);
+		if (ErrorCode) {
+			return nullptr;
+		}
+
+		return PlatformVendor;
+	}
+
+	const char* GetPlatformVersion(const cl_platform_id& id) {
+		if (id == nullptr) {
+			return nullptr;
+		}
+
+		cl_uint ErrorCode = 0;
+		std::size_t SizeVersion = 0;
+
+		ErrorCode = clGetPlatformInfo(id,
+			CL_PLATFORM_VERSION,
+			0, nullptr,
+			&SizeVersion);
+		if (ErrorCode) {
+			return nullptr;
+		}
+
+		if (SizeVersion == 0) {
+			return nullptr;
+		}
+
+		char* PlatformVersion = new char[SizeVersion];
+		ErrorCode = clGetPlatformInfo(id,
+			CL_PLATFORM_VERSION,
+			SizeVersion,
+			(void*)PlatformVersion,
+			nullptr);
+		if (ErrorCode) {
+			return nullptr;
+		}
+
+		return PlatformVersion;
+	}
+
+	const char* GetPlatformProfile(const cl_platform_id& id) {
+		if (id == nullptr) {
+			return nullptr;
+		}
+
+		cl_uint ErrorCode = 0;
+		std::size_t SizeProfile = 0;
+
+		ErrorCode = clGetPlatformInfo(id,
+			CL_PLATFORM_PROFILE,
+			0, nullptr,
+			&SizeProfile);
+		if (ErrorCode) {
+			return nullptr;
+		}
+
+		if (SizeProfile == 0) {
+			return nullptr;
+		}
+
+		char* PlatformProfile = new char[SizeProfile];
+		ErrorCode = clGetPlatformInfo(id,
+			CL_PLATFORM_PROFILE,
+			SizeProfile,
+			(void*)PlatformProfile,
+			nullptr);
+		if (ErrorCode) {
+			return nullptr;
+		}
+
+		return PlatformProfile;
+	}
+
+	bool FillDeviceInfo(DeviceData* deviceData)
+	{
+		if (deviceData == nullptr) {
+			return false;
+		}
+
+		if (deviceData->DeviceID == nullptr) {
+			return false;
+		}
+
+		deviceData->Info.Name = GetDeviceName(deviceData->DeviceID);
+		deviceData->Info.Profile = GetDeviceProfile(deviceData->DeviceID);
+		deviceData->Info.Vendor = GetDeviceVendor(deviceData->DeviceID);
+		deviceData->Info.Version = GetDeviceVersion(deviceData->DeviceID);
+
+		return (deviceData->Info.Name &&
+			deviceData->Info.Profile &&
+			deviceData->Info.Vendor &&
+			deviceData->Info.Version);
+	}
+
+	const char* GetDeviceName(const cl_device_id& id) {
+		if (id == nullptr) {
+			return nullptr;
+		}
+
+		cl_uint ErrorCode = 0;
+		std::size_t SizeName = 0;
+
+		ErrorCode = clGetDeviceInfo(id,
+			CL_DEVICE_NAME,
+			0, nullptr,
+			&SizeName);
+		if (ErrorCode) {
+			return nullptr;
+		}
+
+		if (SizeName == 0) {
+			return nullptr;
+		}
+
+		char* DeviceName = new char[SizeName];
+		ErrorCode = clGetDeviceInfo(id,
+			CL_DEVICE_NAME,
+			SizeName,
+			(void*)DeviceName,
+			nullptr);
+		if (ErrorCode) {
+			return nullptr;
+		}
+
+		return DeviceName;
+	}
+
+	const char* GetDeviceVendor(const cl_device_id& id) {
+		if (id == nullptr) {
+			return nullptr;
+		}
+
+		cl_uint ErrorCode = 0;
+		std::size_t SizeName = 0;
+
+		ErrorCode = clGetDeviceInfo(id,
+			CL_DEVICE_VENDOR,
+			0, nullptr,
+			&SizeName);
+		if (ErrorCode) {
+			return nullptr;
+		}
+
+		if (SizeName == 0) {
+			return nullptr;
+		}
+
+		char* DeviceVendor = new char[SizeName];
+		ErrorCode = clGetDeviceInfo(id,
+			CL_DEVICE_VENDOR,
+			SizeName,
+			(void*)DeviceVendor,
+			nullptr);
+		if (ErrorCode) {
+			return nullptr;
+		}
+
+		return DeviceVendor;
+	}
+
+	const char* GetDeviceVersion(const cl_device_id& id) {
+		if (id == nullptr) {
+			return nullptr;
+		}
+
+		cl_uint ErrorCode = 0;
+		std::size_t SizeName = 0;
+
+		ErrorCode = clGetDeviceInfo(id,
+			CL_DEVICE_VERSION,
+			0, nullptr,
+			&SizeName);
+		if (ErrorCode) {
+			return nullptr;
+		}
+
+		if (SizeName == 0) {
+			return nullptr;
+		}
+
+		char* DeviceVersion = new char[SizeName];
+		ErrorCode = clGetDeviceInfo(id,
+			CL_DEVICE_VERSION,
+			SizeName,
+			(void*)DeviceVersion,
+			nullptr);
+		if (ErrorCode) {
+			return nullptr;
+		}
+
+		return DeviceVersion;
+	}
+
+	const char* GetDeviceProfile(const cl_device_id& id) {
+		if (id == nullptr) {
+			return nullptr;
+		}
+
+		cl_uint ErrorCode = 0;
+		std::size_t SizeName = 0;
+
+		ErrorCode = clGetDeviceInfo(id,
+			CL_DEVICE_PROFILE,
+			0, nullptr,
+			&SizeName);
+		if (ErrorCode) {
+			return nullptr;
+		}
+
+		if (SizeName == 0) {
+			return nullptr;
+		}
+
+		char* DeviceProfile = new char[SizeName];
+		ErrorCode = clGetDeviceInfo(id,
+			CL_DEVICE_PROFILE,
+			SizeName,
+			(void*)DeviceProfile,
+			nullptr);
+		if (ErrorCode) {
+			return nullptr;
+		}
+
+		return DeviceProfile;
+	}
 }
 
-namespace gp
-{
-	platforom_unit::platforom_unit()
-	{
-	}
 
-	platforom_unit::~platforom_unit()
-	{
-	}
-
-	const std::vector<platform>& platforom_unit::get_platforms() const
-	{
-		return _platforms;
-	}
-
-	const platform& platforom_unit::get_cpu_platforms() const
-	{
-		return platform();
-	}
-
-	const platform& platforom_unit::get_gpu_platforms() const
-	{
-		return platform();
-	}
-}

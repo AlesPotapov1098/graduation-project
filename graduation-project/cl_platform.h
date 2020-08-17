@@ -5,95 +5,130 @@
 
 #include <CL/cl.h>
 #include <vector>
-#include <string>
 
 namespace gp
 {
-	class information;
-	class device;
-	class platform;
-
-	enum type_info : __int32
+	struct ExecutionUnit
 	{
-		/*Common type info*/
-		ID_NAME = 0,
-		ID_VENDOR = 1,
-		ID_VERSION = 2,
-		ID_PROFILE = 3,
-
-		/*Platfrom specific type info*/
-		ID_PLATFROM_EXTENSIONS = 4,
-
-		/*Device specific type info*/
-		ID_DEVICE_DRIVER_VERSION = 5
+		cl_kernel KernelID;
+		cl_program Program;
+		cl_context ContextID;
 	};
 
-	class information
+	struct PlatformInfo
 	{
-		public:
-			__stdcall information();
-			virtual const std::string& __stdcall get_name();
-			virtual const std::string& __stdcall get_vendor();
-			virtual const std::string& __stdcall get_version();
-			virtual const std::string& __stdcall get_profile();
-			virtual void*  __stdcall load_info(type_info type) = 0;
-		protected:
-			std::string name;
-			std::string vendor;
-			std::string version;
-			std::string profile;
-	};
-		
-	class device : public information
-	{
-		public:
-			device();
-			device(cl_device_id devID);
-			~device();
-			const std::string& __stdcall get_driver_version();
-			void * __stdcall load_info(type_info type) override;
-	
-		private:
-			cl_device_id id;
-			std::string driver_version;
+		const char* Name;
+		const char* Vendor;
+		const char* Profile;
+		const char* Version;
 	};
 
-	class platform : public information
+	struct DeviceInfo
 	{
-		public:
-			platform();
-			platform(cl_platform_id id);
-			~platform();
-			
-			void __stdcall load_device();
-			const std::vector<device>& get_devices() const;
-// 			const device & get_cpu_device() const;
-// 			const device & get_gpu_device() const;
-
-			const std::string& __stdcall get_extensions();
-			void* __stdcall load_info(type_info type) override;
-	
-		private:
-			cl_platform_id		id; 
-			cl_uint				count_devices;
-			std::vector<device>	devices;	
-			std::string extensions;
+		const char* Name;
+		const char* Vendor;
+		const char* Profile;
+		const char* Version;
 	};
 
-	class platforom_unit
+	struct DeviceData
 	{
-		public:
-			platforom_unit();
-			~platforom_unit();
+		cl_device_id DeviceID;
+		DeviceInfo Info;
 
-			const std::vector<platform>& get_platforms() const;
-			const platform& get_cpu_platforms() const;
-			const platform& get_gpu_platforms() const;
+		DeviceData() : DeviceID(nullptr) {};
 
-		private:
-			std::vector<platform> _platforms;
-			std::size_t			  _count_platform;
+		DeviceData(cl_device_id id) :DeviceID(id) {};
 	};
+
+	struct PlatformData
+	{
+		cl_platform_id PlatformID;
+		PlatformInfo Info;
+
+		PlatformData() : PlatformID(nullptr) {};
+
+		PlatformData(cl_platform_id id) : PlatformID(id) {};
+
+		std::vector<DeviceData> DevicesStorage;
+	};
+
+	/// <summary>
+	/// Инициализируем платформы и смежные им устройства
+	/// </summary>
+	/// <param name="size">[OUT] количество платформ на хосте</param>
+	/// <returns>Указатель на PlatfromData, содержая ID платформы и устройства</returns>
+	PlatformData* InitPlatformUnit(int& size);
+
+	/// <summary>
+	/// Заполняем информацию об платфорем
+	/// </summary>
+	/// <param name="platfromData">Платформа, для которой необходимо определить информацию</param>
+	/// <returns>true если удалось заполнить все поля PlatformInfo, false в противном случае</returns>
+	bool FillPlatformInfo(PlatformData*);
+
+	/// <summary>
+	/// Выдает имя платформы
+	/// </summary>
+	/// <param name="id">Константная ссылка на ID платформы</param>
+	/// <returns>nullptr случае неудачи или константный указатель на строку типа char</returns>
+	const char* GetPlatformName(const cl_platform_id& id);
+
+	/// <summary>
+	/// Выдает производителя платформы
+	/// </summary>
+	/// <param name="id">Константная ссылка на ID платформы</param>
+	/// <returns>nullptr случае неудачи или константный указатель на строку типа char</returns>
+	const char* GetPlatformVendor(const cl_platform_id& id);
+
+	/// <summary>
+	/// Выдает версию платформы
+	/// </summary>
+	/// <param name="id">Константная ссылка на ID платформы</param>
+	/// <returns>nullptr случае неудачи или константный указатель на строку типа char</returns>
+	const char* GetPlatformVersion(const cl_platform_id& id);
+
+	/// <summary>
+	/// Выдает профиль платформы
+	/// </summary>
+	/// <param name="id">Константная ссылка на ID платформы</param>
+	/// <returns>nullptr случае неудачи или константный указатель на строку типа char</returns>
+	const char* GetPlatformProfile(const cl_platform_id& id);
+
+	/// <summary>
+	///  Заполняет структуру Info для устройства
+	/// </summary>
+	/// <param name="deviceData">Указатель на структуру DeviceData</param>
+	/// <returns>true если удалось заполнить все поля структуру DeviceInfo, false - в противном случае</returns>
+	bool FillDeviceInfo(DeviceData* deviceData);
+
+	/// <summary>
+	/// Выдает название устройства
+	/// </summary>
+	/// <param name="id">Константная ссылка на ID устройства</param>
+	/// <returns>Указатель на char, по которому можно обраиться к названию устройства, nullptr - в противном случае</returns>
+	const char* GetDeviceName(const cl_device_id& id);
+
+	/// <summary>
+	/// Выдает производителя устройства
+	/// </summary>
+	/// <param name="id">Константная ссылка на ID устройства</param>
+	/// <returns>Указатель на char, по которому можно обраиться к имени производителя устройства, nullptr - в противном случае</returns>
+	const char* GetDeviceVendor(const cl_device_id& id);
+
+	/// <summary>
+	/// Выдает версию устройства
+	/// </summary>
+	/// <param name="id">Константная ссылка на ID устройства</param>
+	/// <returns>Указатель на char, по которому можно обраиться к версии устройства, nullptr - в противном случае</returns>
+	const char* GetDeviceVersion(const cl_device_id& id);
+
+	/// <summary>
+	/// Выдает профиль устройства (идентичен профилю платформы) 
+	/// </summary>
+	/// <param name="id">Константная ссылка на ID устройства</param>
+	/// <returns>Указатель на char, по которому можно обраиться к профилю устройства, nullptr - в противном случае</returns>
+	const char* GetDeviceProfile(const cl_device_id& id);
 }
 
 #endif // !CL_PROGRAM_H
