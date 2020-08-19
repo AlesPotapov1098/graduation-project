@@ -1,10 +1,9 @@
 #ifndef CL_PLATFORM_H
 #define CL_PLATFORM_H
 
-#pragma once
-
 #include <CL/cl.h>
 #include <vector>
+#include <fstream>
 
 namespace gp
 {
@@ -35,6 +34,7 @@ namespace gp
 	{
 		cl_device_id DeviceID;
 		DeviceInfo Info;
+		std::vector<ExecutionUnit> ExcUnit;
 
 		DeviceData() : DeviceID(nullptr) {};
 
@@ -129,6 +129,16 @@ namespace gp
 	/// <param name="id"> онстантна€ ссылка на ID устройства</param>
 	/// <returns>”казатель на char, по которому можно обраитьс€ к профилю устройства, nullptr - в противном случае</returns>
 	const char* GetDeviceProfile(const cl_device_id& id);
+
+	bool InititalizeExecutionUnit(DeviceData * deviceData);
+
+	const char * LoadSrc(const char * filename);
+
+	bool CompileOpenCLProgram(const char * src, ExecutionUnit * excUnit);
+
+	const char * GetCompileError(cl_build_status buildStatus, ExecutionUnit * excUnit);
+
+	bool CreateContext(ExecutionUnit * excUnit);
 }
 
 #endif // !CL_PROGRAM_H

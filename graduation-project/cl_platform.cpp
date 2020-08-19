@@ -372,6 +372,29 @@ namespace gp
 
 		return DeviceProfile;
 	}
+
+	const char* LoadSrc(const char* filename)
+	{
+		if (filename == nullptr)
+		{
+			return nullptr;
+		}
+
+		std::ifstream file(filename, std::ios_base::in);
+		
+		if (!file.is_open())
+		{
+			return nullptr;
+		}
+
+		file.seekg(0,std::ios_base::end);
+		std::size_t size = file.tellg();
+		std::string src(size, '\0');
+		file.read(&src[0],size);
+		file.close();
+
+		return src.c_str();
+	}
 }
 
 
