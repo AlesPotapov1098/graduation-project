@@ -373,7 +373,12 @@ namespace gp
 		return DeviceProfile;
 	}
 
-	const char* LoadSrc(const char* filename)
+	bool InititalizeExecutionUnit(DeviceData* deviceData)
+	{
+		return false;
+	}
+
+	std::string LoadSrc(const char* filename)
 	{
 		if (filename == nullptr)
 		{
@@ -393,7 +398,70 @@ namespace gp
 		file.read(&src[0],size);
 		file.close();
 
-		return src.c_str();
+		return src;
+	}
+
+	bool CompileOpenCLProgram(const char * src, std::size_t length, ExecutionUnit* excUnit)
+	{
+		if (src == nullptr || excUnit == nullptr)
+		{
+			return false;
+		}
+
+		if (length == 0)
+		{
+			return false;
+		}
+					
+		cl_int ErrorCode = 0;
+		cl_program Program = clCreateProgramWithSource(excUnit->ContextID,1,&src,&length,&ErrorCode);
+		if (ErrorCode != 0)
+		{
+			return false;
+		}
+
+		if (!Program)
+		{
+			return false;
+		}
+
+		excUnit->Program = Program;
+
+		return true;
+	}
+
+	const char* GetCompileError(cl_build_status buildStatus, ExecutionUnit* excUnit)
+	{
+		return nullptr;
+	}
+
+	cl_context CreateCompatibleContext(cl_device_id deviceID)
+	{
+		if (deviceID == nullptr)
+		{
+			return nullptr;
+		}
+
+		cl_int ErrorCode = 0;
+		cl_context Context = clCreateContext(
+								nullptr,
+								1,
+								&deviceID,
+								nullptr,
+								nullptr,
+								&ErrorCode);
+
+		if (!Context)
+		{
+			return nullptr;
+		}
+	
+		if (ErrorCode)
+		{
+			return nullptr;
+		}
+
+		return Context;
 	}
 }
 

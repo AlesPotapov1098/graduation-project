@@ -132,13 +132,17 @@ namespace gp
 
 	bool InititalizeExecutionUnit(DeviceData * deviceData);
 
-	const char * LoadSrc(const char * filename);
+	std::string LoadSrc(const char * filename);
 
-	bool CompileOpenCLProgram(const char * src, ExecutionUnit * excUnit);
+	bool CompileOpenCLProgram(const char * src, std::size_t length, ExecutionUnit * excUnit);
 
 	const char * GetCompileError(cl_build_status buildStatus, ExecutionUnit * excUnit);
 
-	bool CreateContext(ExecutionUnit * excUnit);
+	cl_context CreateCompatibleContext(cl_device_id deviceID);
+
+	cl_program CreateCompatibleProgram();
+
+	cl_kernel CreateCompatibleKernel();
 }
 
 #endif // !CL_PROGRAM_H
