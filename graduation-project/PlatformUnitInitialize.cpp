@@ -2,13 +2,15 @@
 
 namespace pl
 {
-	cl_platform_id * InitPlatforms(int& size) {
+	cl_platform_id * InitPlatforms(int* count) {
 		cl_uint CountPlatforms = 0;
 		cl_int ErrorCode = clGetPlatformIDs(0, nullptr, &CountPlatforms);
 		if (ErrorCode)
 		{
 			return nullptr;
 		}
+
+		*count = CountPlatforms;
 
 		if (CountPlatforms == 0)
 		{
@@ -26,7 +28,7 @@ namespace pl
 		return platforms;
 	}
 
-	cl_device_id* __stdcall InitDevices(cl_platform_id platformID)
+	cl_device_id* __stdcall InitDevices(cl_platform_id platformID, int * count)
 	{
 		if (platformID == nullptr)
 		{
@@ -38,6 +40,8 @@ namespace pl
 		{
 			return nullptr;
 		}
+
+		*count = CountDevices;
 
 		if (CountDevices == 0)
 		{

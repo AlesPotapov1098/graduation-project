@@ -8,17 +8,18 @@ namespace pl
 	/// <summary>
 	/// Инициализируем платформы и смежные им устройства
 	/// </summary>
-	/// <param name="size">[OUT] количество платформ на хосте</param>
+	/// <param name="count">[OUT] количество платформ на хосте</param>
 	/// <returns>Указатель на cl_platform_id,nullptr случае неудачи</returns>
-	cl_platform_id * __stdcall InitPlatforms(int& size);
+	cl_platform_id * __stdcall InitPlatforms(int* count);
 
 	/// <summary>
 	/// Инициализируем устройства для конкретной платформы
 	/// </summary>
 	/// <param name="platformID">Константная ссылка на конкретну платформу, 
 	///	для которой необходимо определить устройства</param>
+	/// <param name="count">[OUT] количество устройству для платформы</param>		
 	/// <returns>Указатель на cl_device_id, nullptr в случае неудачи</returns>
-	cl_device_id * __stdcall InitDevices(cl_platform_id platformID);
+	cl_device_id * __stdcall InitDevices(cl_platform_id platformID, int * count);
 
 	/// <summary>
 	/// Выдает имя платформы

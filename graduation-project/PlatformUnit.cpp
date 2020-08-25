@@ -63,7 +63,7 @@ namespace gp
 		m_PlatformVersion = nullptr;
 	}
 
-	Platform::Platform(const cl_platform_id& plID)
+	Platform::Platform(cl_platform_id plID)
 	{
 		m_PlatformID = plID;
 	}
@@ -262,6 +262,157 @@ namespace gp
 	{
 		m_DeviceVersion = pl::GetDeviceVersion(m_DeviceID);
 	}
+	
+	PlatformUnit::PlatformUnit()
+	{
+		m_CountPlatformData = 0;
+	}
+	
+	PlatformUnit::~PlatformUnit()
+	{
+		m_CountPlatformData = 0;
+	}
+
+	void PlatformUnit::OnInitPlatformData()
+	{
+		int CountPlatforms;
+		cl_platform_id * platformIDs = pl::InitPlatforms(&CountPlatforms);
+		
+		if (!platformIDs || CountPlatforms == 0)
+		{
+			return;
+		}
+
+		for(int i = 0; i < CountPlatforms; i++)
+		{ 
+			int CountDevices = 0;
+			cl_device_id * devices = pl::InitDevices(platformIDs[i],&CountDevices);
+		
+			if (!devices || CountDevices == 0)
+			{
+				return;
+			}
+			
+			Platform platform(platformIDs[i]);
+
+			std::vector<Device> devDatas;
+			for (int j = 0; j < CountDevices; j++)
+			{
+				devDatas.push_back(Device(devices[j]));
+			}
+		
+			PlatformData plData;
+			plData.m_Platform = platform;
+			plData.m_Devices = devDatas;
+			
+			m_PlatformDataStorage.push_back(plData);
+		}
+		
+		m_CountPlatformData = m_PlatformDataStorage.size();
+	}
+
+	void PlatformUnit::OnRemovePlatformData(__int32 index)
+	{
+		if (index >= m_CountPlatformData)
+		{
+			return;
+		}
+
+		m_PlatformDataStorage.erase(m_PlatformDataStorage.begin() + index);
+	}
+
+	void PlatformUnit::OnRemoveAll()
+	{
+		if (m_CountPlatformData == 0)
+		{
+			return;
+		}
+
+		m_PlatformDataStorage.clear();
+		m_CountPlatformData = m_PlatformDataStorage.size();
+	}
+
+	void PlatformUnit::AddPlatformData(const PlatformData& plData)
+	{
+		m_PlatformDataStorage.push_back(plData);
+	}
+
+	void PlatformUnit::AddPlatformData(const Platform& platform, const Device& device)
+	{
+		PlatformData plData;
+		plData.m_Platform = platform;
+		plData.m_Devices.push_back(device);
+		m_PlatformDataStorage.push_back(plData);
+	}
+
+	void PlatformUnit::AddPlatformData(const Platform& platform, std::vector<Device>& devices)
+	{
+		PlatformData plData;
+		plData.m_Platform = platform;
+		plData.m_Devices = devices;
+		m_PlatformDataStorage.push_back(plData);
+	}
+
+	const PlatformData& PlatformUnit::GetPlatformData(__int32 index)
+	{
+		if (index >= m_CountPlatformData)
+		{
+			return nullptr;
+		}
+
+		return m_PlatformDataStorage[index];
+	}
+
+	const Platform& PlatformUnit::GetPlatform(__int32 index)
+	{
+		if (index >= m_CountPlatformData)
+		{
+			return nullptr;
+		}
+
+		return m_PlatformDataStorage[index].m_Platform;
+	}
+
+	__int32 PlatformUnit::CountPlatformData()
+	{
+		return m_CountPlatformData;
+	}
+
+	__int32 PlatformUnit::CountPlatforms()
+	{
+		return m_CountPlatformData;
+	}
+
+	__int32 PlatformUnit::CountDevices()
+	{
+		__int32 count;
+		for (auto& plData : m_PlatformDataStorage)
+		{
+			count += plData.m_Devices.size();
+		}
+
+		return count;
+	}
+	
+	PlatformData::PlatformData()
+	{
+
+	}
+
+	PlatformData::PlatformData(const PlatformData& plData)
+	{
+		m_Platform = plData.m_Platform;
+		m_Devices = plData.m_Devices;
+	}
+
+	PlatformData::PlatformData(std::nullptr_t)
+	{
+	}
+
+	PlatformData::~PlatformData()
+	{
+	}
+
 }
 
 

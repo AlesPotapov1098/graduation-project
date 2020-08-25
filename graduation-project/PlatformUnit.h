@@ -3,6 +3,7 @@
 
 #include <CL/cl.h>
 #include <vector>
+#include <map>
 #include <fstream>
 
 #include "PlatformUnitInitialize.h"
@@ -10,11 +11,12 @@
 namespace gp
 {
 
+
 	class Platform
 	{
 	public:
 		Platform();
-		Platform(const cl_platform_id& plID);
+		Platform(cl_platform_id plID);
 		~Platform();
 
 		cl_platform_id GetID();
@@ -46,6 +48,10 @@ namespace gp
 	public:
 		Device();
 		Device(cl_device_id devID);
+		Device(const Device& dev)
+		{
+
+		};
 		~Device();
 			
 		cl_device_id GetID();
@@ -54,6 +60,12 @@ namespace gp
 		const char * GetVendor();
 		const char * GetProfile();
 		const char * GetVersion();
+
+		const Device& operator=(const Device& dev)
+		{
+			*this = Device(dev);
+			return *this;
+		}
 
 	private:
 
@@ -79,6 +91,51 @@ namespace gp
 	cl_program CreateCompatibleProgram();
 
 	cl_kernel CreateCompatibleKernel();
+	
+	typedef cl_uint PlatformDataID;
+	
+	struct PlatformData
+	{
+		PlatformData();
+		PlatformData(const PlatformData& plData);
+		PlatformData(std::nullptr_t);
+		~PlatformData();
+		
+		PlatformDataID id;
+		Platform m_Platform;
+		std::vector<Device> m_Devices;
+
+	};
+
+	class PlatformUnit
+	{
+	public:
+		PlatformUnit();
+		~PlatformUnit();
+		
+		void OnInitPlatformData();
+		void OnRemovePlatformData(__int32 index);
+		void OnRemoveAll();
+		
+		void AddPlatformData(const PlatformData& plData);
+		void AddPlatformData(const Platform& platform, const Device& device);
+		void AddPlatformData(const Platform& platform, std::vector<Device>& devices);
+
+		//void AddPlatformData(PlatformDataID id, const PlatformData& plData);
+		//void AddPlatformData(PlatformDataID id, const Platform& platform, const Device& device);
+		//void AddPlatformData(PlatformDataID id, const Platform& platfrom, const std::vector<Device>& devices);
+		
+		const PlatformData& GetPlatformData(__int32 index);
+		const Platform& GetPlatform(__int32 index);
+
+		__int32 CountPlatformData();
+		__int32 CountPlatforms();
+		__int32 CountDevices();
+		
+	private:
+		std::vector<PlatformData> m_PlatformDataStorage;
+		__int32 m_CountPlatformData;
+	};
 }
 
 #endif // !CL_PROGRAM_H
