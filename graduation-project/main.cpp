@@ -1,6 +1,9 @@
 #include <iostream>
+#include <string>
+#include <fstream>
 
 #include "PlatformUnitInitialize.h"
+#include "PlatformUnit.h"
 
 int main(int argc, char ** argv) {
 	
@@ -50,6 +53,18 @@ int main(int argc, char ** argv) {
 	{
 		return -4;
 	}
+
+	std::ifstream kernel_file = std::ifstream("D:\\graduation-project\\graduation-project\\image_rotate.cl");
+	if (!kernel_file.is_open()) {
+		printf("Error (mess) - can not open file\n");
+		return -5;
+	}
+	std::string source_code = 
+			std::string(std::istreambuf_iterator<char>(kernel_file), 
+						(std::istreambuf_iterator<char>()));
+	kernel_file.close();
+
+	std::cout << source_code << std::endl;
 
 	return 0;
 }

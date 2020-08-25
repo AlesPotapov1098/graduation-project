@@ -2,23 +2,23 @@
 
 namespace gp
 {
-	std::string LoadSrc(const char* filename)
+	char * LoadSrc(const char* filename)
 	{
 		if (filename == nullptr)
 		{
 			return nullptr;
 		}
 
-		std::ifstream file(filename, std::ios_base::in);
+		std::ifstream file(filename);
 		
 		if (!file.is_open())
 		{
-			return nullptr;
+			return "";
 		}
 
 		file.seekg(0,std::ios_base::end);
 		std::size_t size = file.tellg();
-		std::string src(size, '\0');
+		char * src = new char[size];
 		file.read(&src[0],size);
 		file.close();
 

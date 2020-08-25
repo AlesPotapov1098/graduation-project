@@ -84,7 +84,7 @@ namespace gp
 		const char * m_DeviceVersion;
 	};
 
-	std::string LoadSrc(const char * filename);
+	char * LoadSrc(const char * filename);
 
 	cl_context CreateCompatibleContext(cl_device_id deviceID);
 

@@ -180,6 +180,9 @@
   <ItemGroup>
     <ResourceCompile Include="literal-rus.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="image_rotate.cl" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
