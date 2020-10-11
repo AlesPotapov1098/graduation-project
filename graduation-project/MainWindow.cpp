@@ -12,6 +12,8 @@ namespace gui {
 			PostQuitMessage(EXIT_SUCCESS);
 		}
 		return 0;
+
+
 		
 		default:
 			break;
@@ -26,6 +28,7 @@ namespace gui {
 		m_hInstance = hInst;
 		ZeroMemory(&m_WindowClass, sizeof(WNDCLASSEXA));
 		m_ForeBrush = CreateSolidBrush(color::ANTHRACITE);
+		m_Cursor = LoadCursor(0, IDC_ARROW);
 	}
 
 	MainWindow::~MainWindow()
@@ -42,6 +45,7 @@ namespace gui {
 		m_WindowClass.style = CS_VREDRAW | CS_HREDRAW;
 		m_WindowClass.hbrBackground = m_ForeBrush;
 		m_WindowClass.lpszClassName = m_ClassObjectName;
+		m_WindowClass.hCursor = m_Cursor;
 
 		if (!RegisterClassExA(&m_WindowClass))
 			return false;

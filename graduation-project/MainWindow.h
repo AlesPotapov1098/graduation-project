@@ -19,6 +19,7 @@ namespace gui {
 		MSG m_MessageStruct;
 		HBRUSH m_ForeBrush;
 		HINSTANCE m_hInstance;
+		HCURSOR m_Cursor;
 	};
 }
 
