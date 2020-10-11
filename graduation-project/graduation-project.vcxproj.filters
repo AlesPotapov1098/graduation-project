@@ -13,8 +13,17 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="GUI">
-      <UniqueIdentifier>{ee623c8d-1c55-4d4e-a2f9-88922101e438}</UniqueIdentifier>
+    <Filter Include="Файлы заголовков\GUI">
+      <UniqueIdentifier>{744dcce3-2895-4d55-aaeb-da219df34908}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\GUI">
+      <UniqueIdentifier>{07f4e8ac-2bd4-4346-9b64-55ca4ebce86e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\GUI\Window">
+      <UniqueIdentifier>{6ee8aa73-e4c5-4235-bd98-af4b4f376f5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\GUI\Window">
+      <UniqueIdentifier>{f288aef0-6808-4466-a70b-6fbae8dd9e0d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -31,7 +40,13 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="IGUIObject.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MainWindow.cpp">
+      <Filter>Исходные файлы\GUI\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorScheme.cpp">
+      <Filter>Исходные файлы\GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -48,7 +63,13 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="IGUIObject.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Файлы заголовков\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MainWindow.h">
+      <Filter>Файлы заголовков\GUI\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorScheme.h">
+      <Filter>Файлы заголовков\GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -166,14 +166,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ColorScheme.cpp" />
     <ClCompile Include="IGUIObject.cpp" />
+    <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="PlatformUnit.cpp" />
     <ClCompile Include="ExecutionUnit.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlatformUnitInitialize.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ColorScheme.h" />
     <ClInclude Include="IGUIObject.h" />
+    <ClInclude Include="MainWindow.h" />
     <ClInclude Include="PlatformUnit.h" />
     <ClInclude Include="ExecutionUnit.h" />
     <ClInclude Include="PlatformUnitInitialize.h" />
