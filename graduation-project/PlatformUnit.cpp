@@ -13,7 +13,7 @@ namespace gp
 		
 		if (!file.is_open())
 		{
-			return "";
+			return nullptr;
 		}
 
 		file.seekg(0,std::ios_base::end);
@@ -385,7 +385,7 @@ namespace gp
 
 	__int32 PlatformUnit::CountDevices()
 	{
-		__int32 count;
+		__int32 count = 0;
 		for (auto& plData : m_PlatformDataStorage)
 		{
 			count += plData.m_Devices.size();
