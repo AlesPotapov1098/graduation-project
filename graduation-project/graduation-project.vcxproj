@@ -166,12 +166,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="IGUIObject.cpp" />
     <ClCompile Include="PlatformUnit.cpp" />
     <ClCompile Include="ExecutionUnit.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlatformUnitInitialize.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IGUIObject.h" />
     <ClInclude Include="PlatformUnit.h" />
     <ClInclude Include="ExecutionUnit.h" />
     <ClInclude Include="PlatformUnitInitialize.h" />
