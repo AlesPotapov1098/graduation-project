@@ -25,6 +25,12 @@
     <Filter Include="Исходные файлы\GUI\Window">
       <UniqueIdentifier>{f288aef0-6808-4466-a70b-6fbae8dd9e0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\GUI\Controls">
+      <UniqueIdentifier>{19c774ce-8b2d-42ee-afd4-e43defc75747}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\GUI\Controls">
+      <UniqueIdentifier>{7edcf25a-405d-4c02-acb4-d5e880302c52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -48,6 +54,9 @@
     <ClCompile Include="ColorScheme.cpp">
       <Filter>Исходные файлы\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="Control.cpp">
+      <Filter>Исходные файлы\GUI\Controls</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -70,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="ColorScheme.h">
       <Filter>Файлы заголовков\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Control.h">
+      <Filter>Файлы заголовков\GUI\Controls</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
