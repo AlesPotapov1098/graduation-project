@@ -5,7 +5,7 @@ namespace gui {
 
 	LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT mess, WPARAM wParam, LPARAM lParam)
 	{
-		static ctrl::Button test(hwnd,"Test Button",100,50,50,50,"BUTTON","TestButton");
+		static ctrl::Button test(hwnd,"Test Button",1001,100,50,50,50,"BUTTON","TestButton");
 
 		switch (mess)
 		{
@@ -20,6 +20,15 @@ namespace gui {
 			if (!test.Build())
 			{
 				abort();
+			}
+		}
+		return 0;
+
+		case WM_COMMAND:
+		{
+			if (test.GetControlID() == static_cast<__int32>(wParam))
+			{
+				test.OnClick();
 			}
 		}
 		return 0;

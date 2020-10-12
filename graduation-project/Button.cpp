@@ -2,8 +2,8 @@
 
 namespace gui {
     namespace ctrl {
-        Button::Button(HWND parent, LPCSTR text, __int32 width, __int32 heigth, __int32 x, __int32 y, LPCSTR ClassName, LPCSTR ControlName)
-            : Control(parent,text,width,heigth,x,y,ClassName,ControlName)
+        Button::Button(HWND parent, LPCSTR text, __int32 id,__int32 width, __int32 heigth, __int32 x, __int32 y, LPCSTR ClassName, LPCSTR ControlName)
+            : Control(parent,text,id,width,heigth,x,y,ClassName,ControlName)
         {
         }
 
@@ -20,11 +20,16 @@ namespace gui {
                 m_XPos,m_YPos,
                 m_Width,m_Heigth,
                 m_ParentHandle,
-                nullptr,
+                reinterpret_cast<HMENU>(m_ControlID),
                 nullptr,
                 nullptr);
 
             return m_hwnd;
+        }
+
+        void Button::OnClick()
+        {
+            MessageBoxA(nullptr, "TestButton Click!!!", "Event", MB_ICONINFORMATION | MB_OK);
         }
     }
 }
