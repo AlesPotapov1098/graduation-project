@@ -2,8 +2,8 @@
 
 namespace gui {
 	namespace ctrl {
-		Control::Control(HWND parent, LPCSTR text, __int32 width, __int32 heigth, __int32 x, __int32 y, LPCSTR ClassName, LPCSTR ButtonName)
-			: IGUIObject(width, heigth, x, y, ClassName, ButtonName)
+		Control::Control(HWND parent, LPCSTR text, __int32 width, __int32 heigth, __int32 x, __int32 y, LPCSTR ClassName, LPCSTR ControlName)
+			: IGUIObject(width, heigth, x, y, ClassName, ControlName)
 		{
 			m_ParentHandle = parent;
 			m_ControlText = text;

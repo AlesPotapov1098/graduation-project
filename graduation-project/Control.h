@@ -11,8 +11,8 @@ namespace gui {
 		public:
 
 			Control() = default;
-			Control(HWND parent, LPCSTR text, __int32 width, __int32 heigth, __int32 x, __int32 y, LPCSTR ClassName, LPCSTR ButtonName);
-			~Control();
+			Control(HWND parent, LPCSTR text, __int32 width, __int32 heigth, __int32 x, __int32 y, LPCSTR ClassName, LPCSTR ControlName);
+			virtual ~Control();
 
 			virtual void OnPaint() = 0;
 
@@ -21,7 +21,7 @@ namespace gui {
 			COLORREF GetForeColor() const;
 			HWND GetParentHWND() const;
 
-		private:
+		protected:
 			HWND m_ParentHandle;
 			HFONT m_ControlTextFont;
 			COLORREF m_BackColor;

@@ -5,7 +5,7 @@ namespace gui {
 
 	LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT mess, WPARAM wParam, LPARAM lParam)
 	{
-		static HWND Button;
+		static ctrl::Button test(hwnd,"Test Button",100,50,50,50,"BUTTON","TestButton");
 
 		switch (mess)
 		{
@@ -17,14 +17,10 @@ namespace gui {
 
 		case WM_CREATE:
 		{
-			Button = CreateWindow(
-				L"BUTTON", 
-				L"Simple Button", 
-				WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 
-				50, 50, 200, 50, 
-				hwnd, 
-				nullptr, 
-				0, 0);
+			if (!test.Build())
+			{
+				abort();
+			}
 		}
 		return 0;
 

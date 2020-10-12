@@ -2,6 +2,7 @@
 
 #include "IGUIObject.h"
 #include "ColorScheme.h"
+#include "Button.h"
 
 namespace gui {
 	class MainWindow : public IGUIObject
