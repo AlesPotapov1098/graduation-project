@@ -31,6 +31,12 @@
     <Filter Include="Исходные файлы\GUI\Controls">
       <UniqueIdentifier>{7edcf25a-405d-4c02-acb4-d5e880302c52}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\gpgpu">
+      <UniqueIdentifier>{a4f4cdd7-14a3-46cc-a0d5-c398eba73c6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\gpgpu">
+      <UniqueIdentifier>{a516bb31-44ff-4a23-b3af-bbe722efac09}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -60,6 +66,12 @@
     <ClCompile Include="Button.cpp">
       <Filter>Исходные файлы\GUI\Controls</Filter>
     </ClCompile>
+    <ClCompile Include="OpenCLWrapper.cpp">
+      <Filter>Исходные файлы\gpgpu</Filter>
+    </ClCompile>
+    <ClCompile Include="OpemCLObject.cpp">
+      <Filter>Исходные файлы\gpgpu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -88,6 +100,12 @@
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Файлы заголовков\GUI\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenCLWrapper.h">
+      <Filter>Файлы заголовков\gpgpu</Filter>
+    </ClInclude>
+    <ClInclude Include="OpemCLObject.h">
+      <Filter>Файлы заголовков\gpgpu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
