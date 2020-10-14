@@ -26,6 +26,9 @@ namespace gui {
 
 		case WM_COMMAND:
 		{
+			DWORD l = LOWORD(lParam);
+			DWORD h = HIWORD(lParam);
+
 			if (test.GetControlID() == static_cast<__int32>(wParam))
 			{
 				test.OnClick();
@@ -33,12 +36,27 @@ namespace gui {
 		}
 		return 0;
 
-		case WM_DRAWITEM:
+		case WM_PAINT:
 		{
-			OutputDebugStringA("WM_DRAWITEM");
+			PAINTSTRUCT Paint;
+			HDC DeviceContext = BeginPaint(hwnd, &Paint);
+
+			EndPaint(hwnd, &Paint);
 		}
 		return 0;
-		
+
+		case WM_DRAWITEM:
+		{
+			if (test.GetControlID() == static_cast<__int32>(wParam))
+			{
+				PAINTSTRUCT Paint;
+				HDC DeviceContext = BeginPaint(test.GetHWND(), &Paint);
+
+				EndPaint(test.GetHWND(), &Paint);
+			}
+		}
+		return 0;
+					
 		default:
 			break;
 		}

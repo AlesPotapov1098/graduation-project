@@ -16,7 +16,6 @@ namespace gui {
 
 		Control::~Control()
 		{
-			CloseHandle(m_ControlTextFont);
 		}
 
 		LPCSTR Control::GetText() const

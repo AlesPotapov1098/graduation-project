@@ -16,13 +16,24 @@ namespace gui {
             m_hwnd = CreateWindowA(
                 m_ClassObjectName,
                 m_ObjectName,
-                WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+                WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_OWNERDRAW,
                 m_XPos,m_YPos,
                 m_Width,m_Heigth,
                 m_ParentHandle,
                 reinterpret_cast<HMENU>(m_ControlID),
                 nullptr,
                 nullptr);
+
+            if (!m_hwnd)
+                return false;
+
+            m_ControlTextFont = CreateFontA(
+                18, 0, 0, 0, FW_REGULAR, 0, 0, 0, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, DEFAULT_PITCH, "Roboto");
+            
+            if (!m_ControlTextFont)
+                return false;
+
+            SendMessageA(m_hwnd, WM_SETFONT, reinterpret_cast<WPARAM>(m_ControlTextFont), 0);
 
             return m_hwnd;
         }
