@@ -48,7 +48,7 @@ namespace gpgpu {
 			if (!m_ID)
 				return "NONE";
 
-			if (m_Name.empty())
+			if (m_Vendor.empty())
 			{
 				std::size_t vendorSize = 0;
 				int error = clGetPlatformInfo(m_ID, CL_PLATFORM_VENDOR, 0, nullptr, &vendorSize);
