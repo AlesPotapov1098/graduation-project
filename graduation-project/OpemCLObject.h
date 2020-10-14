@@ -30,7 +30,7 @@ namespace gpgpu {
 		class OpenCLPlatform : public OpenCLObject<cl_platform_id>
 		{
 		public:
-			OpenCLPlatform();
+			OpenCLPlatform(cl_platform_id id);
 			~OpenCLPlatform();
 
 			const std::string& getName() override;
