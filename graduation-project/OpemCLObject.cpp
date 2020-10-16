@@ -5,8 +5,26 @@ namespace gpgpu {
 	namespace objects {
 
 		template<typename T>
-		inline OpenCLObject<T>::~OpenCLObject()
+		inline IOpenCLObject<T>::~IOpenCLObject()
 		{
+		}
+
+		template<typename T>
+		T IOpenCLObject<T>::getID()
+		{
+			return m_ID;
+		}
+
+		template<typename T>
+		inline OpenCLPlatformUnit<T>::OpenCLPlatformUnit()
+		{
+
+		}
+
+		template<typename T>
+		inline OpenCLPlatformUnit<T>::~OpenCLPlatformUnit()
+		{
+
 		}
 
 		OpenCLPlatform::OpenCLPlatform(cl_platform_id id)
@@ -93,7 +111,7 @@ namespace gpgpu {
 			return m_Profile;
 		}
 
-		const std::string& OpenCLPlatform::getVersion()
+		const std::string& OpenCLPlatform::getVersion() 
 		{
 			if (!m_ID)
 				return "NONE";
@@ -116,6 +134,31 @@ namespace gpgpu {
 			}
 
 			return m_Version;
+		}
+
+		const std::string& OpenCLPlatform::getExtensions()
+		{
+			if (!m_ID)
+				return "NONE";
+
+			if (m_Extensions.empty())
+			{
+				std::size_t extensionsSize = 0;
+				int error = clGetPlatformInfo(m_ID, CL_PLATFORM_EXTENSIONS, 0, nullptr, &extensionsSize);
+				if (error || !extensionsSize)
+					return "FAIL";
+
+				char* buff = new char[extensionsSize];
+
+				error = clGetPlatformInfo(m_ID, CL_PLATFORM_EXTENSIONS, extensionsSize, buff, nullptr);
+				if (error)
+					return "FAIL";
+
+				m_Extensions = buff;
+				delete [] buff;
+			}
+
+			return m_Extensions;
 		}
 	}
 }

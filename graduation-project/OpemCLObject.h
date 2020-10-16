@@ -8,26 +8,38 @@ namespace gpgpu {
 	namespace objects {
 	
 		template<typename T>
-		class OpenCLObject
+		class IOpenCLObject
 		{
 		public:
-			OpenCLObject() = default;
-			virtual ~OpenCLObject();
+			IOpenCLObject() = default;
+			virtual ~IOpenCLObject();
+
+			T getID();
+		protected:
+			
+			T m_ID;
+		};
+
+		template<typename T>
+		class OpenCLPlatformUnit : public IOpenCLObject<T>
+		{
+		public:
+
+			OpenCLPlatformUnit();
+			virtual ~OpenCLPlatformUnit();
 
 			virtual const std::string& getName() = 0;
 			virtual const std::string& getVendor() = 0;
 			virtual const std::string& getProfile() = 0;
 			virtual const std::string& getVersion() = 0;
-			T getID();
 		protected:
 			std::string m_Name;
 			std::string m_Vendor;
 			std::string m_Profile;
 			std::string m_Version;
-			T m_ID;
 		};
 
-		class OpenCLPlatform : public OpenCLObject<cl_platform_id>
+		class OpenCLPlatform : public OpenCLPlatformUnit<cl_platform_id>
 		{
 		public:
 			OpenCLPlatform(cl_platform_id id);
@@ -37,10 +49,14 @@ namespace gpgpu {
 			const std::string& getVendor() override;
 			const std::string& getProfile() override;
 			const std::string& getVersion() override;
+			const std::string& getExtensions();
+		private:
+			std::string m_Extensions;
 		};
 
 		
 
+	
 	}
 
 }

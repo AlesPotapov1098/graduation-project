@@ -26,6 +26,7 @@ int main()
 	std::cout << test.getVendor() << std::endl;
 	std::cout << test.getProfile() << std::endl;
 	std::cout << test.getVersion() << std::endl;
+	std::cout << test.getExtensions() << std::endl;
 
 	return 0;
 }
