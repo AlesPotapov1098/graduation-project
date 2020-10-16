@@ -69,7 +69,7 @@
     <ClCompile Include="OpenCLWrapper.cpp">
       <Filter>Исходные файлы\gpgpu</Filter>
     </ClCompile>
-    <ClCompile Include="OpemCLObject.cpp">
+    <ClCompile Include="OpenCLPlatformUnit.cpp">
       <Filter>Исходные файлы\gpgpu</Filter>
     </ClCompile>
   </ItemGroup>
@@ -104,7 +104,10 @@
     <ClInclude Include="OpenCLWrapper.h">
       <Filter>Файлы заголовков\gpgpu</Filter>
     </ClInclude>
-    <ClInclude Include="OpemCLObject.h">
+    <ClInclude Include="IOpenCLObject.h">
+      <Filter>Файлы заголовков\gpgpu</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenCLPlatformUnit.h">
       <Filter>Файлы заголовков\gpgpu</Filter>
     </ClInclude>
   </ItemGroup>

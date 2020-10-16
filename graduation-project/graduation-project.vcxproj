@@ -171,7 +171,7 @@
     <ClCompile Include="Control.cpp" />
     <ClCompile Include="IGUIObject.cpp" />
     <ClCompile Include="MainWindow.cpp" />
-    <ClCompile Include="OpemCLObject.cpp" />
+    <ClCompile Include="OpenCLPlatformUnit.cpp" />
     <ClCompile Include="OpenCLWrapper.cpp" />
     <ClCompile Include="PlatformUnit.cpp" />
     <ClCompile Include="ExecutionUnit.cpp" />
@@ -184,7 +184,8 @@
     <ClInclude Include="Control.h" />
     <ClInclude Include="IGUIObject.h" />
     <ClInclude Include="MainWindow.h" />
-    <ClInclude Include="OpemCLObject.h" />
+    <ClInclude Include="IOpenCLObject.h" />
+    <ClInclude Include="OpenCLPlatformUnit.h" />
     <ClInclude Include="OpenCLWrapper.h" />
     <ClInclude Include="PlatformUnit.h" />
     <ClInclude Include="ExecutionUnit.h" />

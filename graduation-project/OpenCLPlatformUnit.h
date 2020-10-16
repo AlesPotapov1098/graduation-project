@@ -1,24 +1,10 @@
 #pragma once
 
-#include <string>
-#include <CL/cl.h>
+#include "IOpenCLObject.h"
 
 namespace gpgpu {
 
 	namespace objects {
-	
-		template<typename T>
-		class IOpenCLObject
-		{
-		public:
-			IOpenCLObject() = default;
-			virtual ~IOpenCLObject();
-
-			T getID();
-		protected:
-			
-			T m_ID;
-		};
 
 		template<typename T>
 		class OpenCLPlatformUnit : public IOpenCLObject<T>
@@ -67,10 +53,6 @@ namespace gpgpu {
 			const std::string& getVersion() override;
 			const std::string& getExtensions() override;
 		};
-
-
-	
 	}
 
 }
-

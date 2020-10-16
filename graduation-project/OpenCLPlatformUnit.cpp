@@ -1,19 +1,8 @@
-#include "OpemCLObject.h"
+#include "OpenCLPlatformUnit.h"
 
 namespace gpgpu {
 
 	namespace objects {
-
-		template<typename T>
-		inline IOpenCLObject<T>::~IOpenCLObject()
-		{
-		}
-
-		template<typename T>
-		T IOpenCLObject<T>::getID()
-		{
-			return m_ID;
-		}
 
 		template<typename T>
 		inline OpenCLPlatformUnit<T>::OpenCLPlatformUnit()
@@ -44,20 +33,20 @@ namespace gpgpu {
 			if (m_Name.empty())
 			{
 				std::size_t nameSize = 0;
-				int error = clGetPlatformInfo(m_ID,	CL_PLATFORM_NAME, 0, nullptr, &nameSize);
-				if (error || !nameSize) 
+				int error = clGetPlatformInfo(m_ID, CL_PLATFORM_NAME, 0, nullptr, &nameSize);
+				if (error || !nameSize)
 					return "FAIL";
 
-				char * buff = new char[nameSize];
+				char* buff = new char[nameSize];
 
 				error = clGetPlatformInfo(m_ID, CL_PLATFORM_NAME, nameSize, (void*)buff, nullptr);
 				if (error)
 					return "FAIL";
 
 				m_Name = buff;
-				delete [] buff;
+				delete[] buff;
 			}
-			
+
 			return m_Name;
 		}
 
@@ -80,7 +69,7 @@ namespace gpgpu {
 					return "FAIL";
 
 				m_Vendor = buff;
-				delete [] buff;
+				delete[] buff;
 			}
 
 			return m_Vendor;
@@ -105,13 +94,13 @@ namespace gpgpu {
 					return "FAIL";
 
 				m_Profile = buff;
-				delete [] buff;
+				delete[] buff;
 			}
 
 			return m_Profile;
 		}
 
-		const std::string& OpenCLPlatform::getVersion() 
+		const std::string& OpenCLPlatform::getVersion()
 		{
 			if (!m_ID)
 				return "NONE";
@@ -130,7 +119,7 @@ namespace gpgpu {
 					return "FAIL";
 
 				m_Version = buff;
-				delete [] buff;
+				delete[] buff;
 			}
 
 			return m_Version;
@@ -155,7 +144,7 @@ namespace gpgpu {
 					return "FAIL";
 
 				m_Extensions = buff;
-				delete [] buff;
+				delete[] buff;
 			}
 
 			return m_Extensions;
@@ -168,23 +157,25 @@ namespace gpgpu {
 		}
 		const std::string& OpenCLDevice::getName()
 		{
-			// TODO: вставьте здесь оператор return
+			return m_Name;
 		}
 		const std::string& OpenCLDevice::getVendor()
 		{
-			// TODO: вставьте здесь оператор return
+			return m_Vendor;
 		}
 		const std::string& OpenCLDevice::getProfile()
 		{
-			// TODO: вставьте здесь оператор return
+			return m_Profile;
 		}
 		const std::string& OpenCLDevice::getVersion()
 		{
-			// TODO: вставьте здесь оператор return
+			return m_Version;
 		}
 		const std::string& OpenCLDevice::getExtensions()
 		{
-			// TODO: вставьте здесь оператор return
+			return m_Extensions;
 		}
-}
+
+	}
+
 }
