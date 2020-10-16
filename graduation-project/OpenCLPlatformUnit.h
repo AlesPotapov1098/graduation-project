@@ -41,10 +41,10 @@ namespace gpgpu {
 			const std::string& getExtensions() override;
 		};
 
-		class OpenCLDevice : public OpenCLPlatformUnit<cl_platform_id>
+		class OpenCLDevice : public OpenCLPlatformUnit<cl_device_id>
 		{
 		public:
-			OpenCLDevice(cl_platform_id id);
+			OpenCLDevice(cl_device_id id);
 			~OpenCLDevice();
 
 			const std::string& getName() override;
