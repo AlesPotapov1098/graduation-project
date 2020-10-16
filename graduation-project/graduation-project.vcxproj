@@ -166,30 +166,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Button.cpp" />
-    <ClCompile Include="ColorScheme.cpp" />
-    <ClCompile Include="Control.cpp" />
-    <ClCompile Include="IGUIObject.cpp" />
-    <ClCompile Include="MainWindow.cpp" />
-    <ClCompile Include="OpenCLPlatformUnit.cpp" />
-    <ClCompile Include="OpenCLWrapper.cpp" />
-    <ClCompile Include="PlatformUnit.cpp" />
-    <ClCompile Include="ExecutionUnit.cpp" />
+    <ClCompile Include="gui/Button.cpp" />
+    <ClCompile Include="gui/ColorScheme.cpp" />
+    <ClCompile Include="gui/Control.cpp" />
+    <ClCompile Include="gui/IGUIObject.cpp" />
+    <ClCompile Include="gui/MainWindow.cpp" />
+    <ClCompile Include="gpgpu/OpenCLPlatformUnit.cpp" />
+    <ClCompile Include="gpgpu/OpenCLWrapper.cpp" />
+    <ClCompile Include="legacy/PlatformUnit.cpp" />
+    <ClCompile Include="legacy/ExecutionUnit.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PlatformUnitInitialize.cpp" />
+    <ClCompile Include="legacy/PlatformUnitInitialize.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Button.h" />
-    <ClInclude Include="ColorScheme.h" />
-    <ClInclude Include="Control.h" />
-    <ClInclude Include="IGUIObject.h" />
-    <ClInclude Include="MainWindow.h" />
-    <ClInclude Include="IOpenCLObject.h" />
-    <ClInclude Include="OpenCLPlatformUnit.h" />
-    <ClInclude Include="OpenCLWrapper.h" />
-    <ClInclude Include="PlatformUnit.h" />
-    <ClInclude Include="ExecutionUnit.h" />
-    <ClInclude Include="PlatformUnitInitialize.h" />
+    <ClInclude Include="giu/Button.h" />
+    <ClInclude Include="giu/ColorScheme.h" />
+    <ClInclude Include="gui/Control.h" />
+    <ClInclude Include="gui/IGUIObject.h" />
+    <ClInclude Include="gui/MainWindow.h" />
+    <ClInclude Include="gpgpu/IOpenCLObject.h" />
+    <ClInclude Include="gpgpu/OpenCLPlatformUnit.h" />
+    <ClInclude Include="gpgpu/OpenCLWrapper.h" />
+    <ClInclude Include="legacy/PlatformUnit.h" />
+    <ClInclude Include="legacy/ExecutionUnit.h" />
+    <ClInclude Include="legacy/PlatformUnitInitialize.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
