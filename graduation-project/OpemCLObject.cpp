@@ -160,5 +160,31 @@ namespace gpgpu {
 
 			return m_Extensions;
 		}
-	}
+		OpenCLDevice::OpenCLDevice(cl_platform_id id)
+		{
+		}
+		OpenCLDevice::~OpenCLDevice()
+		{
+		}
+		const std::string& OpenCLDevice::getName()
+		{
+			// TODO: вставьте здесь оператор return
+		}
+		const std::string& OpenCLDevice::getVendor()
+		{
+			// TODO: вставьте здесь оператор return
+		}
+		const std::string& OpenCLDevice::getProfile()
+		{
+			// TODO: вставьте здесь оператор return
+		}
+		const std::string& OpenCLDevice::getVersion()
+		{
+			// TODO: вставьте здесь оператор return
+		}
+		const std::string& OpenCLDevice::getExtensions()
+		{
+			// TODO: вставьте здесь оператор return
+		}
+}
 }
