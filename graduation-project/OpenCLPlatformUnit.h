@@ -28,6 +28,9 @@ namespace gpgpu {
 
 		};
 
+		class OpenCLPlatfrom;
+		class OpenCLDevice;
+
 		class OpenCLPlatform : public OpenCLPlatformUnit<cl_platform_id>
 		{
 		public:
