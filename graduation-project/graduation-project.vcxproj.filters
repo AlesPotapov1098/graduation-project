@@ -37,39 +37,45 @@
     <Filter Include="Файлы заголовков\gpgpu">
       <UniqueIdentifier>{a516bb31-44ff-4a23-b3af-bbe722efac09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\legacy">
+      <UniqueIdentifier>{23ffcc61-c9f2-4937-9505-41af6e5e68fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\legacy">
+      <UniqueIdentifier>{ec478a91-bb3e-4fa2-9308-bef28db9d1ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="ExecutionUnit.cpp">
-      <Filter>Исходные файлы</Filter>
+    <ClCompile Include="gui/Button.cpp">
+      <Filter>Исходные файлы\GUI\Controls</Filter>
     </ClCompile>
-    <ClCompile Include="PlatformUnitInitialize.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="PlatformUnit.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="IGUIObject.cpp">
+    <ClCompile Include="gui/ColorScheme.cpp">
       <Filter>Исходные файлы\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="MainWindow.cpp">
+    <ClCompile Include="gui/MainWindow.cpp">
       <Filter>Исходные файлы\GUI\Window</Filter>
     </ClCompile>
-    <ClCompile Include="ColorScheme.cpp">
+    <ClCompile Include="gui/IGUIObject.cpp">
       <Filter>Исходные файлы\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="Control.cpp">
+    <ClCompile Include="gui/Control.cpp">
       <Filter>Исходные файлы\GUI\Controls</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Исходные файлы\GUI\Controls</Filter>
+    <ClCompile Include="legacy/PlatformUnitInitialize.cpp">
+      <Filter>Исходные файлы\legacy</Filter>
     </ClCompile>
-    <ClCompile Include="OpenCLWrapper.cpp">
+    <ClCompile Include="legacy/PlatformUnit.cpp">
+      <Filter>Исходные файлы\legacy</Filter>
+    </ClCompile>
+    <ClCompile Include="legacy/ExecutionUnit.cpp">
+      <Filter>Исходные файлы\legacy</Filter>
+    </ClCompile>
+    <ClCompile Include="gpgpu/OpenCLPlatformUnit.cpp">
       <Filter>Исходные файлы\gpgpu</Filter>
     </ClCompile>
-    <ClCompile Include="OpenCLPlatformUnit.cpp">
+    <ClCompile Include="gpgpu/OpenCLWrapper.cpp">
       <Filter>Исходные файлы\gpgpu</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,37 +83,37 @@
     <ClInclude Include="resource.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="ExecutionUnit.h">
-      <Filter>Файлы заголовков</Filter>
+    <ClInclude Include="giu/Button.h">
+      <Filter>Файлы заголовков\GUI\Controls</Filter>
     </ClInclude>
-    <ClInclude Include="PlatformUnitInitialize.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="PlatformUnit.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="IGUIObject.h">
+    <ClInclude Include="giu/ColorScheme.h">
       <Filter>Файлы заголовков\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="MainWindow.h">
+    <ClInclude Include="gui/MainWindow.h">
       <Filter>Файлы заголовков\GUI\Window</Filter>
     </ClInclude>
-    <ClInclude Include="ColorScheme.h">
+    <ClInclude Include="gui/IGUIObject.h">
       <Filter>Файлы заголовков\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="Control.h">
+    <ClInclude Include="gui/Control.h">
       <Filter>Файлы заголовков\GUI\Controls</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Файлы заголовков\GUI\Controls</Filter>
+    <ClInclude Include="legacy/PlatformUnitInitialize.h">
+      <Filter>Файлы заголовков\legacy</Filter>
     </ClInclude>
-    <ClInclude Include="OpenCLWrapper.h">
+    <ClInclude Include="legacy/PlatformUnit.h">
+      <Filter>Файлы заголовков\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="legacy/ExecutionUnit.h">
+      <Filter>Файлы заголовков\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="gpgpu/IOpenCLObject.h">
       <Filter>Файлы заголовков\gpgpu</Filter>
     </ClInclude>
-    <ClInclude Include="IOpenCLObject.h">
+    <ClInclude Include="gpgpu/OpenCLPlatformUnit.h">
       <Filter>Файлы заголовков\gpgpu</Filter>
     </ClInclude>
-    <ClInclude Include="OpenCLPlatformUnit.h">
+    <ClInclude Include="gpgpu/OpenCLWrapper.h">
       <Filter>Файлы заголовков\gpgpu</Filter>
     </ClInclude>
   </ItemGroup>
