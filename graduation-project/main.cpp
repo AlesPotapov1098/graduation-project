@@ -16,6 +16,9 @@ int main()
 	{
 		return -1;
 	}
+
+	cl_context_properties prop;
+	cl_command_queue_properties prop1;
 	
 	id = new cl_platform_id[size];
 	error = clGetPlatformIDs(size, id, 0);
