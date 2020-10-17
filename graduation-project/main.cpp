@@ -1,7 +1,4 @@
 #pragma once
-#pragma comment(linker,"\"/manifestdependency:type='win32' \
-name='Microsoft.Windows.Common-Controls' version='6.0.0.0' \
-processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
 #include <iostream>
 #include "gpgpu/OpenCLPlatformUnit.h"
@@ -16,9 +13,6 @@ int main()
 	{
 		return -1;
 	}
-
-	cl_context_properties prop;
-	cl_command_queue_properties prop1;
 	
 	id = new cl_platform_id[size];
 	error = clGetPlatformIDs(size, id, 0);
