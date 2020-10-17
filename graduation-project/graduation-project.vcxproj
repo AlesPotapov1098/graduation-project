@@ -166,11 +166,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="gui/Button.cpp" />
+    <ClCompile Include="gui/controls/Button.cpp" />
     <ClCompile Include="gui/ColorScheme.cpp" />
-    <ClCompile Include="gui/Control.cpp" />
+    <ClCompile Include="gui/controls/Control.cpp" />
     <ClCompile Include="gui/IGUIObject.cpp" />
-    <ClCompile Include="gui/MainWindow.cpp" />
+    <ClCompile Include="gui/window/MainWindow.cpp" />
     <ClCompile Include="gpgpu/OpenCLPlatformUnit.cpp" />
     <ClCompile Include="gpgpu/OpenCLWrapper.cpp" />
     <ClCompile Include="legacy/PlatformUnit.cpp" />
@@ -179,11 +179,11 @@
     <ClCompile Include="legacy/PlatformUnitInitialize.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="giu/Button.h" />
+    <ClInclude Include="giu/controls/Button.h" />
     <ClInclude Include="giu/ColorScheme.h" />
-    <ClInclude Include="gui/Control.h" />
+    <ClInclude Include="gui/controls/Control.h" />
     <ClInclude Include="gui/IGUIObject.h" />
-    <ClInclude Include="gui/MainWindow.h" />
+    <ClInclude Include="gui/window/MainWindow.h" />
     <ClInclude Include="gpgpu/IOpenCLObject.h" />
     <ClInclude Include="gpgpu/OpenCLPlatformUnit.h" />
     <ClInclude Include="gpgpu/OpenCLWrapper.h" />
