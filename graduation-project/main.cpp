@@ -1,29 +1,45 @@
 #pragma once
 
+#pragma comment(lib,"OpenCL.lib")
+
+#define CL_HPP_ENABLE_EXCEPTIONS
+#define CL_HPP_MINIMUM_OPENCL_VERSION 110
+#define CL_HPP_TARGET_OPENCL_VERSION  210
+
 #include <iostream>
-#include "gpgpu/OpenCLPlatformUnit.h"
+#include <CL/opencl.hpp>
+#include <string>
 
 int main()
 {
-	cl_uint size = 0;
-	cl_platform_id * id;
-	cl_int error = clGetPlatformIDs(0, nullptr, &size);
+	cl::vector<cl::Platform> platforms;
+	cl::Platform::get(&platforms);
 
-	if(error || !size)
+	for (auto& platfrom : platforms)
 	{
-		return -1;
+		auto platform_name = platfrom.getInfo<CL_PLATFORM_NAME>();
+
+		std::cout << platform_name << std::endl;
+
+		cl::vector<cl::Device> devices;
+
+		platfrom.getDevices(CL_DEVICE_TYPE_ALL, &devices);
+		
+		for (auto& device : devices)
+		{
+			auto device_name = device.getInfo<CL_DEVICE_NAME>();
+
+			std::cout << device_name << std::endl;
+
+			cl::string device_vendor = device.getInfo<CL_DEVICE_VENDOR>();
+
+			std::cout << device_vendor << std::endl;
+
+			cl::string device_ext = device.getInfo<CL_DEVICE_EXTENSIONS>();
+
+			std::cout << device_ext << std::endl;
+		}
 	}
-	
-	id = new cl_platform_id[size];
-	error = clGetPlatformIDs(size, id, 0);
-
-	gpgpu::objects::OpenCLPlatform test(id[0]);
-
-	std::cout << test.getName() << std::endl;
-	std::cout << test.getVendor() << std::endl;
-	std::cout << test.getProfile() << std::endl;
-	std::cout << test.getVersion() << std::endl;
-	std::cout << test.getExtensions() << std::endl;
 
 	return 0;
 }

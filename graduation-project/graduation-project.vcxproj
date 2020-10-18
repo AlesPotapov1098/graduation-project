@@ -136,13 +136,13 @@
       <CompileAsManaged>false</CompileAsManaged>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <CallingConvention>StdCall</CallingConvention>
-      <AdditionalIncludeDirectories>C:\Users\Ales1098\Documents\Visual Studio 2019\OpenCL_start;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Ales1098\nstu-stuff\graduation-project\graduation-project\gui;C:\Users\Ales1098\Documents\Visual Studio 2019\OpenCL-CLHPP\OpenCL-CLHPP-master\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Ales1098\Documents\Visual Studio 2019\OpenCL_start</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OpenCL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Ales1098\nstu-stuff\graduation-project\graduation-project</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/HIGHENTROPYVA</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
@@ -179,8 +179,8 @@
     <ClCompile Include="legacy/PlatformUnitInitialize.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="giu/controls/Button.h" />
-    <ClInclude Include="giu/ColorScheme.h" />
+    <ClInclude Include="gui/controls/Button.h" />
+    <ClInclude Include="gui/ColorScheme.h" />
     <ClInclude Include="gui/controls/Control.h" />
     <ClInclude Include="gui/IGUIObject.h" />
     <ClInclude Include="gui/window/MainWindow.h" />
