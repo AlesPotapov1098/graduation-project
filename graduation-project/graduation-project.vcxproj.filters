@@ -43,6 +43,12 @@
     <Filter Include="Файлы заголовков\legacy">
       <UniqueIdentifier>{ec478a91-bb3e-4fa2-9308-bef28db9d1ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\filenamager">
+      <UniqueIdentifier>{e5ea0c41-c119-4829-a1b2-6f6a8f3c77eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\filenamager">
+      <UniqueIdentifier>{3edb716b-2436-43d9-80b6-d75b1cd9800e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -77,6 +83,12 @@
     </ClCompile>
     <ClCompile Include="gui/controls/Control.cpp">
       <Filter>Исходные файлы\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="filenamager/IFile.cpp">
+      <Filter>Исходные файлы\filenamager</Filter>
+    </ClCompile>
+    <ClCompile Include="filenamager/IFile.h">
+      <Filter>Файлы заголовков\filenamager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

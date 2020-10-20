@@ -175,6 +175,7 @@
     <ClCompile Include="gpgpu/OpenCLWrapper.cpp" />
     <ClCompile Include="legacy/PlatformUnit.cpp" />
     <ClCompile Include="legacy/ExecutionUnit.cpp" />
+    <ClCompile Include="filenamager/IFile.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="legacy/PlatformUnitInitialize.cpp" />
   </ItemGroup>
@@ -190,6 +191,7 @@
     <ClInclude Include="legacy/PlatformUnit.h" />
     <ClInclude Include="legacy/ExecutionUnit.h" />
     <ClInclude Include="legacy/PlatformUnitInitialize.h" />
+    <ClCompile Include="filenamager/IFile.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
