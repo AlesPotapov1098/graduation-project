@@ -33,6 +33,7 @@ int main()
 				std::cout << device_vendor << std::endl;
 				cl::string device_ext = device.getInfo<CL_DEVICE_EXTENSIONS>();
 				std::cout << device_ext << std::endl;
+				auto type = device.getInfo<CL_DEVICE_TYPE>();
 			}
 		}
 	}

@@ -2,9 +2,25 @@
 
 #include "IOpenCLObject.h"
 
+#include <CL/opencl.hpp>
+
 namespace gpgpu {
 
 	namespace objects {
+
+		class OpenCLHost {
+		public:
+			OpenCLHost();
+			~OpenCLHost();
+
+			bool InitHost(const cl::Platform& platform, const cl::Device& device);
+			int  GetType();
+			
+
+		private:
+			cl::Platform m_HostPlatform;
+			cl::Device   m_HostDevice;
+		};
 
 		template<typename T>
 		class OpenCLPlatformUnit : public IOpenCLObject<T>
