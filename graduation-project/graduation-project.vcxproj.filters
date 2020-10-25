@@ -84,11 +84,17 @@
     <ClCompile Include="gui/controls/Control.cpp">
       <Filter>Исходные файлы\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="filenamager/IFile.cpp">
-      <Filter>Исходные файлы\filenamager</Filter>
+    <ClCompile Include="filemanager/IFile.cpp">
+      <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="filenamager/IFile.h">
-      <Filter>Файлы заголовков\filenamager</Filter>
+    <ClCompile Include="ApplicationAPI.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="filemanager/IFile.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClCompile>
+    <ClCompile Include="ApplicationAPI.h">
+      <Filter>Файлы заголовков</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

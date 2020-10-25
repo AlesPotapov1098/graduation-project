@@ -1,6 +1,8 @@
 #pragma once
 
-#define CL_HPP_ENABLE_EXCEPTIONS
+//#define CL_HPP_ENABLE_EXCEPTIONS
+
+#pragma warning(disable : 4996)
 
 #include <string>
 #include <CL/opencl.hpp>
@@ -19,6 +21,17 @@ namespace gpgpu {
 
 	private:
 		PlatfromInfoDTOWrapper m_PlatformInfo;
+	};
+
+	class OpenCLDeviceLoadInfo {
+	public:
+		OpenCLDeviceLoadInfo() = default;
+		OpenCLDeviceLoadInfo(const cl::Device& device);
+		~OpenCLDeviceLoadInfo() = default;
+
+		const DeviceInfoDTOWrapper& GetDeviceInfo();
+	private:
+		DeviceInfoDTOWrapper m_DeviceInfo;
 	};
 
 	class OpenCLWrapper

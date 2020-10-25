@@ -43,7 +43,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>ClangCL</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
@@ -130,13 +130,14 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <CompileAsManaged>false</CompileAsManaged>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <CallingConvention>StdCall</CallingConvention>
       <AdditionalIncludeDirectories>C:\Users\Ales1098\nstu-stuff\graduation-project\graduation-project\gui;C:\Users\Ales1098\Documents\Visual Studio 2019\OpenCL-CLHPP\OpenCL-CLHPP-master\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -166,33 +167,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="gui/controls/Button.cpp" />
-    <ClCompile Include="gui/ColorScheme.cpp" />
-    <ClCompile Include="gui/controls/Control.cpp" />
-    <ClCompile Include="gui/IGUIObject.cpp" />
-    <ClCompile Include="gui/window/MainWindow.cpp" />
-    <ClCompile Include="gpgpu/OpenCLPlatformUnit.cpp" />
-    <ClCompile Include="gpgpu/OpenCLWrapper.cpp" />
-    <ClCompile Include="legacy/PlatformUnit.cpp" />
-    <ClCompile Include="legacy/ExecutionUnit.cpp" />
-    <ClCompile Include="filenamager/IFile.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="ColorScheme.cpp" />
+    <ClCompile Include="Control.cpp" />
+    <ClCompile Include="IGUIObject.cpp" />
+    <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="OpenCLPlatformUnit.cpp" />
+    <ClCompile Include="OpenCLWrapper.cpp" />
+    <ClCompile Include="PlatformUnit.cpp" />
+    <ClCompile Include="ExecutionUnit.cpp" />
+    <ClCompile Include="IFile.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="legacy/PlatformUnitInitialize.cpp" />
+    <ClCompile Include="ApplicationAPI.cpp" />
+    <ClCompile Include="PlatformUnitInitialize.cpp" />
+	<ClCompile Include="OpenClExecutionUnit.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="gui/controls/Button.h" />
-    <ClInclude Include="gui/ColorScheme.h" />
-    <ClInclude Include="gui/controls/Control.h" />
-    <ClInclude Include="gui/IGUIObject.h" />
-    <ClInclude Include="gui/window/MainWindow.h" />
-    <ClInclude Include="gpgpu/IOpenCLObject.h" />
-    <ClInclude Include="gpgpu/OpenCLPlatformUnit.h" />
-    <ClInclude Include="gpgpu/OpenCLWrapper.h" />
-    <ClInclude Include="legacy/PlatformUnit.h" />
-    <ClInclude Include="legacy/ExecutionUnit.h" />
-    <ClInclude Include="legacy/PlatformUnitInitialize.h" />
-    <ClCompile Include="filenamager/IFile.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="ColorScheme.h" />
+    <ClInclude Include="controls/Control.h" />
+    <ClInclude Include="IGUIObject.h" />
+    <ClInclude Include="MainWindow.h" />
+    <ClInclude Include="IOpenCLObject.h" />
+    <ClInclude Include="OpenCLPlatformUnit.h" />
+    <ClInclude Include="OpenCLWrapper.h" />
+    <ClInclude Include="PlatformUnit.h" />
+    <ClInclude Include="ExecutionUnit.h" />
+    <ClInclude Include="PlatformUnitInitialize.h" />
+    <ClCompile Include="filemanager/IFile.h" />
     <ClInclude Include="resource.h" />
+    <ClCompile Include="ApplicationAPI.h" />
+	<ClCompile Include="OpenClExecutionUnit.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="literal-rus.rc" />
