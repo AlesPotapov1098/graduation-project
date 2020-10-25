@@ -1,8 +1,8 @@
 #pragma once
 
-//#define CL_HPP_ENABLE_EXCEPTIONS
+#define CL_HPP_ENABLE_EXCEPTIONS
 
-#pragma warning(disable : 4996)
+//#pragma warning(disable : 4996)
 
 #include <string>
 #include <CL/opencl.hpp>
@@ -10,6 +10,10 @@
 #include "OpenCLDtoWrappers.h"
 
 namespace gpgpu {
+
+	const char* NONE = "NONE";
+	const char* GPU = "GPU";
+	const char* CPU = "CPU";
 
 	class OpenCLPlatformLoadInfo {
 	public:
@@ -34,16 +38,17 @@ namespace gpgpu {
 		DeviceInfoDTOWrapper m_DeviceInfo;
 	};
 
-	class OpenCLWrapper
+	class OpenCLPlatformUnitWrapper
 	{
 	public:
-		OpenCLWrapper();
-		~OpenCLWrapper();
+		OpenCLPlatformUnitWrapper();
+		~OpenCLPlatformUnitWrapper();
 
 		void Init();
+		const PlatfromUnitDTO& getDTO(unsigned int index);
 
 	private:
-
+		std::vector<PlatfromUnitDTO> m_Units;
 	};
 
 }

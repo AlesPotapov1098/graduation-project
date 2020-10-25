@@ -172,32 +172,25 @@
     <ClCompile Include="Control.cpp" />
     <ClCompile Include="IGUIObject.cpp" />
     <ClCompile Include="MainWindow.cpp" />
-    <ClCompile Include="OpenCLPlatformUnit.cpp" />
     <ClCompile Include="OpenCLWrapper.cpp" />
     <ClCompile Include="PlatformUnit.cpp" />
-    <ClCompile Include="ExecutionUnit.cpp" />
-    <ClCompile Include="IFile.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ApplicationAPI.cpp" />
     <ClCompile Include="PlatformUnitInitialize.cpp" />
-	<ClCompile Include="OpenClExecutionUnit.cpp" />
+    <ClCompile Include="OpenClExecutionUnit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="ColorScheme.h" />
-    <ClInclude Include="controls/Control.h" />
+    <ClInclude Include="Control.h" />
     <ClInclude Include="IGUIObject.h" />
     <ClInclude Include="MainWindow.h" />
-    <ClInclude Include="IOpenCLObject.h" />
-    <ClInclude Include="OpenCLPlatformUnit.h" />
     <ClInclude Include="OpenCLWrapper.h" />
     <ClInclude Include="PlatformUnit.h" />
-    <ClInclude Include="ExecutionUnit.h" />
     <ClInclude Include="PlatformUnitInitialize.h" />
-    <ClCompile Include="filemanager/IFile.h" />
     <ClInclude Include="resource.h" />
     <ClCompile Include="ApplicationAPI.h" />
-	<ClCompile Include="OpenClExecutionUnit.h" />
+    <ClCompile Include="OpenClExecutionUnit.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="literal-rus.rc" />

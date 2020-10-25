@@ -1,6 +1,5 @@
-#pragma once
-
 #include <string>
+#include <CL/opencl.hpp>
 
 namespace gpgpu {
 
@@ -19,5 +18,15 @@ namespace gpgpu {
 		std::string m_DeviceVendor;
 		std::string m_DeviceExtensions;
 		std::string m_DeviceType;
+	};
+
+	struct PlatfromUnitDTO {
+		cl::Platform m_Platfrom;
+		cl::vector<cl::Device> m_Devices;
+	};
+
+	struct OpenCLHost {
+		cl::Platform m_HostPlatform;
+		cl::Device   m_HostDevice;
 	};
 }

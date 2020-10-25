@@ -30,15 +30,15 @@ namespace gpgpu {
 		switch (deviceTypeCode)
 		{
 		case CL_DEVICE_TYPE_GPU:
-			m_DeviceInfo.m_DeviceType = "GPU";
+			m_DeviceInfo.m_DeviceType = GPU;
 			break;
 
 		case CL_DEVICE_TYPE_CPU:
-			m_DeviceInfo.m_DeviceType = "CPU";
+			m_DeviceInfo.m_DeviceType = CPU;
 			break;
 
 		default:
-			m_DeviceInfo.m_DeviceType = "NONE";
+			m_DeviceInfo.m_DeviceType = NONE;
 			break;
 		}
     }
@@ -46,5 +46,40 @@ namespace gpgpu {
     const DeviceInfoDTOWrapper& OpenCLDeviceLoadInfo::GetDeviceInfo()
     {
         return m_DeviceInfo;
+    }
+
+    OpenCLPlatformUnitWrapper::OpenCLPlatformUnitWrapper()
+    {
+    }
+
+    OpenCLPlatformUnitWrapper::~OpenCLPlatformUnitWrapper()
+    {
+    }
+
+    void OpenCLPlatformUnitWrapper::Init()
+    {
+        try
+        {
+            cl::vector<cl::Platform> platfroms;
+            cl::Platform::get(&platfroms);
+            for (auto pl : platfroms) {
+                PlatfromUnitDTO dto;
+                dto.m_Platfrom = std::move(pl);
+                dto.m_Platfrom.getDevices(CL_DEVICE_TYPE_ALL, &dto.m_Devices);
+                m_Units.push_back(std::move(dto));
+            }
+        }
+        catch (const cl::Error& error) {
+
+        }
+    }
+    const PlatfromUnitDTO& OpenCLPlatformUnitWrapper::getDTO(unsigned int index)
+    {
+        if (index >= m_Units.size())
+        {
+            throw std::exception("Invalid index!");
+        }
+
+        return m_Units[index];
     }
 }
