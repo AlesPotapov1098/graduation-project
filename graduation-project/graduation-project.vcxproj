@@ -140,10 +140,10 @@
       </AdditionalOptions>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\Ales1098\nstu-stuff\graduation-project\graduation-project</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d2d1.lib;OpenCL.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/HIGHENTROPYVA</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>

@@ -16,7 +16,7 @@ namespace gui {
             m_hwnd = CreateWindowA(
                 m_ClassObjectName,
                 m_ObjectName,
-                WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_OWNERDRAW,
+                WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
                 m_XPos,m_YPos,
                 m_Width,m_Heigth,
                 m_ParentHandle,
@@ -34,6 +34,7 @@ namespace gui {
                 return false;
 
             SendMessageA(m_hwnd, WM_SETFONT, reinterpret_cast<WPARAM>(m_ControlTextFont), 0);
+            SendMessageA(m_hwnd, WM_SETTEXT, reinterpret_cast<WPARAM>("Button"), 0);
 
             return m_hwnd;
         }

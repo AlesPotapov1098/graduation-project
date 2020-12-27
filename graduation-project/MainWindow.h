@@ -10,6 +10,9 @@ namespace gui {
 	public:
 		MainWindow() = default;
 		MainWindow(__int32 width, __int32 heigth, __int32 x, __int32 y, LPCSTR ClassName, LPCSTR WindowName, HINSTANCE hInst);
+
+		LRESULT WindowFunction(HWND, UINT, WPARAM, LPARAM);
+
 		~MainWindow();
 
 		bool Build() override;
