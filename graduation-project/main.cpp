@@ -136,11 +136,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
     case WM_DISPLAYCHANGE:
     case WM_PAINT:
-        BeginPaint(hWndClientWindow, &ps);
-        rt->BeginDraw();
-        rt->Clear(D2D1::ColorF(D2D1::ColorF::Brown));
-        rt->EndDraw();
-        EndPaint(hWndClientWindow, &ps);
+        
         break;
 
     default:
@@ -167,8 +163,20 @@ LRESULT CALLBACK ClientWindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPa
 
     switch (msg)
     {
-    case WM_CHILDACTIVATE:
-        int a = 0;
+    case WM_NCPAINT:
+    {
+        BeginPaint(hwnd, &ps);
+        rt->BeginDraw();
+        rt->Clear(D2D1::ColorF(D2D1::ColorF::Brown));
+        rt->EndDraw();
+        EndPaint(hwnd, &ps);
+    }
+    break;
+
+    case WM_NCCREATE:
+        break;
+
+    default:
         break;
     }
 
