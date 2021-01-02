@@ -16,14 +16,15 @@ public:
 //Переменные окна
 LPCSTR WindowName = "GraduationProject";
 LPCSTR WindowClass = "DirectXWindow";
-const __int32 wndWidth = 500;
-const __int32 wndHeight = 600;
+const __int32 wndWidth = 1600;
+const __int32 wndHeight = 800;
 PAINTSTRUCT ps;
 HINSTANCE hInst;
 
 //Переменные DirectX
 ID2D1Factory* d2d1Factory{};
 ID2D1HwndRenderTarget* rt{};
+ID2D1HwndRenderTarget* rt1{};
 
 //Window функции
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -41,10 +42,16 @@ bool InitRenderTarget(HWND hwnd)
     return SUCCEEDED(res) && rt;
 }
 
+bool InitRenderTarget1(HWND hwnd)
+{
+    HRESULT res = d2d1Factory->CreateHwndRenderTarget(D2D1::RenderTargetProperties(), D2D1::HwndRenderTargetProperties(hwnd, D2D1::SizeU(wndWidth, wndHeight)), &rt1);
+    return SUCCEEDED(res) && rt1;
+}
+
 //Переменные клиентского окна
 
 HWND hWndClientWindow;
-LPCSTR ClientWindowClass = "MDICLIETN";
+LPCSTR ClientWindowClass = "MDICLIENT";
 
 //Функции клиентского окна
 
@@ -54,7 +61,8 @@ LRESULT CALLBACK ClientWindowProc(HWND, UINT, WPARAM, LPARAM);
 
 //Переменные MDI-окная
 
-
+HWND hWndMDIWindow;
+LPCSTR MDIWindowClass = "MDIWindow";
 
 //Функции MDI-окна
 
@@ -76,14 +84,16 @@ int WinMain(HINSTANCE hInstance,
     wndClass.style = CS_VREDRAW | CS_HREDRAW;
     wndClass.lpfnWndProc = WindowProc;
     wndClass.lpszClassName = WindowClass;
-    wndClass.hbrBackground = CreateSolidBrush(WINDOW_CLASSIS);
 
     if (!RegisterClassA(&wndClass) || !InitClientWindowClass(hInstance))
         return -1;
     
-    auto hwnd = CreateWindowA(WindowClass, WindowName, WS_OVERLAPPEDWINDOW | WS_VISIBLE, 200, 200, wndWidth, wndHeight, nullptr, nullptr, hInstance, nullptr);
+    auto hwnd = CreateWindowA(WindowClass, WindowName, WS_OVERLAPPEDWINDOW | WS_VISIBLE | WS_SIZEBOX, 200, 200, wndWidth, wndHeight, nullptr, nullptr, hInstance, nullptr);
     if (!hwnd)
         return -1;
+
+    if (!InitRenderTarget1(hwnd))
+        return EXIT_FAILURE;
 
     hInst = hInstance;
 
@@ -102,31 +112,40 @@ int WinMain(HINSTANCE hInstance,
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-
+    static PAINTSTRUCT ps1;
     switch (msg)
     {
 
     case WM_CREATE:
     {
-        CLIENTCREATESTRUCT cs;
-        ZeroMemory(&cs, sizeof cs);
+        RECT rect;
+        GetClientRect(hwnd, &rect);
+
+        auto width = rect.right - rect.left;
+        auto height = rect.bottom - rect.top;
+        auto x = width * 30 / 100;
+        auto y = 10;
+        width = width * 70 / 100;
+        width -= 10;
+        height -= 20;
+
+        CLIENTCREATESTRUCT ccs;
+        memset(&ccs, 0, sizeof(CLIENTCREATESTRUCT));
 
         hWndClientWindow = CreateWindowA(
             ClientWindowClass,
             (LPCSTR)NULL,
             WS_CHILD | WS_CLIPCHILDREN ,
-            0, 0, 300, 400,
+            x, y, width, height,
             hwnd,
             nullptr,
             hInst,
-            (LPSTR)&cs);
+            (LPSTR)&ccs);
 
         if (!hWndClientWindow)
             return 0;
 
         ShowWindow(hWndClientWindow, SW_SHOW);
-
-        InitRenderTarget(hWndClientWindow);
     } 
     break;
 
@@ -136,14 +155,35 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
     case WM_DISPLAYCHANGE:
     case WM_PAINT:
-        
+        BeginPaint(hwnd, &ps1);
+        rt1->BeginDraw();
+        rt1->Clear(D2D1::ColorF(D2D1::ColorF::Bisque));
+        rt1->EndDraw();
+        EndPaint(hwnd, &ps1);
         break;
+
+    case WM_SIZE:
+        return 0;
+
+    case WM_LBUTTONDOWN:
+    {
+        hWndMDIWindow = CreateMDIWindowA(MDIWindowClass, (LPCSTR)"MDI Window",
+            MDIS_ALLCHILDSTYLES, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, hWndClientWindow, hInst, NULL);
+
+        if (!hWndMDIWindow)
+        {
+            DWORD error = GetLastError();
+            return 0;
+        }
+
+        ShowWindow(hWndMDIWindow, SW_SHOW);
+    }    break;
 
     default:
-        break;
+        return DefWindowProcA(hwnd, msg, wParam, lParam);
     }
 
-    return DefWindowProcA(hwnd, msg, wParam, lParam);
+    return 0;
 }
 
 bool InitClientWindowClass(HINSTANCE hInstance)
@@ -152,7 +192,7 @@ bool InitClientWindowClass(HINSTANCE hInstance)
     ClientWndClass.hInstance = hInstance;
     ClientWndClass.hCursor = LoadCursor(nullptr, IDC_ARROW);
     ClientWndClass.hbrBackground = CreateSolidBrush(WHITE_BRUSH);
-    ClientWndClass.lpszClassName = ClientWindowClass;
+    ClientWndClass.lpszClassName = MDIWindowClass;
     ClientWndClass.lpfnWndProc = ClientWindowProc;
 
     return RegisterClassA(&ClientWndClass);
@@ -163,18 +203,19 @@ LRESULT CALLBACK ClientWindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPa
 
     switch (msg)
     {
-    case WM_NCPAINT:
+    case WM_PAINT:
     {
-        BeginPaint(hwnd, &ps);
-        rt->BeginDraw();
-        rt->Clear(D2D1::ColorF(D2D1::ColorF::Brown));
-        rt->EndDraw();
-        EndPaint(hwnd, &ps);
+        
     }
     break;
 
-    case WM_NCCREATE:
-        break;
+    case WM_LBUTTONDOWN:
+    {
+        
+    }
+    break;
+
+   
 
     default:
         break;
