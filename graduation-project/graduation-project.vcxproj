@@ -172,6 +172,7 @@
     <ClCompile Include="Control.cpp" />
     <ClCompile Include="IGUIObject.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="MessageWindowStorage.cpp" />
     <ClCompile Include="OpenCLWrapper.cpp" />
     <ClCompile Include="PlatformUnit.cpp" />
     <ClCompile Include="main.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="Control.h" />
     <ClInclude Include="IGUIObject.h" />
     <ClInclude Include="MainWindow.h" />
+    <ClInclude Include="MessageWindowStorage.h" />
     <ClInclude Include="OpenCLWrapper.h" />
     <ClInclude Include="PlatformUnit.h" />
     <ClInclude Include="PlatformUnitInitialize.h" />

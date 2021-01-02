@@ -49,6 +49,9 @@
     <Filter Include="Исходные файлы\filenamager">
       <UniqueIdentifier>{3edb716b-2436-43d9-80b6-d75b1cd9800e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\GUI\app">
+      <UniqueIdentifier>{950dc3e0-ef74-4ccb-b0ff-c05eb6698a81}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -90,6 +93,9 @@
     <ClCompile Include="PlatformUnitInitialize.cpp">
       <Filter>Исходные файлы\legacy</Filter>
     </ClCompile>
+    <ClCompile Include="MessageWindowStorage.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OpenCLWrapper.h">
@@ -117,6 +123,9 @@
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
     <ClInclude Include="Control.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageWindowStorage.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
