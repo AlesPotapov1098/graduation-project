@@ -34,6 +34,13 @@ namespace gp {
             if (!appWnd)
                 return appWnd->WindowFunction(hWnd, msg, wParam, lParam);
 
+            switch (msg)
+            {
+            case WM_DESTROY:
+                PostQuitMessage(EXIT_SUCCESS);
+                break;
+            }
+
             return DefWindowProcA(hWnd, msg, wParam, lParam);
         }
 
