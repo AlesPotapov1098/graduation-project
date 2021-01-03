@@ -103,7 +103,13 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="OpenCLHost.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>GPGPU</Filter>
+    </ClCompile>
+    <ClCompile Include="Proportions.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="ApplicationWindow.cpp">
+      <Filter>application</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -141,7 +147,10 @@
       <Filter>application</Filter>
     </ClInclude>
     <ClInclude Include="OpenCLHost.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>GPGPU</Filter>
+    </ClInclude>
+    <ClInclude Include="ApplicationWindow.h">
+      <Filter>application</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

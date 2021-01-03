@@ -1,8 +1,14 @@
 #pragma once
+
+#define CL_HPP_ENABLE_EXCEPTIONS
+#define CL_HPP_TARGET_OPENCL_VERSION 220
+
 #include <Windows.h>
 #include <d2d1.h>
+#include <CL/opencl.hpp>
 
 #include "Proportions.h"
+#include "ApplicationWindow.h"
 
 class MessageProcedure
 {
@@ -20,6 +26,13 @@ const __int32 wndWidth = 1600;
 const __int32 wndHeight = 800;
 PAINTSTRUCT ps;
 HINSTANCE hInst;
+
+// Переменные OpenCL
+
+using Devices = cl::vector<cl::Device>;
+
+cl::vector<cl::Platform> platfroms;
+cl::vector<Devices> devices;
 
 //Переменные DirectX
 ID2D1Factory* d2d1Factory{};
@@ -70,13 +83,25 @@ LRESULT CALLBACK SimpleMDIWindowProc(HWND, UINT, WPARAM, LPARAM);
 
 gp::prop::ClientAreaPos clientAreaPos;
 
+void InitOpenCL();
+
 //Начало
-int WinMain(HINSTANCE hInstance,
+int CALLBACK WinMain(HINSTANCE hInstance,
     HINSTANCE hPrevInstance,
     PSTR szCmdLine,
     int iCmdShow)
 {
-    if (!InitDirectX())
+    gp::app::ApplicationWindow window(hInstance, "Graduation Project", "GraduationProjectWindowClass");
+    
+    if (!window.Init())
+        return EXIT_FAILURE;
+
+    if (window.Create())
+        return EXIT_FAILURE;
+
+    window.Run();
+
+    /*if (!InitDirectX())
         return EXIT_FAILURE;
 
     WNDCLASSA wndClass{ sizeof wndClass};
@@ -107,7 +132,7 @@ int WinMain(HINSTANCE hInstance,
             TranslateMessage(&msg);
             DispatchMessageW(&msg);
         }
-    }
+    }*/
 
 	return 0;
 }
@@ -145,6 +170,8 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             return 0;
 
         ShowWindow(hWndClientWindow, SW_SHOW);
+
+        InitOpenCL();
     } 
     break;
 
@@ -251,8 +278,20 @@ LRESULT CALLBACK ClientWindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPa
     return DefMDIChildProcA(hwnd, msg, wParam, lParam);
 }
 
+void InitOpenCL()
+{
+    cl_int ErrorCode = cl::Platform::get(&platfroms);
 
+    if (platfroms.empty() || ErrorCode != CL_SUCCESS)
+        return;
 
+    for (auto& pl : platfroms)
+    {
+        Devices devs;
+        ErrorCode = pl.getDevices(CL_DEVICE_TYPE_ALL, &devs);
+        if (ErrorCode != CL_SUCCESS || devs.empty())
+            return;
 
-
-
+        devices.push_back(devs);
+    }
+}

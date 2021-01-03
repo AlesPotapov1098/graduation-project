@@ -167,6 +167,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ApplicationWindow.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ColorScheme.cpp" />
     <ClCompile Include="Control.cpp" />
@@ -180,8 +181,10 @@
     <ClCompile Include="ApplicationAPI.cpp" />
     <ClCompile Include="PlatformUnitInitialize.cpp" />
     <ClCompile Include="OpenClExecutionUnit.cpp" />
+    <ClCompile Include="Proportions.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ApplicationWindow.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="ColorScheme.h" />
     <ClInclude Include="Control.h" />

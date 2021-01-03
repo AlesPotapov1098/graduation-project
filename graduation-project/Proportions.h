@@ -10,28 +10,28 @@ namespace gp
         {
         public:
             Proportion() = default;
-            Proportion(UINT32 x = 0, UINT32 y = 0, UINT32 cx = 100, UINT32 cy = 100)
+            Proportion(UINT x = 0, UINT y = 0, UINT cx = 100, UINT cy = 100)
                 : m_X(x), m_Y(y), m_Cx(cx), m_Cy(cy) {};
             ~Proportion() = default;
 
             virtual void ConvertFromRectToPos(RECT&) = 0;
 
-            UINT32 GetX() const { return m_X; }
-            UINT32 GetY() const { return m_Y; }
-            UINT32 GetCX() const { return m_Cx; }
-            UINT32 GetCY() const { return m_Cy; }
+            UINT GetX() const { return m_X; }
+            UINT GetY() const { return m_Y; }
+            UINT GetCX() const { return m_Cx; }
+            UINT GetCY() const { return m_Cy; }
 
         protected:
-            UINT32 m_X;
-            UINT32 m_Y;
-            UINT32 m_Cx;
-            UINT32 m_Cy;
+            UINT m_X;
+            UINT m_Y;
+            UINT m_Cx;
+            UINT m_Cy;
         };
 
         class ClientAreaPos : public Proportion
         {
         public:
-            ClientAreaPos(UINT32 x = 0, UINT32 y = 0, UINT32 cx = 100, UINT32 cy = 100)
+            ClientAreaPos(UINT x = 0, UINT y = 0, UINT cx = 100, UINT cy = 100)
                 : Proportion(x, y, cx, cy) {};
             ~ClientAreaPos() = default;
 
@@ -43,6 +43,43 @@ namespace gp
                 m_X = (rect.right - rect.left) * 20 / 100;
                 m_Y = 10;
             }
+        };
+
+        class WindowProportion
+        {
+        public:
+            WindowProportion();
+            ~WindowProportion();
+
+            void SetHWND(HWND hWnd);
+
+            virtual void CalculateProportion();
+
+            int GetX() const;
+            int GetY() const;
+            int GetWidth() const;
+            int GetHeight() const;
+            int GetCX() const;
+            int GetCY() const;
+
+        protected:
+            int m_X;
+            int m_Y;
+            int m_Width;
+            int m_Height;
+
+            HWND m_Window;
+            RECT m_Rect;
+        };
+
+        class ClientAreaProportion : public WindowProportion
+        {
+        public:
+            ClientAreaProportion(HWND parent);
+            void CalculateProportion() override;
+
+        private:
+            HWND m_ParentWindow;
         };
 	}
 
