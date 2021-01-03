@@ -2,8 +2,6 @@
 
 #define CL_HPP_ENABLE_EXCEPTIONS
 
-//#pragma warning(disable : 4996)
-
 #include <string>
 #include <CL/opencl.hpp>
 

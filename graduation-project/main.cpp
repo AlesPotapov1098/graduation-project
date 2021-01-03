@@ -4,8 +4,6 @@
 
 #include "Proportions.h"
 
-#define WINDOW_CLASSIS 0x001a0000
-
 class MessageProcedure
 {
 public:
@@ -69,8 +67,6 @@ LPCSTR MDIWindowClass = "MDIWindow";
 //Функции MDI-окна
 
 LRESULT CALLBACK SimpleMDIWindowProc(HWND, UINT, WPARAM, LPARAM);
-
-//Вспомагательные функции и структуры
 
 gp::prop::ClientAreaPos clientAreaPos;
 
@@ -172,14 +168,6 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         RECT rect;
         GetClientRect(hwnd, &rect);
 
-        auto width = rect.right - rect.left;
-        auto height = rect.bottom - rect.top;
-        auto x = width * 30 / 100;
-        auto y = 10;
-        width = width * 70 / 100;
-        width -= 10;
-        height -= 20;
-
         clientAreaPos.ConvertFromRectToPos(rect);
 
         SetWindowPos(
@@ -202,10 +190,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             MDIS_ALLCHILDSTYLES, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, hWndClientWindow, hInst, NULL);
 
         if (!hWndMDIWindow)
-        {
-            DWORD error = GetLastError();
             return 0;
-        }
 
         ShowWindow(hWndMDIWindow, SW_SHOW);
     }    break;

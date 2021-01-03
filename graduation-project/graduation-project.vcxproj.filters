@@ -55,6 +55,9 @@
     <Filter Include="application">
       <UniqueIdentifier>{1806f3eb-9023-4aa7-8868-a4f513685e17}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GPGPU">
+      <UniqueIdentifier>{06960dff-a81e-4ebf-94e5-36d1fdd3cbf0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -99,6 +102,9 @@
     <ClCompile Include="MessageWindowStorage.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="OpenCLHost.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OpenCLWrapper.h">
@@ -133,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="Proportions.h">
       <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenCLHost.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
