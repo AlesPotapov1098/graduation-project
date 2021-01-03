@@ -52,6 +52,9 @@
     <Filter Include="Исходные файлы\GUI\app">
       <UniqueIdentifier>{950dc3e0-ef74-4ccb-b0ff-c05eb6698a81}</UniqueIdentifier>
     </Filter>
+    <Filter Include="application">
+      <UniqueIdentifier>{1806f3eb-9023-4aa7-8868-a4f513685e17}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="MessageWindowStorage.h">
       <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Proportions.h">
+      <Filter>application</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,8 @@
 #include <Windows.h>
 #include <d2d1.h>
 
+#include "Proportions.h"
+
 #define WINDOW_CLASSIS 0x001a0000
 
 class MessageProcedure
@@ -68,6 +70,10 @@ LPCSTR MDIWindowClass = "MDIWindow";
 
 LRESULT CALLBACK SimpleMDIWindowProc(HWND, UINT, WPARAM, LPARAM);
 
+//Вспомагательные функции и структуры
+
+gp::prop::ClientAreaPos clientAreaPos;
+
 //Начало
 int WinMain(HINSTANCE hInstance,
     HINSTANCE hPrevInstance,
@@ -121,13 +127,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         RECT rect;
         GetClientRect(hwnd, &rect);
 
-        auto width = rect.right - rect.left;
-        auto height = rect.bottom - rect.top;
-        auto x = width * 30 / 100;
-        auto y = 10;
-        width = width * 70 / 100;
-        width -= 10;
-        height -= 20;
+        clientAreaPos.ConvertFromRectToPos(rect);
 
         CLIENTCREATESTRUCT ccs;
         memset(&ccs, 0, sizeof(CLIENTCREATESTRUCT));
@@ -136,7 +136,10 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             ClientWindowClass,
             (LPCSTR)NULL,
             WS_CHILD | WS_CLIPCHILDREN ,
-            x, y, width, height,
+            clientAreaPos.GetX(), 
+            clientAreaPos.GetY(),
+            clientAreaPos.GetCX(), 
+            clientAreaPos.GetCY(),
             hwnd,
             nullptr,
             hInst,
@@ -155,18 +158,46 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
     case WM_DISPLAYCHANGE:
     case WM_PAINT:
+    {
         BeginPaint(hwnd, &ps1);
         rt1->BeginDraw();
         rt1->Clear(D2D1::ColorF(D2D1::ColorF::Bisque));
         rt1->EndDraw();
         EndPaint(hwnd, &ps1);
-        break;
+    }
+    break;
 
     case WM_SIZE:
-        return 0;
+    {
+        RECT rect;
+        GetClientRect(hwnd, &rect);
+
+        auto width = rect.right - rect.left;
+        auto height = rect.bottom - rect.top;
+        auto x = width * 30 / 100;
+        auto y = 10;
+        width = width * 70 / 100;
+        width -= 10;
+        height -= 20;
+
+        clientAreaPos.ConvertFromRectToPos(rect);
+
+        SetWindowPos(
+            hWndClientWindow, 
+            nullptr, 
+            clientAreaPos.GetX(), 
+            clientAreaPos.GetY(),
+            clientAreaPos.GetCX(),
+            clientAreaPos.GetCY(), 
+            0);
+    }
+    break;;
 
     case WM_LBUTTONDOWN:
     {
+        if (hWndMDIWindow)
+            return 0;
+
         hWndMDIWindow = CreateMDIWindowA(MDIWindowClass, (LPCSTR)"MDI Window",
             MDIS_ALLCHILDSTYLES, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, hWndClientWindow, hInst, NULL);
 
@@ -200,12 +231,23 @@ bool InitClientWindowClass(HINSTANCE hInstance)
 
 LRESULT CALLBACK ClientWindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-
+    static PAINTSTRUCT ps;
     switch (msg)
     {
+
+    case WM_CREATE:
+    {
+        InitRenderTarget(hwnd);
+    }
+    break;
+
     case WM_PAINT:
     {
-        
+        BeginPaint(hwnd, &ps);
+        rt->BeginDraw();
+        rt->Clear(D2D1::ColorF(D2D1::ColorF::Firebrick));
+        rt->EndDraw();
+        EndPaint(hwnd, &ps);
     }
     break;
 
@@ -223,7 +265,6 @@ LRESULT CALLBACK ClientWindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPa
 
     return DefMDIChildProcA(hwnd, msg, wParam, lParam);
 }
-
 
 
 

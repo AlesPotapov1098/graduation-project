@@ -190,6 +190,7 @@
     <ClInclude Include="OpenCLWrapper.h" />
     <ClInclude Include="PlatformUnit.h" />
     <ClInclude Include="PlatformUnitInitialize.h" />
+    <ClInclude Include="Proportions.h" />
     <ClInclude Include="resource.h" />
     <ClCompile Include="ApplicationAPI.h" />
     <ClCompile Include="OpenClExecutionUnit.h" />
