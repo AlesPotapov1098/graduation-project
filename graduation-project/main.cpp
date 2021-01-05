@@ -97,7 +97,10 @@ int CALLBACK WinMain(HINSTANCE hInstance,
         return EXIT_FAILURE;
 
     if (window.Create())
-        return EXIT_FAILURE;
+        return EXIT_FAILURE; 
+    
+    //if (!window.InitDirectX())
+    //    return EXIT_FAILURE;
 
     window.Run();
 
