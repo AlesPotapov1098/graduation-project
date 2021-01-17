@@ -22,7 +22,6 @@ namespace gp
 
 			/// <summary>
 			/// Переопределение функции, вызываемой перед функцией CreateClient
-			/// TODO: добавить создание меню
 			/// </summary>
 			afx_msg BOOL OnCreateClient(
 				LPCREATESTRUCT lpcs,
@@ -38,10 +37,6 @@ namespace gp
 			DECLARE_MESSAGE_MAP()
 
 		private:
-			int m_Width;
-			int m_Height;
-			int m_PosX;
-			int m_PosY;
 
 			LPCTSTR m_WindowName = L"Graduation Project";
 		};

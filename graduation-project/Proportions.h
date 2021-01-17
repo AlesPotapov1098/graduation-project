@@ -4,83 +4,44 @@
 
 namespace gp
 {
-	namespace prop
+	namespace app
 	{
-        class Proportion
-        {
-        public:
-            Proportion() = default;
-            Proportion(UINT x = 0, UINT y = 0, UINT cx = 100, UINT cy = 100)
-                : m_X(x), m_Y(y), m_Cx(cx), m_Cy(cy) {};
-            ~Proportion() = default;
+		class WindowProportion
+		{
+		public:
 
-            virtual void ConvertFromRectToPos(RECT&) = 0;
+			WindowProportion();
+			WindowProportion(HWND parent);
+			~WindowProportion();
 
-            UINT GetX() const { return m_X; }
-            UINT GetY() const { return m_Y; }
-            UINT GetCX() const { return m_Cx; }
-            UINT GetCY() const { return m_Cy; }
+			int GetWidth() const;
+			int GetHeight() const;
+			int GetX() const;
+			int GetY() const;
 
-        protected:
-            UINT m_X;
-            UINT m_Y;
-            UINT m_Cx;
-            UINT m_Cy;
-        };
+			virtual void CalculateWindowProportion() = 0;
 
-        class ClientAreaPos : public Proportion
-        {
-        public:
-            ClientAreaPos(UINT x = 0, UINT y = 0, UINT cx = 100, UINT cy = 100)
-                : Proportion(x, y, cx, cy) {};
-            ~ClientAreaPos() = default;
+		protected:
+			int m_Width;
+			int m_Height;
+			int m_PoxX;
+			int m_PosY;
 
-            void ConvertFromRectToPos(RECT& rect) override
-            {
-                m_Cx = (rect.right - rect.left) * 80 / 100 - 10;
-                m_Cy = (rect.bottom - rect.top) - 20;
+			CRect m_WindowRect;
 
-                m_X = (rect.right - rect.left) * 20 / 100;
-                m_Y = 10;
-            }
-        };
+			HWND m_Parent;
+		};
 
-        class WindowProportion
-        {
-        public:
-            WindowProportion();
-            ~WindowProportion();
+		class MainWindowAppPropportion : public WindowProportion
+		{
+		public:
+			void CalculateWindowProportion() override;
+		};
 
-            void SetHWND(HWND hWnd);
-
-            virtual void CalculateProportion();
-
-            int GetX() const;
-            int GetY() const;
-            int GetWidth() const;
-            int GetHeight() const;
-            int GetCX() const;
-            int GetCY() const;
-
-        protected:
-            int m_X;
-            int m_Y;
-            int m_Width;
-            int m_Height;
-
-            HWND m_Window;
-            RECT m_Rect;
-        };
-
-        class ClientAreaProportion : public WindowProportion
-        {
-        public:
-            ClientAreaProportion(HWND parent);
-            void CalculateProportion() override;
-
-        private:
-            HWND m_ParentWindow;
-        };
+		class MDIClientRectWindowProportion : public WindowProportion
+		{
+		public:
+			void CalculateWindowProportion() override;
+		};
 	}
-
 }

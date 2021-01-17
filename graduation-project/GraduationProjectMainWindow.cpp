@@ -21,6 +21,8 @@ namespace gp {
 
 		BOOL GraduationProjectMainWindow::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 		{
+			// TODO: добавить создание меню
+
 			return CreateClient(lpcs, nullptr);
 		}
 
