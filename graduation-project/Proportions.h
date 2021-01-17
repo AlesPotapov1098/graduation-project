@@ -27,6 +27,11 @@ namespace gp
 			int m_PoxX;
 			int m_PosY;
 
+			int m_ParentWndWidth;
+			int m_ParentWndHeight;
+			int m_ParentWndPosX;
+			int m_ParentWndPosY;
+
 			CRect m_WindowRect;
 
 			HWND m_Parent;
