@@ -46,6 +46,7 @@
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+    <UseOfMfc>Static</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -167,38 +168,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ApplicationWindow.cpp" />
-    <ClCompile Include="Button.cpp" />
-    <ClCompile Include="ColorScheme.cpp" />
-    <ClCompile Include="Control.cpp" />
-    <ClCompile Include="IGUIObject.cpp" />
-    <ClCompile Include="MainWindow.cpp" />
-    <ClCompile Include="MessageWindowStorage.cpp" />
+    <ClCompile Include="GraduationProjectMainWindow.cpp" />
+    <ClCompile Include="OpenCLConnection.cpp" />
     <ClCompile Include="OpenCLHost.cpp" />
-    <ClCompile Include="OpenCLWrapper.cpp" />
-    <ClCompile Include="PlatformUnit.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ApplicationAPI.cpp" />
-    <ClCompile Include="PlatformUnitInitialize.cpp" />
-    <ClCompile Include="OpenClExecutionUnit.cpp" />
     <ClCompile Include="Proportions.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ApplicationWindow.h" />
-    <ClInclude Include="Button.h" />
-    <ClInclude Include="ColorScheme.h" />
-    <ClInclude Include="Control.h" />
-    <ClInclude Include="IGUIObject.h" />
-    <ClInclude Include="MainWindow.h" />
-    <ClInclude Include="MessageWindowStorage.h" />
+    <ClInclude Include="GraduationProjectMainWindow.h" />
+    <ClInclude Include="OpenCLConnection.h" />
     <ClInclude Include="OpenCLHost.h" />
-    <ClInclude Include="OpenCLWrapper.h" />
-    <ClInclude Include="PlatformUnit.h" />
-    <ClInclude Include="PlatformUnitInitialize.h" />
     <ClInclude Include="Proportions.h" />
     <ClInclude Include="resource.h" />
-    <ClCompile Include="ApplicationAPI.h" />
-    <ClCompile Include="OpenClExecutionUnit.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="literal-rus.rc" />

@@ -13,45 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Файлы заголовков\GUI">
-      <UniqueIdentifier>{744dcce3-2895-4d55-aaeb-da219df34908}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\GUI">
-      <UniqueIdentifier>{07f4e8ac-2bd4-4346-9b64-55ca4ebce86e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\GUI\Window">
-      <UniqueIdentifier>{6ee8aa73-e4c5-4235-bd98-af4b4f376f5b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\GUI\Window">
-      <UniqueIdentifier>{f288aef0-6808-4466-a70b-6fbae8dd9e0d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\GUI\Controls">
-      <UniqueIdentifier>{19c774ce-8b2d-42ee-afd4-e43defc75747}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\GUI\Controls">
-      <UniqueIdentifier>{7edcf25a-405d-4c02-acb4-d5e880302c52}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\gpgpu">
-      <UniqueIdentifier>{a4f4cdd7-14a3-46cc-a0d5-c398eba73c6e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\gpgpu">
-      <UniqueIdentifier>{a516bb31-44ff-4a23-b3af-bbe722efac09}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\legacy">
-      <UniqueIdentifier>{23ffcc61-c9f2-4937-9505-41af6e5e68fb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\legacy">
-      <UniqueIdentifier>{ec478a91-bb3e-4fa2-9308-bef28db9d1ec}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\filenamager">
-      <UniqueIdentifier>{e5ea0c41-c119-4829-a1b2-6f6a8f3c77eb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\filenamager">
-      <UniqueIdentifier>{3edb716b-2436-43d9-80b6-d75b1cd9800e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\GUI\app">
-      <UniqueIdentifier>{950dc3e0-ef74-4ccb-b0ff-c05eb6698a81}</UniqueIdentifier>
-    </Filter>
     <Filter Include="application">
       <UniqueIdentifier>{1806f3eb-9023-4aa7-8868-a4f513685e17}</UniqueIdentifier>
     </Filter>
@@ -63,85 +24,22 @@
     <ClCompile Include="main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="ApplicationAPI.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="ApplicationAPI.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenCLWrapper.cpp">
-      <Filter>Исходные файлы\gpgpu</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenClExecutionUnit.cpp">
-      <Filter>Исходные файлы\gpgpu</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenClExecutionUnit.h">
-      <Filter>Файлы заголовков\gpgpu</Filter>
-    </ClCompile>
-    <ClCompile Include="Control.cpp">
-      <Filter>Исходные файлы\GUI\Controls</Filter>
-    </ClCompile>
-    <ClCompile Include="ColorScheme.cpp">
-      <Filter>Исходные файлы\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Исходные файлы\GUI\Controls</Filter>
-    </ClCompile>
-    <ClCompile Include="MainWindow.cpp">
-      <Filter>Исходные файлы\GUI\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="IGUIObject.cpp">
-      <Filter>Исходные файлы\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="PlatformUnit.cpp">
-      <Filter>Исходные файлы\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="PlatformUnitInitialize.cpp">
-      <Filter>Исходные файлы\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="MessageWindowStorage.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="OpenCLHost.cpp">
       <Filter>GPGPU</Filter>
     </ClCompile>
     <ClCompile Include="Proportions.cpp">
       <Filter>application</Filter>
     </ClCompile>
-    <ClCompile Include="ApplicationWindow.cpp">
+    <ClCompile Include="OpenCLConnection.cpp">
+      <Filter>GPGPU</Filter>
+    </ClCompile>
+    <ClCompile Include="GraduationProjectMainWindow.cpp">
       <Filter>application</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="OpenCLWrapper.h">
-      <Filter>Файлы заголовков\gpgpu</Filter>
-    </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Файлы заголовков\GUI\Controls</Filter>
-    </ClInclude>
-    <ClInclude Include="ColorScheme.h">
-      <Filter>Файлы заголовков\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="IGUIObject.h">
-      <Filter>Файлы заголовков\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="MainWindow.h">
-      <Filter>Файлы заголовков\GUI\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="PlatformUnit.h">
-      <Filter>Файлы заголовков\legacy</Filter>
-    </ClInclude>
-    <ClInclude Include="PlatformUnitInitialize.h">
-      <Filter>Файлы заголовков\legacy</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Файлы ресурсов</Filter>
-    </ClInclude>
-    <ClInclude Include="Control.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="MessageWindowStorage.h">
-      <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Proportions.h">
       <Filter>application</Filter>
@@ -149,7 +47,10 @@
     <ClInclude Include="OpenCLHost.h">
       <Filter>GPGPU</Filter>
     </ClInclude>
-    <ClInclude Include="ApplicationWindow.h">
+    <ClInclude Include="OpenCLConnection.h">
+      <Filter>GPGPU</Filter>
+    </ClInclude>
+    <ClInclude Include="GraduationProjectMainWindow.h">
       <Filter>application</Filter>
     </ClInclude>
   </ItemGroup>
