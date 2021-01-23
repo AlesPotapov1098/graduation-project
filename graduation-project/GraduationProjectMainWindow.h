@@ -38,6 +38,9 @@ namespace gp
 
 			DECLARE_MESSAGE_MAP()
 
+		/// <summary>
+		/// Поля класс для MFC
+		/// </summary>
 		private:
 
 			/// <summary>
@@ -45,7 +48,7 @@ namespace gp
 			/// </summary>
 			LPCTSTR m_WindowName = L"Graduation Project";
 
-		private:
+			LPCTSTR m_MDIClientClass = L"MDICLIENT";
 
 			/// <summary>
 			/// Объект для управления позицией, шириной и высотой главного окна приложения

@@ -48,7 +48,7 @@ namespace gp {
 
 			m_hWndMDIClient = CreateWindowEx(
 				0,
-				L"MDICLIENT",
+				m_MDIClientClass,
 				nullptr,
 				dwStyle,
 				m_MDIClientProportion.GetX(),

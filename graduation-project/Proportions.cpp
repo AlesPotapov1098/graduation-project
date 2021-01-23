@@ -68,8 +68,9 @@ namespace gp
 			return m_PosY;
 		}
 
-		CRect WindowProportion::GetWindowRect() const
+		CRect WindowProportion::GetWindowRect()
 		{
+			m_WindowRect.SetRect(m_PosX, m_PosY, m_Width, m_Height);
 			return m_WindowRect;
 		}
 
@@ -80,14 +81,12 @@ namespace gp
 
 			m_PosX = (m_ParentWndWidth - m_Width) / 2;
 			m_PosY = (m_ParentWndHeight - m_Height) / 2;
-
-			m_WindowRect.SetRect(m_PosX, m_PosY, m_Width, m_Height);
 		}
 
 		void MDIClientRectWindowProportion::CalculateWindowProportion()
 		{
-			m_Width = m_ParentWndWidth * 7 / 10;
-			m_Height = m_ParentWndHeight - 10;
+			m_Width = m_ParentWndWidth * 7 / 10 - 20;
+			m_Height = m_ParentWndHeight - 20;
 
 			int dy = m_ParentWndHeight - m_Height;;
 
