@@ -4,6 +4,8 @@
 
 #include "Proportions.h"
 
+#define ID_CREATE_NEW_CHILD_WINDOW_BUTTON	100
+
 namespace gp
 {
 	namespace app
@@ -38,6 +40,9 @@ namespace gp
 
 			DECLARE_MESSAGE_MAP()
 
+		private:
+			void click();
+
 		/// <summary>
 		/// Поля класс для MFC
 		/// </summary>
@@ -59,6 +64,8 @@ namespace gp
 			/// Объект для управления позицией, шириной и высотой окна MDICLIENT
 			/// </summary>
 			MDIClientRectWindowProportion m_MDIClientProportion;
+
+			CButton button1;
 		};
 	}
 }

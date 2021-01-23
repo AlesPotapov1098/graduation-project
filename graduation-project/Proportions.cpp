@@ -85,13 +85,11 @@ namespace gp
 
 		void MDIClientRectWindowProportion::CalculateWindowProportion()
 		{
-			m_Width = m_ParentWndWidth * 7 / 10 - 20;
-			m_Height = m_ParentWndHeight - 20;
+			m_Width = m_ParentWndWidth * 7 / 10;
+			m_Height = m_ParentWndHeight;
 
-			int dy = m_ParentWndHeight - m_Height;;
-
-			m_PosX = (m_ParentWndWidth - m_Width) - dy / 2;
-			m_PosY = dy / 2;
+			m_PosX = (m_ParentWndWidth - m_Width);
+			m_PosY = 0;
 		}
 
 	}

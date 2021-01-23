@@ -5,7 +5,8 @@ namespace gp {
 	namespace app {
 
 		BEGIN_MESSAGE_MAP(GraduationProjectMainWindow, CMDIFrameWnd)
-		
+			ON_WM_PAINT()
+			ON_BN_CLICKED(ID_CREATE_NEW_CHILD_WINDOW_BUTTON,click)
 		END_MESSAGE_MAP()
 
 
@@ -13,10 +14,15 @@ namespace gp {
 		{
 			m_MainWindowPropportions.CalculateWindowProportion();
 
-			Create( NULL,
-					m_WindowName, 
-					WS_OVERLAPPEDWINDOW, 
-					m_MainWindowPropportions.GetWindowRect());
+			if (Create(NULL,
+				m_WindowName,
+				WS_OVERLAPPEDWINDOW,
+				m_MainWindowPropportions.GetWindowRect()))
+
+			{
+				
+				button1.Create(L"Test", WS_CHILD | WS_VISIBLE, { 20,20,100,50 }, this, ID_CREATE_NEW_CHILD_WINDOW_BUTTON);
+			}
 		}
 
 		GraduationProjectMainWindow::~GraduationProjectMainWindow()
@@ -70,6 +76,11 @@ namespace gp {
 			::BringWindowToTop(m_hWndMDIClient);
 
 			return TRUE;
+		}
+
+		void GraduationProjectMainWindow::click()
+		{
+			
 		}
 
 
