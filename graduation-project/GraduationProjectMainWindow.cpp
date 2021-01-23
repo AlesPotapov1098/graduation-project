@@ -11,7 +11,12 @@ namespace gp {
 
 		GraduationProjectMainWindow::GraduationProjectMainWindow()
 		{
-			Create(NULL, m_WindowName, WS_OVERLAPPEDWINDOW, { 500,500,1000,1000 });
+			m_MainWindowPropportions.CalculateWindowProportion();
+
+			Create( NULL,
+					m_WindowName, 
+					WS_OVERLAPPEDWINDOW, 
+					m_MainWindowPropportions.GetWindowRect());
 		}
 
 		GraduationProjectMainWindow::~GraduationProjectMainWindow()
@@ -38,15 +43,18 @@ namespace gp {
 			ccs.hWindowMenu = nullptr;
 			ccs.idFirstChild = 0;
 
+			m_MDIClientProportion.SetParent(m_hWnd);
+			m_MDIClientProportion.CalculateWindowProportion();
+
 			m_hWndMDIClient = CreateWindowEx(
 				0,
 				L"MDICLIENT",
 				nullptr,
 				dwStyle,
-				100,
-				100,
-				200,
-				200,
+				m_MDIClientProportion.GetX(),
+				m_MDIClientProportion.GetY(),
+				m_MDIClientProportion.GetWidth(),
+				m_MDIClientProportion.GetHeight(),
 				m_hWnd,
 				nullptr,
 				AfxGetInstanceHandle(),

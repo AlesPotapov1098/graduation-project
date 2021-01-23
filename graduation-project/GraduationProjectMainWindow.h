@@ -2,6 +2,8 @@
 
 #include <afxwin.h>
 
+#include "Proportions.h"
+
 namespace gp
 {
 	namespace app
@@ -38,7 +40,22 @@ namespace gp
 
 		private:
 
+			/// <summary>
+			/// Имя главного окна
+			/// </summary>
 			LPCTSTR m_WindowName = L"Graduation Project";
+
+		private:
+
+			/// <summary>
+			/// Объект для управления позицией, шириной и высотой главного окна приложения
+			/// </summary>
+			MainWindowAppPropportion m_MainWindowPropportions;
+
+			/// <summary>
+			/// Объект для управления позицией, шириной и высотой окна MDICLIENT
+			/// </summary>
+			MDIClientRectWindowProportion m_MDIClientProportion;
 		};
 	}
 }

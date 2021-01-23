@@ -19,10 +19,6 @@ public:
     CMyApp() {}; // конструктор
     virtual BOOL InitInstance() {
 
-        HDC screen = GetWindowDC(GetDesktopWindow());
-        auto X = GetDeviceCaps(screen, HORZRES);
-        auto Y = GetDeviceCaps(screen, VERTRES);
-
         auto m_pMainMDIWindow = new gp::app::GraduationProjectMainWindow;
 
         if (!m_pMainMDIWindow)
