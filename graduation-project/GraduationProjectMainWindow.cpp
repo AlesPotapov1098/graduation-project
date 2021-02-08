@@ -8,12 +8,17 @@ namespace gp {
 			ON_WM_CREATE()
 			ON_WM_PAINT()
 			ON_BN_CLICKED(ID_CREATE_NEW_CHILD_WINDOW_BUTTON,click)
+			ON_COMMAND(ID_MENU_CREATE_NEW_OPENCL_WINDOW, &GraduationProjectMainWindow::CreateMDIChild)
 		END_MESSAGE_MAP()
 
 
 		GraduationProjectMainWindow::GraduationProjectMainWindow()
 		{
 			m_MainWindowPropportions.CalculateWindowProportion();
+		}
+
+		GraduationProjectMainWindow::GraduationProjectMainWindow(HINSTANCE instance)
+		{
 		}
 
 		GraduationProjectMainWindow::~GraduationProjectMainWindow()
@@ -54,5 +59,14 @@ namespace gp {
 			return 0;
 		}
 
+		void GraduationProjectMainWindow::CreateMDIChild()
+		{
+			HINSTANCE instd = AfxGetResourceHandle();
+
+			HMENU menu = ::LoadMenu(instd, MAKEINTRESOURCE(IDR_MAINFRAME));
+
+			CreateNewChild(RUNTIME_CLASS(OpenCLWnd), IDR_MAINFRAME, menu);
+
+		}
 	}
 }

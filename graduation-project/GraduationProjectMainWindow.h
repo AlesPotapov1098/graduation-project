@@ -17,13 +17,17 @@ namespace gp
 	{
 		class GraduationProjectMainWindow : public CMDIFrameWnd
 		{
-
 		protected:
 
 			CMFCToolBar m_wndToolBar;
 
 		private:
 			void click();
+
+		protected:
+
+			HMENU m_WndMenu;
+			HACCEL m_WndAccel;
 
 		/// <summary>
 		/// Поля класс для MFC
@@ -48,13 +52,16 @@ namespace gp
 			MDIClientRectWindowProportion m_MDIClientProportion;
 
 			CButton button1;
+
 			
 		public:
-
+			//DECLARE_DYNAMIC(CMainFrame)
 			/// <summary>
 			/// Конструктор = вызов Create
 			/// </summary>
 			GraduationProjectMainWindow();
+
+			GraduationProjectMainWindow(HINSTANCE instance);
 
 			/// <summary>
 			/// Деструктор = закрытие всех открытых MDI-child окон
@@ -64,6 +71,8 @@ namespace gp
 			virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 
 			afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+
+			void CreateMDIChild();
 
 			DECLARE_MESSAGE_MAP()
 		};

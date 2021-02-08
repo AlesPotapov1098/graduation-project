@@ -74,6 +74,15 @@ BEGIN
     END
 END
 
+IDR_MENU1 MENU
+BEGIN
+    MENUITEM "Файл",                        0
+    MENUITEM "Вид",                         0
+    MENUITEM "Окно",                        0
+    MENUITEM "Создать",                     0
+    MENUITEM "Настройки",                   0
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

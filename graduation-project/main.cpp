@@ -1,26 +1,16 @@
-#pragma once
+#include "main.h"
 
-#include <afxwin.h>
+BEGIN_MESSAGE_MAP(App, CWinApp)
+    
+END_MESSAGE_MAP()
 
-#define CL_HPP_ENABLE_EXCEPTIONS
-#define CL_HPP_TARGET_OPENCL_VERSION 220
-
-#include <CL/opencl.hpp>
-
-#include "GraduationProjectMainWindow.h"
-
-class App : public CWinApp
-{
-public:
-    App() {}; // конструктор
-    virtual BOOL InitInstance();
-};
+using namespace gp::app;
 
 BOOL App::InitInstance()
 {
     CWinApp::InitInstance();
 
-    auto m_pMainMDIWindow = new gp::app::GraduationProjectMainWindow;
+    auto m_pMainMDIWindow = new gp::app::GraduationProjectMainWindow(m_hInstance);
 
     if (!m_pMainMDIWindow->LoadFrame(IDR_MAINFRAME))
         return FALSE;
@@ -33,4 +23,7 @@ BOOL App::InitInstance()
     return TRUE;
 }
 
-App theApp;
+void App::OnFileNew()
+{
+}
+

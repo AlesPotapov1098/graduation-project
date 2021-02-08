@@ -4,9 +4,14 @@ namespace gp
 {
 	namespace app
 	{
-		OpenCLWnd::OpenCLWnd()
+		
+		IMPLEMENT_DYNCREATE(OpenCLWnd, CMDIChildWnd)
+
+		OpenCLWnd::OpenCLWnd() noexcept
 		{
+
 		}
+
 		OpenCLWnd::~OpenCLWnd()
 		{
 		}

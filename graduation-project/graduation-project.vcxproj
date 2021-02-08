@@ -180,6 +180,7 @@
   <ItemGroup>
     <ClInclude Include="CDigitalHologramDoc.h" />
     <ClInclude Include="CDigitalHologramView.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="OpenCLWnd.h" />
     <ClInclude Include="GraduationProjectMainWindow.h" />
     <ClInclude Include="OpenCLConnection.h" />

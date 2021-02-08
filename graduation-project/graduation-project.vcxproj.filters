@@ -71,6 +71,9 @@
     <ClInclude Include="CDigitalHologramDoc.h">
       <Filter>application</Filter>
     </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="graduation-project.rc">
