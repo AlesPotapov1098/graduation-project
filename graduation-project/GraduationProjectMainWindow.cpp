@@ -23,7 +23,12 @@ namespace gp {
 
 		BOOL GraduationProjectMainWindow::PreCreateWindow(CREATESTRUCT& cs)
 		{
+			// Изменение парметров главного окна (фрейма)
 			cs.lpszName = m_WindowName;
+			cs.x = m_MainWindowPropportions.GetX();
+			cs.y = m_MainWindowPropportions.GetY();
+			cs.cx = m_MainWindowPropportions.GetWidth();
+			cs.cy = m_MainWindowPropportions.GetHeight();
 			if (!CMDIFrameWnd::PreCreateWindow(cs))
 				return FALSE;
 
