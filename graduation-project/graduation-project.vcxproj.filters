@@ -36,11 +36,17 @@
     <ClCompile Include="GraduationProjectMainWindow.cpp">
       <Filter>application</Filter>
     </ClCompile>
+    <ClCompile Include="OpenCLWnd.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="CDigitalHologramDoc.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="CDigitalHologramView.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="resource.h">
-      <Filter>Файлы ресурсов</Filter>
-    </ClInclude>
     <ClInclude Include="Proportions.h">
       <Filter>application</Filter>
     </ClInclude>
@@ -53,14 +59,31 @@
     <ClInclude Include="GraduationProjectMainWindow.h">
       <Filter>application</Filter>
     </ClInclude>
+    <ClInclude Include="OpenCLWnd.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="CDigitalHologramView.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="CDigitalHologramDoc.h">
+      <Filter>application</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="literal-rus.rc">
+    <ResourceCompile Include="graduation-project.rc">
       <Filter>Файлы ресурсов</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="image_rotate.cl">
+    <Image Include="toolbar1.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="idr_main.bin">
       <Filter>Файлы ресурсов</Filter>
     </None>
   </ItemGroup>

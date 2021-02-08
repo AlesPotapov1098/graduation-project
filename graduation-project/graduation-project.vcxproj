@@ -168,6 +168,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CDigitalHologramDoc.cpp" />
+    <ClCompile Include="CDigitalHologramView.cpp" />
+    <ClCompile Include="OpenCLWnd.cpp" />
     <ClCompile Include="GraduationProjectMainWindow.cpp" />
     <ClCompile Include="OpenCLConnection.cpp" />
     <ClCompile Include="OpenCLHost.cpp" />
@@ -175,6 +178,9 @@
     <ClCompile Include="Proportions.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CDigitalHologramDoc.h" />
+    <ClInclude Include="CDigitalHologramView.h" />
+    <ClInclude Include="OpenCLWnd.h" />
     <ClInclude Include="GraduationProjectMainWindow.h" />
     <ClInclude Include="OpenCLConnection.h" />
     <ClInclude Include="OpenCLHost.h" />
@@ -182,10 +188,13 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="literal-rus.rc" />
+    <ResourceCompile Include="graduation-project.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="image_rotate.cl" />
+    <Image Include="toolbar1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="idr_main.bin" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

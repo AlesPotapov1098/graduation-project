@@ -1,10 +1,15 @@
 #pragma once
 
 #include <afxwin.h>
+#include <afxcontrolbars.h>
+
+#include "resource.h"
 
 #include "Proportions.h"
+#include "OpenCLWnd.h"
 
 #define ID_CREATE_NEW_CHILD_WINDOW_BUTTON	100
+#define FAIL	-1
 
 namespace gp
 {
@@ -12,33 +17,10 @@ namespace gp
 	{
 		class GraduationProjectMainWindow : public CMDIFrameWnd
 		{
-		public:
 
-			/// <summary>
-			/// Конструктор = вызов Create
-			/// </summary>
-			GraduationProjectMainWindow();
+		protected:
 
-			/// <summary>
-			/// Деструктор = закрытие всех открытых MDI-child окон
-			/// </summary>
-			~GraduationProjectMainWindow();
-
-			/// <summary>
-			/// Переопределение функции, вызываемой перед функцией CreateClient
-			/// </summary>
-			afx_msg BOOL OnCreateClient(
-				LPCREATESTRUCT lpcs,
-				CCreateContext* pContext);
-
-			/// <summary>
-			/// Преопределение функции создания дочернего окна класса MDICLIENT
-			/// </summary>
-			afx_msg BOOL CreateClient(
-				LPCREATESTRUCT lpCreateStruct,
-				CMenu* pWindowMenu);
-
-			DECLARE_MESSAGE_MAP()
+			CMFCToolBar m_wndToolBar;
 
 		private:
 			void click();
@@ -66,6 +48,24 @@ namespace gp
 			MDIClientRectWindowProportion m_MDIClientProportion;
 
 			CButton button1;
+			
+		public:
+
+			/// <summary>
+			/// Конструктор = вызов Create
+			/// </summary>
+			GraduationProjectMainWindow();
+
+			/// <summary>
+			/// Деструктор = закрытие всех открытых MDI-child окон
+			/// </summary>
+			~GraduationProjectMainWindow();
+
+			virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+
+			afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+
+			DECLARE_MESSAGE_MAP()
 		};
 	}
 }

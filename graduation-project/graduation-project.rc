@@ -47,17 +47,58 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// Dialog
+// Menu
 //
 
-IDD_DIALOG1 DIALOGEX 0, 0, 309, 268
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Dialog"
-FONT 8, "MS Shell Dlg", 400, 0, 0x1
+IDR_MAINFRAME MENU
 BEGIN
-    DEFPUSHBUTTON   "ОК",IDOK,198,247,50,14
-    PUSHBUTTON      "Отмена",IDCANCEL,252,247,50,14
+    POPUP "Файл"
+    BEGIN
+        MENUITEM "Выйти",                       ID_MENU_CLOSE
+    END
+    POPUP "Создать"
+    BEGIN
+        MENUITEM "Директория",                  ID_40003
+        MENUITEM "Камера",                      ID_40004
+        MENUITEM "Предыдущая картинка",         ID_40005
+        MENUITEM "Создать новое окно",          ID_MENU_CREATE_NEW_OPENCL_WINDOW
+    END
+    POPUP "Настройки"
+    BEGIN
+        MENUITEM "Элементы управления",         ID_40013
+        MENUITEM "Вывод",                       ID_40014
+    END
+    POPUP "Система"
+    BEGIN
+        MENUITEM "О программе",                 ID_MENU_ABOUT
+    END
 END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_TOOLBAR1 TOOLBAR 18, 18
+BEGIN
+    BUTTON      ID_BUTTON40006
+    SEPARATOR
+    BUTTON      ID_BUTTON40008
+    BUTTON      ID_BUTTON40010
+    SEPARATOR
+    BUTTON      ID_BUTTON40009
+    BUTTON      ID_BUTTON40011
+    BUTTON      ID_BUTTON40012
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_TOOLBAR1            BITMAP                  "toolbar1.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -68,12 +109,11 @@ END
 #ifdef APSTUDIO_INVOKED
 GUIDELINES DESIGNINFO
 BEGIN
-    IDD_DIALOG1, DIALOG
+    IDD_PROPPAGE_SMALL, DIALOG
     BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 302
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 261
+        RIGHTMARGIN, 266
+        VERTGUIDE, 236
+        BOTTOMMARGIN, 127
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -81,36 +121,29 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
+// Dialog
+//
+
+IDD_PROPPAGE_SMALL DIALOGEX 0, 0, 267, 166
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Свойства"
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    LTEXT           "TODO: страница свойств макета",IDC_STATIC,53,59,90,33
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
 // AFX_DIALOG_LAYOUT
 //
 
-IDD_DIALOG1 AFX_DIALOG_LAYOUT
+IDD_PROPPAGE_SMALL AFX_DIALOG_LAYOUT
 BEGIN
     0
 END
 
 #endif    // Русский (Россия) resources
-/////////////////////////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////////////////////////
-// Английский (США) resources
-
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
-#pragma code_page(1252)
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// String Table
-//
-
-STRINGTABLE
-BEGIN
-    IDS_STRING101           "??????\036"
-END
-
-#endif    // Английский (США) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
