@@ -44,6 +44,9 @@ namespace gp
 			/// Объект для управления позицией, шириной и высотой окна MDICLIENT
 			/// </summary>
 			MDIClientRectWindowProportion m_MDIClientProportion;
+
+			CStatusBar m_wndStatusBar;
+
 		public:
 
 			/// <summary>

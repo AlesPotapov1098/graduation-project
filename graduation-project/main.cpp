@@ -2,6 +2,7 @@
 
 BEGIN_MESSAGE_MAP(App, CWinApp)
     ON_COMMAND(ID_MENU_CREATE_NEW_OPENCL_WINDOW, &App::OnMenuCreateNewOpenclWindow)
+    ON_COMMAND(ID_CREATE_FROM_IMAGE, &App::OnCreateFromImage)
 END_MESSAGE_MAP()
 
 App::App()
@@ -33,4 +34,9 @@ BOOL App::InitInstance()
 void App::OnMenuCreateNewOpenclWindow()
 {
     m_pMainMDIWnd->CreateMDIChild();
+}
+
+
+void App::OnCreateFromImage()
+{
 }

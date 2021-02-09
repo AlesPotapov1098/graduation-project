@@ -58,7 +58,7 @@ BEGIN
     END
     POPUP "Создать"
     BEGIN
-        MENUITEM "Директория",                  ID_40003
+        MENUITEM "Директория",                  ID_CREATE_FROM_IMAGE
         MENUITEM "Камера",                      ID_40004
         MENUITEM "Предыдущая картинка",         ID_40005
         MENUITEM "Создать новое окно\tCtlr + N", ID_MENU_CREATE_NEW_OPENCL_WINDOW

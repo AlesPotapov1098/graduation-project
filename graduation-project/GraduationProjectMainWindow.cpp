@@ -9,6 +9,13 @@ namespace gp {
 			ON_WM_PAINT()
 		END_MESSAGE_MAP()
 
+		static UINT indicators[] =
+		{
+			ID_SEPARATOR,           // индикатор строки состояния
+			ID_INDICATOR_CAPS,
+			ID_INDICATOR_NUM,
+			ID_INDICATOR_SCRL,
+		};
 
 		GraduationProjectMainWindow::GraduationProjectMainWindow() 
 		{
@@ -49,6 +56,12 @@ namespace gp {
 			if (CMDIFrameWnd::OnCreate(lpCreateStruct) == FAIL)
 				return FAIL;
 
+			if (!m_wndStatusBar.Create(this))
+			{
+				return FAIL;
+			}
+
+			m_wndStatusBar.SetIndicators(indicators, sizeof(indicators) / sizeof(UINT));
 			//if (!m_wndToolBar.Create(this, WS_CHILD | WS_VISIBLE | CBRS_SIZE_FIXED | CBRS_TOP | CBRS_TOOLTIPS)
 			//	|| !m_wndToolBar.LoadToolBar(IDR_TOOLBAR1))
 			//{

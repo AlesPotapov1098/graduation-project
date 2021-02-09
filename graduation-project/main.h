@@ -23,7 +23,7 @@ public:
     virtual BOOL InitInstance();
 
     afx_msg void OnMenuCreateNewOpenclWindow();
-    
+    afx_msg void OnCreateFromImage();
     
     DECLARE_MESSAGE_MAP()
 };

@@ -106,11 +106,6 @@ namespace gp
 		class MDIChildWindowProportion : public WindowProportion
 		{
 		public:
-
-			MDIChildWindowProportion() : WindowProportion() {};
-			MDIChildWindowProportion(HWND hwnd) : WindowProportion(hwnd) {};
-			~MDIChildWindowProportion() {};
-
 			void CalculateWindowProportion() override;
 		};
 	}
