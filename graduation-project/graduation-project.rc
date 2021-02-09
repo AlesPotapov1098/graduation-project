@@ -61,7 +61,7 @@ BEGIN
         MENUITEM "Директория",                  ID_40003
         MENUITEM "Камера",                      ID_40004
         MENUITEM "Предыдущая картинка",         ID_40005
-        MENUITEM "Создать новое окно",          ID_MENU_CREATE_NEW_OPENCL_WINDOW
+        MENUITEM "Создать новое окно\tCtlr + N", ID_MENU_CREATE_NEW_OPENCL_WINDOW
     END
     POPUP "Настройки"
     BEGIN
@@ -76,10 +76,10 @@ END
 
 IDR_MENU1 MENU
 BEGIN
-    MENUITEM "Файл",                        0
-    MENUITEM "Вид",                         0
-    MENUITEM "Окно",                        0
-    MENUITEM "Создать",                     0
+    MENUITEM "Файл",                        ID_40022
+    MENUITEM "Вид",                         ID_40023
+    MENUITEM "Окно",                        ID_40024
+    MENUITEM "Создать",                     ID_40025
     MENUITEM "Настройки",                   0
 END
 
@@ -150,6 +150,17 @@ END
 IDD_PROPPAGE_SMALL AFX_DIALOG_LAYOUT
 BEGIN
     0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS
+BEGIN
+    "N",            ID_MENU_CREATE_NEW_OPENCL_WINDOW, VIRTKEY, CONTROL, NOINVERT
 END
 
 #endif    // Русский (Россия) resources

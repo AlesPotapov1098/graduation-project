@@ -2,20 +2,26 @@
 
 BEGIN_MESSAGE_MAP(App, CWinApp)
     
+    ON_COMMAND(ID_MENU_CREATE_NEW_OPENCL_WINDOW, &App::OnMenuCreateNewOpenclWindow)
 END_MESSAGE_MAP()
 
 using namespace gp::app;
+
+App::App()
+{
+    m_pMainMDIWnd = nullptr;
+}
 
 BOOL App::InitInstance()
 {
     CWinApp::InitInstance();
 
-    auto m_pMainMDIWindow = new gp::app::GraduationProjectMainWindow(m_hInstance);
+    m_pMainMDIWnd = new gp::app::GraduationProjectMainWindow;
 
-    if (!m_pMainMDIWindow->LoadFrame(IDR_MAINFRAME))
+    if (!m_pMainMDIWnd->LoadFrame(IDR_MAINFRAME))
         return FALSE;
 
-    m_pMainWnd = m_pMainMDIWindow;
+    m_pMainWnd = m_pMainMDIWnd;
     
     m_pMainWnd->ShowWindow(SW_RESTORE);
     m_pMainWnd->UpdateWindow();
@@ -27,3 +33,9 @@ void App::OnFileNew()
 {
 }
 
+
+
+void App::OnMenuCreateNewOpenclWindow()
+{
+    m_pMainMDIWnd->CreateMDIChild();
+}

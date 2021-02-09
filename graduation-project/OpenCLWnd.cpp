@@ -15,5 +15,21 @@ namespace gp
 		OpenCLWnd::~OpenCLWnd()
 		{
 		}
+
+		BOOL OpenCLWnd::PreCreateWindow(CREATESTRUCT& cs)
+		{
+			cs.lpszName = L"MDIChildWindow";
+
+			cs.x = 10;
+			cs.y = 10;
+
+			cs.style &= ~FWS_ADDTOTITLE;
+
+			if (!CMDIChildWnd::PreCreateWindow(cs)) {
+				return FALSE;
+			}
+
+			return TRUE;
+		}
 	}
 }

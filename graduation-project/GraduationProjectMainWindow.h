@@ -50,18 +50,12 @@ namespace gp
 			/// Объект для управления позицией, шириной и высотой окна MDICLIENT
 			/// </summary>
 			MDIClientRectWindowProportion m_MDIClientProportion;
-
-			CButton button1;
-
-			
 		public:
-			//DECLARE_DYNAMIC(CMainFrame)
+
 			/// <summary>
 			/// Конструктор = вызов Create
 			/// </summary>
 			GraduationProjectMainWindow();
-
-			GraduationProjectMainWindow(HINSTANCE instance);
 
 			/// <summary>
 			/// Деструктор = закрытие всех открытых MDI-child окон

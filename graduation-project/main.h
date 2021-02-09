@@ -11,13 +11,17 @@
 
 class App : public CWinApp
 {
-public:
-    App() {}; // конструктор
-    virtual BOOL InitInstance();
+private:
+    gp::app::GraduationProjectMainWindow* m_pMainMDIWnd;
 
 public:
+
+    App(); // конструктор
+    virtual BOOL InitInstance();
+
     afx_msg void OnFileNew();
     DECLARE_MESSAGE_MAP()
+    afx_msg void OnMenuCreateNewOpenclWindow();
 };
 
 App theApp;

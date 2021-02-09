@@ -6,6 +6,7 @@
 #define IDD_PROPPAGE_SMALL              102
 #define IDR_IDR_MAINFRAME1              108
 #define IDR_MENU1                       111
+#define IDR_ACCELERATOR1                112
 #define IDR_MAINFRAME                   128
 #define ID_40001                        40001
 #define ID_40002                        40002
@@ -25,13 +26,17 @@
 #define ID_40017                        40017
 #define ID_MENU_CREATE_NEW_OPENCL_WINDOW 40018
 #define ID_MENU_ABOUT                   40019
+#define ID_40022                        40022
+#define ID_40023                        40023
+#define ID_40024                        40024
+#define ID_40025                        40025
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        112
-#define _APS_NEXT_COMMAND_VALUE         40020
+#define _APS_NEXT_RESOURCE_VALUE        113
+#define _APS_NEXT_COMMAND_VALUE         40026
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

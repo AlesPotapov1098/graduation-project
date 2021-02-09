@@ -34,6 +34,8 @@ namespace gp {
 		public:
 			OpenCLWnd() noexcept;
 			~OpenCLWnd();
+
+			afx_msg BOOL PreCreateWindow(CREATESTRUCT& cs);
 		};
 	}
 }
