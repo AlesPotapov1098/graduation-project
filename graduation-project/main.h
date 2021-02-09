@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 #include <afxwin.h>
 
 #define CL_HPP_ENABLE_EXCEPTIONS
@@ -13,15 +15,17 @@ class App : public CWinApp
 {
 private:
     gp::app::GraduationProjectMainWindow* m_pMainMDIWnd;
-
 public:
 
-    App(); // конструктор
+    App(); 
+    virtual ~App();
+
     virtual BOOL InitInstance();
 
-    afx_msg void OnFileNew();
-    DECLARE_MESSAGE_MAP()
     afx_msg void OnMenuCreateNewOpenclWindow();
+    
+    
+    DECLARE_MESSAGE_MAP()
 };
 
 App theApp;

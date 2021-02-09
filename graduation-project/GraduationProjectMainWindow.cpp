@@ -10,14 +10,19 @@ namespace gp {
 		END_MESSAGE_MAP()
 
 
-		GraduationProjectMainWindow::GraduationProjectMainWindow()
+		GraduationProjectMainWindow::GraduationProjectMainWindow() 
 		{
 			m_MainWindowPropportions.CalculateWindowProportion();
+			m_WndMenu = nullptr;
+			m_WndAccel = nullptr;
 		}
 
 		GraduationProjectMainWindow::~GraduationProjectMainWindow()
 		{
-
+			if (m_WndMenu != nullptr)
+				FreeResource(m_WndMenu);
+			if (m_WndAccel != nullptr)
+				FreeResource(m_WndAccel);
 		}
 
 		BOOL GraduationProjectMainWindow::PreCreateWindow(CREATESTRUCT& cs)

@@ -20,12 +20,6 @@ namespace gp
 		protected:
 
 			CMFCToolBar m_wndToolBar;
-
-		private:
-			void click();
-
-		protected:
-
 			HMENU m_WndMenu;
 			HACCEL m_WndAccel;
 
@@ -62,11 +56,15 @@ namespace gp
 			/// </summary>
 			~GraduationProjectMainWindow();
 
-			virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
-
-			afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
-
+			/// <summary>
+			/// Создание нового дочернего MDI окна
+			/// </summary>
 			void CreateMDIChild();
+		
+		public:
+
+			virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+			afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 
 			DECLARE_MESSAGE_MAP()
 		};
