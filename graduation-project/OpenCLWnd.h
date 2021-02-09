@@ -26,16 +26,25 @@
 
 #include <afxcontrolbars.h>     // поддержка MFC для лент и панелей управления
 
+#include "Proportions.h"
+
 namespace gp {
 	namespace app {
 		class OpenCLWnd : public CMDIChildWnd
 		{
 			DECLARE_DYNCREATE(OpenCLWnd)
+		private:
+			MDIChildWindowProportion m_WindowProportion;
+
+			LPCWSTR m_MDIWindowName = L"MDIChildWnd";
+
 		public:
 			OpenCLWnd() noexcept;
 			~OpenCLWnd();
 
 			afx_msg BOOL PreCreateWindow(CREATESTRUCT& cs);
+
+			DECLARE_MESSAGE_MAP()
 		};
 	}
 }

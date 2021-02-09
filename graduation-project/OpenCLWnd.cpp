@@ -7,9 +7,12 @@ namespace gp
 		
 		IMPLEMENT_DYNCREATE(OpenCLWnd, CMDIChildWnd)
 
+		BEGIN_MESSAGE_MAP(OpenCLWnd, CMDIChildWnd)
+
+		END_MESSAGE_MAP()
+
 		OpenCLWnd::OpenCLWnd() noexcept
 		{
-
 		}
 
 		OpenCLWnd::~OpenCLWnd()
@@ -18,10 +21,13 @@ namespace gp
 
 		BOOL OpenCLWnd::PreCreateWindow(CREATESTRUCT& cs)
 		{
-			cs.lpszName = L"MDIChildWindow";
+			cs.lpszName = m_MDIWindowName;
 
-			cs.x = 10;
-			cs.y = 10;
+			m_WindowProportion.SetParent(cs.hwndParent);
+			m_WindowProportion.CalculateWindowProportion();
+
+			cs.cx = m_WindowProportion.GetWidth();
+			cs.cy = m_WindowProportion.GetHeight();
 
 			cs.style &= ~FWS_ADDTOTITLE;
 

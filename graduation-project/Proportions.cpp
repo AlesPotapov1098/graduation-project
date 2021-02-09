@@ -92,5 +92,11 @@ namespace gp
 			m_PosY = 0;
 		}
 
+		void MDIChildWindowProportion::CalculateWindowProportion()
+		{
+			m_Width = m_ParentWndWidth * 7 / 10;
+			m_Height = m_ParentWndHeight * 6 / 10;
+		}
+
 	}
 }

@@ -44,11 +44,6 @@ namespace gp {
 			return TRUE;
 		}
 
-		void GraduationProjectMainWindow::click()
-		{
-			CreateNewChild(RUNTIME_CLASS(CMDIChildWnd), 0);
-		}
-
 		int GraduationProjectMainWindow::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		{
 			if (CMDIFrameWnd::OnCreate(lpCreateStruct) == FAIL)
