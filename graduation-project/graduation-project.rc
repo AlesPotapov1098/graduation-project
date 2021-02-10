@@ -94,6 +94,18 @@ BEGIN
     BUTTON      ID_MENU_CREATE_NEW_OPENCL_WINDOW
 END
 
+IDR_TOOLBAR256 TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_MENU_CREATE_NEW_OPENCL_WINDOW
+    BUTTON      NEW_OPENCL_WINDOW
+    BUTTON      NEW_OPENCL_WINDOW
+    BUTTON      NEW_OPENCL_WINDOW
+    BUTTON      NEW_OPENCL_WINDOW
+    BUTTON      NEW_OPENCL_WINDOW
+    BUTTON      NEW_OPENCL_WINDOW
+    BUTTON      NEW_OPENCL_WINDOW
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -101,6 +113,12 @@ END
 //
 
 IDR_MAINFRAME           BITMAP                  "toolbar1.bmp"
+
+IDR_TOOLBAR256          BITMAP                  "Toolbar.bmp"
+
+IDR_TOOLBAR2            BITMAP                  "toolbar2.bmp"
+
+IDB_BITMAP2             BITMAP                  "bitmap2.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

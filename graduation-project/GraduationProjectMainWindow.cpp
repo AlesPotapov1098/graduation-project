@@ -50,7 +50,7 @@ namespace gp {
 
 		bool GraduationProjectMainWindow::InitToolBar()
 		{
-			if (!m_wndToolBar.Create(this) || !m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
+			if (!m_wndToolBar.Create(this) || !m_wndToolBar.LoadToolBar(IDR_TOOLBAR256))
 				return false;
 
 			EnableDocking(CBRS_ALIGN_ANY);

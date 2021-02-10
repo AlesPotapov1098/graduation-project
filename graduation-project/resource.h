@@ -9,8 +9,11 @@
 #define IDR_ACCELERATOR1                112
 #define ID_SEPARATOR                    113
 #define ID_INDICATOR_CAPS               114
+#define IDR_TOOLBAR2                    114
 #define ID_INDICATOR_NUM                115
+#define IDB_BITMAP1                     115
 #define ID_INDICATOR_SCRL               116
+#define IDB_BITMAP2                     116
 #define IDR_MAINFRAME                   128
 #define ID_40001                        40001
 #define ID_40002                        40002
@@ -43,12 +46,14 @@
 #define ID_BUTTON40033                  40033
 #define ID_BUTTON40034                  40034
 #define ID_BUTTON40035                  40035
+#define NEW_OPENCL_WINDOW               40036
+#define IDR_TOOLBAR256					40037
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        114
+#define _APS_NEXT_RESOURCE_VALUE        117
 #define _APS_NEXT_COMMAND_VALUE         40036
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           101
