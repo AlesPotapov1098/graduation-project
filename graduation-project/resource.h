@@ -31,13 +31,21 @@
 #define ID_40024                        40024
 #define ID_40025                        40025
 #define ID_CREATE_FROM_IMAGE            40026
+#define ID_BUTTON40027                  40027
+#define ID_BUTTON40029                  40029
+#define ID_BUTTON40030                  40030
+#define ID_BUTTON40031                  40031
+#define ID_BUTTON40032                  40032
+#define ID_BUTTON40033                  40033
+#define ID_BUTTON40034                  40034
+#define ID_BUTTON40035                  40035
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        113
-#define _APS_NEXT_COMMAND_VALUE         40027
+#define _APS_NEXT_COMMAND_VALUE         40036
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <afxwin.h>
+#include <afxext.h>
 #include <afxcontrolbars.h>
 
 #include "resource.h"
@@ -17,9 +18,10 @@ namespace gp
 	{
 		class GraduationProjectMainWindow : public CMDIFrameWnd
 		{
+			DECLARE_DYNCREATE(GraduationProjectMainWindow)
 		protected:
 
-			CMFCToolBar m_wndToolBar;
+			CToolBar m_wndToolBar;
 			HMENU m_WndMenu;
 			HACCEL m_WndAccel;
 
@@ -52,7 +54,7 @@ namespace gp
 			/// <summary>
 			/// Конструктор = вызов Create
 			/// </summary>
-			GraduationProjectMainWindow();
+			GraduationProjectMainWindow() noexcept;
 
 			/// <summary>
 			/// Деструктор = закрытие всех открытых MDI-child окон

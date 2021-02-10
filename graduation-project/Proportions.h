@@ -1,6 +1,7 @@
 #pragma once
 
 #include <afxwin.h>
+#include <afxext.h>
 
 namespace gp
 {

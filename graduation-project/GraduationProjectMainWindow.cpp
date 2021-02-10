@@ -1,8 +1,12 @@
 #include "GraduationProjectMainWindow.h"
 
+
+
 namespace gp {
 
 	namespace app {
+
+		IMPLEMENT_DYNCREATE(GraduationProjectMainWindow, CMDIFrameWnd)
 
 		BEGIN_MESSAGE_MAP(GraduationProjectMainWindow, CMDIFrameWnd)
 			ON_WM_CREATE()
@@ -17,7 +21,7 @@ namespace gp {
 			ID_INDICATOR_SCRL,
 		};
 
-		GraduationProjectMainWindow::GraduationProjectMainWindow() 
+		GraduationProjectMainWindow::GraduationProjectMainWindow() noexcept
 		{
 			m_MainWindowPropportions.CalculateWindowProportion();
 			m_WndMenu = nullptr;
@@ -62,12 +66,15 @@ namespace gp {
 			}
 
 			m_wndStatusBar.SetIndicators(indicators, sizeof(indicators) / sizeof(UINT));
-			//if (!m_wndToolBar.Create(this, WS_CHILD | WS_VISIBLE | CBRS_SIZE_FIXED | CBRS_TOP | CBRS_TOOLTIPS)
-			//	|| !m_wndToolBar.LoadToolBar(IDR_TOOLBAR1))
-			//{
-			//	return FAIL;
-			//}
+			
+			if (!m_wndToolBar.Create(this) || !m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
+			{
+				return FAIL;
+			}
 
+			EnableDocking(CBRS_ALIGN_ANY);
+			m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);
+			
 			return 0;
 		}
 

@@ -89,16 +89,9 @@ END
 // Toolbar
 //
 
-IDR_TOOLBAR1 TOOLBAR 18, 18
+IDR_MAINFRAME TOOLBAR 16, 16
 BEGIN
-    BUTTON      ID_BUTTON40006
-    SEPARATOR
-    BUTTON      ID_BUTTON40008
-    BUTTON      ID_BUTTON40010
-    SEPARATOR
-    BUTTON      ID_BUTTON40009
-    BUTTON      ID_BUTTON40011
-    BUTTON      ID_BUTTON40012
+    BUTTON      ID_MENU_CREATE_NEW_OPENCL_WINDOW
 END
 
 
@@ -107,7 +100,7 @@ END
 // Bitmap
 //
 
-IDR_TOOLBAR1            BITMAP                  "toolbar1.bmp"
+IDR_MAINFRAME           BITMAP                  "toolbar1.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

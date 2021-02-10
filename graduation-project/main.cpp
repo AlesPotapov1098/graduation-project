@@ -1,13 +1,15 @@
 #include "main.h"
 
-BEGIN_MESSAGE_MAP(App, CWinApp)
+BEGIN_MESSAGE_MAP(App, CWinAppEx)
     ON_COMMAND(ID_MENU_CREATE_NEW_OPENCL_WINDOW, &App::OnMenuCreateNewOpenclWindow)
     ON_COMMAND(ID_CREATE_FROM_IMAGE, &App::OnCreateFromImage)
 END_MESSAGE_MAP()
 
-App::App()
+App theApp;
+
+App::App() noexcept
 {
-    m_pMainMDIWnd = nullptr;
+    //m_pMainMDIWnd = nullptr;
 }
 
 App::~App()
@@ -18,9 +20,9 @@ BOOL App::InitInstance()
 {
     CWinApp::InitInstance();
 
-   m_pMainMDIWnd = new gp::app::GraduationProjectMainWindow();
+    m_pMainMDIWnd = new gp::app::GraduationProjectMainWindow();
 
-    if (!m_pMainMDIWnd->LoadFrame(IDR_MAINFRAME))
+    if (!m_pMainMDIWnd || !m_pMainMDIWnd->LoadFrame(IDR_MAINFRAME))
         return FALSE;
 
     m_pMainWnd = m_pMainMDIWnd;
