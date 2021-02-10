@@ -7,6 +7,10 @@
 #define IDR_IDR_MAINFRAME1              108
 #define IDR_MENU1                       111
 #define IDR_ACCELERATOR1                112
+#define ID_SEPARATOR                    113
+#define ID_INDICATOR_CAPS               114
+#define ID_INDICATOR_NUM                115
+#define ID_INDICATOR_SCRL               116
 #define IDR_MAINFRAME                   128
 #define ID_40001                        40001
 #define ID_40002                        40002
@@ -44,7 +48,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        113
+#define _APS_NEXT_RESOURCE_VALUE        114
 #define _APS_NEXT_COMMAND_VALUE         40036
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           101

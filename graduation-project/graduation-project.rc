@@ -156,6 +156,20 @@ BEGIN
     "N",            ID_MENU_CREATE_NEW_OPENCL_WINDOW, VIRTKEY, CONTROL, NOINVERT
 END
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    ID_SEPARATOR            "Готово"
+    ID_INDICATOR_CAPS       "CapsLock:\t"
+    ID_INDICATOR_NUM        "Num:\t"
+    ID_INDICATOR_SCRL       "???"
+END
+
 #endif    // Русский (Россия) resources
 /////////////////////////////////////////////////////////////////////////////
 
