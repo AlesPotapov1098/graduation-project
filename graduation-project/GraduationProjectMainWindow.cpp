@@ -36,6 +36,29 @@ namespace gp {
 				FreeResource(m_WndAccel);
 		}
 
+		bool GraduationProjectMainWindow::InitStatusBar()
+		{
+			if (!m_wndStatusBar.Create(this))
+			{
+				return false;
+			}
+
+			m_wndStatusBar.SetIndicators(indicators, sizeof(indicators) / sizeof(UINT));
+
+			return true;
+		}
+
+		bool GraduationProjectMainWindow::InitToolBar()
+		{
+			if (!m_wndToolBar.Create(this) || !m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
+				return false;
+
+			EnableDocking(CBRS_ALIGN_ANY);
+			m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);
+
+			return true;
+		}
+
 		BOOL GraduationProjectMainWindow::PreCreateWindow(CREATESTRUCT& cs)
 		{
 			// Изменение парметров главного окна (фрейма)
@@ -60,20 +83,11 @@ namespace gp {
 			if (CMDIFrameWnd::OnCreate(lpCreateStruct) == FAIL)
 				return FAIL;
 
-			if (!m_wndStatusBar.Create(this))
-			{
+			if (!InitStatusBar())
 				return FAIL;
-			}
-
-			m_wndStatusBar.SetIndicators(indicators, sizeof(indicators) / sizeof(UINT));
 			
-			if (!m_wndToolBar.Create(this) || !m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
-			{
+			if (!InitToolBar())
 				return FAIL;
-			}
-
-			EnableDocking(CBRS_ALIGN_ANY);
-			m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);
 			
 			return 0;
 		}

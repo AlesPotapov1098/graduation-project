@@ -49,6 +49,11 @@ namespace gp
 
 			CStatusBar m_wndStatusBar;
 
+		private:
+
+			bool InitStatusBar();
+			bool InitToolBar();
+
 		public:
 
 			/// <summary>
