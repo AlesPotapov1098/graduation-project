@@ -15,7 +15,6 @@
 #define IDB_BITMAP1                     115
 #define ID_INDICATOR_SCRL               116
 #define IDB_BITMAP2                     116
-#define IDD_DIALOG1                     121
 #define IDR_MAINFRAME                   128
 #define IDC_CHECK1                      1007
 #define IDC_OPENCL_PLATFORM_INFO        1008
@@ -27,6 +26,7 @@
 #define IDC_COMBO_PLATFORM_EXTENSIONS   1014
 #define IDC_LABEL_PLATFORM_VERSION      1015
 #define IDC_EDIT_PLATFORM_VERSION       1018
+#define IDC_RICHEDIT21                  1020
 #define ID_40001                        40001
 #define ID_40002                        40002
 #define ID_40003                        40003
@@ -64,15 +64,15 @@
 #define ID_OPENCL_40038                 40038
 #define ID_OPENCL_40039                 40039
 #define ID_OPENCL_CONFIGURATION         40040
-#define IDD_DIALOG1						40041
+#define IDD_DIALOG1                     40041
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        123
+#define _APS_NEXT_RESOURCE_VALUE        124
 #define _APS_NEXT_COMMAND_VALUE         40041
-#define _APS_NEXT_CONTROL_VALUE         1019
+#define _APS_NEXT_CONTROL_VALUE         1021
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

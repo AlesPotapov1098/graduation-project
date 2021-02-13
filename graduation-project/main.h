@@ -14,7 +14,7 @@
 class App : public CWinApp
 {
 private:
-    gp::app::GraduationProjectMainWindow* m_pMainMDIWnd;
+    gp::app::HologramMainWnd* m_pMainMDIWnd;
 public:
 
     App() noexcept;

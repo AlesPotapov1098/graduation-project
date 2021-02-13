@@ -21,7 +21,7 @@ BOOL App::InitInstance()
 {
     CWinApp::InitInstance();
 
-    m_pMainMDIWnd = new gp::app::GraduationProjectMainWindow();
+    m_pMainMDIWnd = new gp::app::HologramMainWnd();
 
     if (!m_pMainMDIWnd || !m_pMainMDIWnd->LoadFrame(IDR_MAINFRAME))
         return FALSE;

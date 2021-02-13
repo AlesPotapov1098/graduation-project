@@ -6,9 +6,9 @@ namespace gp {
 
 	namespace app {
 
-		IMPLEMENT_DYNCREATE(GraduationProjectMainWindow, CMDIFrameWnd)
+		IMPLEMENT_DYNCREATE(HologramMainWnd, CMDIFrameWnd)
 
-		BEGIN_MESSAGE_MAP(GraduationProjectMainWindow, CMDIFrameWnd)
+		BEGIN_MESSAGE_MAP(HologramMainWnd, CMDIFrameWnd)
 			ON_WM_CREATE()
 			ON_WM_PAINT()
 		END_MESSAGE_MAP()
@@ -21,14 +21,14 @@ namespace gp {
 			ID_INDICATOR_SCRL,
 		};
 
-		GraduationProjectMainWindow::GraduationProjectMainWindow() noexcept
+		HologramMainWnd::HologramMainWnd() noexcept
 		{
 			m_MainWindowPropportions.CalculateWindowProportion();
 			m_WndMenu = nullptr;
 			m_WndAccel = nullptr;
 		}
 
-		GraduationProjectMainWindow::~GraduationProjectMainWindow()
+		HologramMainWnd::~HologramMainWnd()
 		{
 			if (m_WndMenu != nullptr)
 				FreeResource(m_WndMenu);
@@ -36,7 +36,7 @@ namespace gp {
 				FreeResource(m_WndAccel);
 		}
 
-		bool GraduationProjectMainWindow::InitStatusBar()
+		bool HologramMainWnd::InitStatusBar()
 		{
 			if (!m_wndStatusBar.Create(this))
 			{
@@ -48,7 +48,7 @@ namespace gp {
 			return true;
 		}
 
-		bool GraduationProjectMainWindow::InitToolBar()
+		bool HologramMainWnd::InitToolBar()
 		{
 			if (!m_wndToolBar.Create(this) || !m_wndToolBar.LoadToolBar(IDR_TOOLBAR256))
 				return false;
@@ -59,7 +59,7 @@ namespace gp {
 			return true;
 		}
 
-		BOOL GraduationProjectMainWindow::PreCreateWindow(CREATESTRUCT& cs)
+		BOOL HologramMainWnd::PreCreateWindow(CREATESTRUCT& cs)
 		{
 			// Изменение парметров главного окна (фрейма)
 			cs.lpszName = m_WindowName;
@@ -78,7 +78,7 @@ namespace gp {
 			return TRUE;
 		}
 
-		int GraduationProjectMainWindow::OnCreate(LPCREATESTRUCT lpCreateStruct)
+		int HologramMainWnd::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		{
 			if (CMDIFrameWnd::OnCreate(lpCreateStruct) == FAIL)
 				return FAIL;
@@ -95,7 +95,7 @@ namespace gp {
 			return 0;
 		}
 
-		void GraduationProjectMainWindow::CreateMDIChild()
+		void HologramMainWnd::CreateMDIChild()
 		{
 			CreateNewChild(RUNTIME_CLASS(OpenCLWnd), IDR_MAINFRAME);
 		}

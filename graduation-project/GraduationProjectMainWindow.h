@@ -17,9 +17,9 @@ namespace gp
 {
 	namespace app
 	{
-		class GraduationProjectMainWindow : public CMDIFrameWnd
+		class HologramMainWnd : public CMDIFrameWnd
 		{
-			DECLARE_DYNCREATE(GraduationProjectMainWindow)
+			DECLARE_DYNCREATE(HologramMainWnd)
 		protected:
 
 			CToolBar m_wndToolBar;
@@ -68,12 +68,12 @@ namespace gp
 			/// <summary>
 			/// Конструктор = вызов Create
 			/// </summary>
-			GraduationProjectMainWindow() noexcept;
+			HologramMainWnd() noexcept;
 
 			/// <summary>
 			/// Деструктор = закрытие всех открытых MDI-child окон
 			/// </summary>
-			~GraduationProjectMainWindow();
+			~HologramMainWnd();
 
 			/// <summary>
 			/// Создание нового дочернего MDI окна
