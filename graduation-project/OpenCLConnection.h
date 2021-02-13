@@ -1,6 +1,6 @@
 #pragma once
 
-#include <CL\cl2.hpp>
+#include <CL/cl2.h>
 
 namespace gp {
 
@@ -16,11 +16,11 @@ namespace gp {
 
 			bool Init();
 
-			const cl::vector <cl::Platform> & GetPlatforms() const;
 			const cl::vector <devices> & GetDevices() const;
+			const cl::vector <cl::Platform> & GetPlatforms() const;
 
 		private:
-
+			
 			cl_int m_CountPlatfroms;
 			cl_int m_CountDevices;
 
