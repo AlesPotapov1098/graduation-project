@@ -1,6 +1,4 @@
-#include "GraduationProjectMainWindow.h"
-
-
+#include "HologramMainWnd.h"
 
 namespace gp {
 
@@ -98,6 +96,11 @@ namespace gp {
 		void HologramMainWnd::CreateMDIChild()
 		{
 			CreateNewChild(RUNTIME_CLASS(OpenCLWnd), IDR_MAINFRAME);
+		}
+		
+		gp::gpgpu::OpenCLConnection HologramMainWnd::GetConnection() const
+		{
+			return m_OpenCLConncetion;
 		}
 	}
 }

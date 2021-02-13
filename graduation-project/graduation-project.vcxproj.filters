@@ -33,9 +33,6 @@
     <ClCompile Include="OpenCLConnection.cpp">
       <Filter>GPGPU</Filter>
     </ClCompile>
-    <ClCompile Include="GraduationProjectMainWindow.cpp">
-      <Filter>application</Filter>
-    </ClCompile>
     <ClCompile Include="OpenCLWnd.cpp">
       <Filter>application</Filter>
     </ClCompile>
@@ -48,6 +45,9 @@
     <ClCompile Include="CDialogOpenCLConfiguration.cpp">
       <Filter>application</Filter>
     </ClCompile>
+    <ClCompile Include="HologramMainWnd.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proportions.h">
@@ -58,9 +58,6 @@
     </ClInclude>
     <ClInclude Include="OpenCLConnection.h">
       <Filter>GPGPU</Filter>
-    </ClInclude>
-    <ClInclude Include="GraduationProjectMainWindow.h">
-      <Filter>application</Filter>
     </ClInclude>
     <ClInclude Include="OpenCLWnd.h">
       <Filter>application</Filter>
@@ -81,6 +78,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="CDialogOpenCLConfiguration.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="HologramMainWnd.h">
       <Filter>application</Filter>
     </ClInclude>
   </ItemGroup>

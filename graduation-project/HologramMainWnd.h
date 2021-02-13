@@ -80,6 +80,8 @@ namespace gp
 			/// </summary>
 			void CreateMDIChild();
 		
+			gp::gpgpu::OpenCLConnection GetConnection() const;
+
 		public:
 
 			virtual BOOL PreCreateWindow(CREATESTRUCT& cs);

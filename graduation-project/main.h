@@ -8,7 +8,7 @@
 #include <CL/opencl.hpp>
 #include "resource.h"
 
-#include "GraduationProjectMainWindow.h"
+#include "HologramMainWnd.h"
 #include "CDialogOpenCLConfiguration.h"
 
 class App : public CWinApp

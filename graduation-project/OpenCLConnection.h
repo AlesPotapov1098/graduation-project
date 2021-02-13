@@ -8,6 +8,14 @@ namespace gp {
 
 		using devices = cl::vector<cl::Device>;
 
+		struct OpenCLInfo
+		{
+			cl::string m_PlatformName;
+			cl::string m_PlatformVendor;
+			cl::string m_PlatfromVersion;
+			cl::string m_PlatfromExtensions;
+		};
+
 		class OpenCLConnection
 		{
 		public:
@@ -18,6 +26,8 @@ namespace gp {
 
 			const cl::vector <devices> & GetDevices() const;
 			const cl::vector <cl::Platform> & GetPlatforms() const;
+
+			OpenCLInfo GetPlatfromInfo() const;
 
 		private:
 			

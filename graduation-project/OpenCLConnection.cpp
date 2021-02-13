@@ -39,6 +39,18 @@ namespace gp {
 			return m_Platfroms;
 		}
 
+		OpenCLInfo OpenCLConnection::GetPlatfromInfo() const
+		{
+			OpenCLInfo info;
+
+			info.m_PlatformName = m_Platfroms[0].getInfo<CL_PLATFORM_NAME>();
+			info.m_PlatformVendor = m_Platfroms[0].getInfo<CL_PLATFORM_VENDOR>();
+			info.m_PlatfromVersion = m_Platfroms[0].getInfo<CL_PLATFORM_VERSION>();
+			info.m_PlatfromExtensions = m_Platfroms[0].getInfo<CL_PLATFORM_EXTENSIONS>();
+
+			return info;
+		}
+
 		const cl::vector<devices>& OpenCLConnection::GetDevices() const
 		{
 			return m_Devices;

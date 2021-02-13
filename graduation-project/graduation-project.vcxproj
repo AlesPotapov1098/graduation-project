@@ -175,7 +175,7 @@
     <ClCompile Include="CDigitalHologramDoc.cpp" />
     <ClCompile Include="CDigitalHologramView.cpp" />
     <ClCompile Include="OpenCLWnd.cpp" />
-    <ClCompile Include="GraduationProjectMainWindow.cpp" />
+    <ClCompile Include="HologramMainWnd.cpp" />
     <ClCompile Include="OpenCLConnection.cpp" />
     <ClCompile Include="OpenCLHost.cpp" />
     <ClCompile Include="main.cpp" />
@@ -187,7 +187,7 @@
     <ClInclude Include="CDigitalHologramView.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="OpenCLWnd.h" />
-    <ClInclude Include="GraduationProjectMainWindow.h" />
+    <ClInclude Include="HologramMainWnd.h" />
     <ClInclude Include="OpenCLConnection.h" />
     <ClInclude Include="OpenCLHost.h" />
     <ClInclude Include="Proportions.h" />
