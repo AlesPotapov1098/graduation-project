@@ -171,7 +171,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CDialogOpenCLConf.cpp" />
+    <ClCompile Include="CDialogOpenCLConfiguration.cpp" />
     <ClCompile Include="CDigitalHologramDoc.cpp" />
     <ClCompile Include="CDigitalHologramView.cpp" />
     <ClCompile Include="OpenCLWnd.cpp" />
@@ -182,7 +182,7 @@
     <ClCompile Include="Proportions.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CDialogOpenCLConf.h" />
+    <ClInclude Include="CDialogOpenCLConfiguration.h" />
     <ClInclude Include="CDigitalHologramDoc.h" />
     <ClInclude Include="CDigitalHologramView.h" />
     <ClInclude Include="main.h" />

@@ -45,7 +45,7 @@
     <ClCompile Include="CDigitalHologramView.cpp">
       <Filter>application</Filter>
     </ClCompile>
-    <ClCompile Include="CDialogOpenCLConf.cpp">
+    <ClCompile Include="CDialogOpenCLConfiguration.cpp">
       <Filter>application</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,7 +80,7 @@
     <ClInclude Include="stdafx.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="CDialogOpenCLConf.h">
+    <ClInclude Include="CDialogOpenCLConfiguration.h">
       <Filter>application</Filter>
     </ClInclude>
   </ItemGroup>

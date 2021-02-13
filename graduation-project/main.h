@@ -6,10 +6,10 @@
 #define CL_HPP_TARGET_OPENCL_VERSION 220
 
 #include <CL/opencl.hpp>
+#include "resource.h"
 
 #include "GraduationProjectMainWindow.h"
-
-#include "resource.h"
+#include "CDialogOpenCLConfiguration.h"
 
 class App : public CWinApp
 {
@@ -24,6 +24,7 @@ public:
 
     afx_msg void OnMenuCreateNewOpenclWindow();
     afx_msg void OnCreateFromImage();
+    afx_msg void OnOpenclConfiguration();
     
     DECLARE_MESSAGE_MAP()
 };

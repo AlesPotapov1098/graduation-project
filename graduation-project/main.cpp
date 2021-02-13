@@ -3,6 +3,7 @@
 BEGIN_MESSAGE_MAP(App, CWinAppEx)
     ON_COMMAND(ID_MENU_CREATE_NEW_OPENCL_WINDOW, &App::OnMenuCreateNewOpenclWindow)
     ON_COMMAND(ID_CREATE_FROM_IMAGE, &App::OnCreateFromImage)
+    ON_COMMAND(ID_OPENCL_CONFIGURATION, &App::OnOpenclConfiguration)
 END_MESSAGE_MAP()
 
 App theApp;
@@ -41,4 +42,11 @@ void App::OnMenuCreateNewOpenclWindow()
 
 void App::OnCreateFromImage()
 {
+}
+
+
+void App::OnOpenclConfiguration()
+{
+    CDialogOpenCLConfiguration OpenCLConfig;
+    OpenCLConfig.DoModal();
 }
