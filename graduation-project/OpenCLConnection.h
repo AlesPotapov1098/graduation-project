@@ -1,6 +1,6 @@
 #pragma once
 
-#include <CL/cl2.h>
+#include <CL\cl2.hpp>
 
 namespace gp {
 

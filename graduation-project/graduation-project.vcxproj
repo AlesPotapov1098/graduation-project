@@ -23,7 +23,7 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{d86fc229-1aeb-4021-82c2-ad7ffaf6841a}</ProjectGuid>
     <RootNamespace>graduationproject</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -43,7 +43,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <PreferredToolArchitecture>
     </PreferredToolArchitecture>
@@ -135,9 +135,9 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>false</ConformanceMode>
       <CompileAsManaged>false</CompileAsManaged>
-      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard>stdcpp14</LanguageStandard>
       <CallingConvention>StdCall</CallingConvention>
-      <AdditionalIncludeDirectories>C:\Users\Ales1098\nstu-stuff\graduation-project\graduation-project\gui;C:\Users\Ales1098\Documents\Visual Studio 2019\OpenCL-CLHPP\OpenCL-CLHPP-master\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Projects\Potapov\FirstSimpleOpenCLProgram\FirstSimpleOpenCLProgram\OpenCLLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>
       </AdditionalOptions>
       <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -146,7 +146,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Ales1098\nstu-stuff\graduation-project\graduation-project</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\Projects\Potapov\FirstSimpleOpenCLProgram\FirstSimpleOpenCLProgram\OpenCLLib</AdditionalLibraryDirectories>
       <AdditionalDependencies>d2d1.lib;OpenCL.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/HIGHENTROPYVA</AdditionalOptions>
     </Link>
