@@ -8,6 +8,7 @@
 
 #include "Proportions.h"
 #include "OpenCLWnd.h"
+#include "OpenCLConnection.h"
 
 #define ID_CREATE_NEW_CHILD_WINDOW_BUTTON	100
 #define FAIL	-1
@@ -47,7 +48,15 @@ namespace gp
 			/// </summary>
 			MDIClientRectWindowProportion m_MDIClientProportion;
 
+			/// <summary>
+			/// Объект MFC для строки состояния
+			/// </summary>
 			CStatusBar m_wndStatusBar;
+
+			/// <summary>
+			/// Объект класса OpenCLConnection для инициализации OpenCL
+			/// </summary>
+			gp::gpgpu::OpenCLConnection m_OpenCLConncetion;
 
 		private:
 

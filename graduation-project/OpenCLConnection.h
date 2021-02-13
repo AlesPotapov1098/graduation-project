@@ -15,6 +15,10 @@ namespace gp {
 			~OpenCLConnection();
 
 			bool Init();
+
+			const cl::vector <cl::Platform> & GetPlatforms() const;
+			const cl::vector <devices> & GetDevices() const;
+
 		private:
 
 			cl_int m_CountPlatfroms;

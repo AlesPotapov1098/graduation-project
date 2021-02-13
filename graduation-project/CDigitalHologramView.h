@@ -1,8 +1,10 @@
 #pragma once
 
+#include <afxwin.h>
+
 namespace gp {
 	namespace app {
-		class CDigitalHologramView
+		class CDigitalHologramView : public CView
 		{
 		};
 	}
