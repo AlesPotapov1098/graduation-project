@@ -45,6 +45,9 @@
     <ClCompile Include="CDigitalHologramView.cpp">
       <Filter>application</Filter>
     </ClCompile>
+    <ClCompile Include="CDialogOpenCLConf.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proportions.h">
@@ -73,6 +76,12 @@
     </ClInclude>
     <ClInclude Include="main.h">
       <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="CDialogOpenCLConf.h">
+      <Filter>application</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

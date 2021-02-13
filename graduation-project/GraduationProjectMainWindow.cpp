@@ -88,6 +88,9 @@ namespace gp {
 			
 			if (!InitToolBar())
 				return FAIL;
+
+			if (!m_OpenCLConncetion.Init())
+				return FAIL;
 			
 			return 0;
 		}

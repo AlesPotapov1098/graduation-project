@@ -135,6 +135,10 @@ BEGIN
         VERTGUIDE, 236
         BOTTOMMARGIN, 127
     END
+
+    IDD_DIALOG_OPENCL_CONFIGURE, DIALOG
+    BEGIN
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -152,6 +156,14 @@ BEGIN
     LTEXT           "TODO: страница свойств макета",IDC_STATIC,53,59,90,33
 END
 
+IDD_DIALOG_OPENCL_CONFIGURE DIALOGEX 0, 0, 235, 156
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Конфигурация OpenCL"
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_TAB1,"SysTabControl32",0x0,0,0,235,156
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -159,6 +171,11 @@ END
 //
 
 IDD_PROPPAGE_SMALL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DIALOG_OPENCL_CONFIGURE AFX_DIALOG_LAYOUT
 BEGIN
     0
 END

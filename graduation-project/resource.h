@@ -4,6 +4,7 @@
 //
 #define IDR_TOOLBAR1                    102
 #define IDD_PROPPAGE_SMALL              102
+#define IDD_DIALOG_OPENCL_CONFIGURE     107
 #define IDR_IDR_MAINFRAME1              108
 #define IDR_MENU1                       111
 #define IDR_ACCELERATOR1                112
@@ -15,6 +16,8 @@
 #define ID_INDICATOR_SCRL               116
 #define IDB_BITMAP2                     116
 #define IDR_MAINFRAME                   128
+#define IDC_TAB1                        1005
+#define IDC_CHECK1                      1007
 #define ID_40001                        40001
 #define ID_40002                        40002
 #define ID_40003                        40003
@@ -47,15 +50,17 @@
 #define ID_BUTTON40034                  40034
 #define ID_BUTTON40035                  40035
 #define NEW_OPENCL_WINDOW               40036
-#define IDR_TOOLBAR256					40037
+#define ID_BUTTON2                      40036
+#define IDR_TOOLBAR256                  40037
+#define IDD_DIALOG_OPENCL_CONFIGURE     40038
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        117
-#define _APS_NEXT_COMMAND_VALUE         40036
-#define _APS_NEXT_CONTROL_VALUE         1001
+#define _APS_NEXT_RESOURCE_VALUE        120
+#define _APS_NEXT_COMMAND_VALUE         40037
+#define _APS_NEXT_CONTROL_VALUE         1008
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
