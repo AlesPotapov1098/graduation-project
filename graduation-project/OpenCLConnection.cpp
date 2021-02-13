@@ -31,7 +31,7 @@ namespace gp {
 				m_CountDevices += devs.size();
 			}
 
-			return m_CountPlatfroms == 0 && m_CountDevices == 0;
+			return !(m_CountPlatfroms == 0 && m_CountDevices == 0);
 		}
 
 		const cl::vector<cl::Platform>& OpenCLConnection::GetPlatforms() const

@@ -72,6 +72,12 @@ BEGIN
     BEGIN
         MENUITEM "О программе",                 ID_MENU_ABOUT
     END
+    POPUP "OpenCL"
+    BEGIN
+        MENUITEM "Конфигурация",                ID_OPENCL_40037
+        MENUITEM "Настройки",                   ID_OPENCL_40038
+        MENUITEM "Справка",                     ID_OPENCL_40039
+    END
 END
 
 IDR_MENU1 MENU
