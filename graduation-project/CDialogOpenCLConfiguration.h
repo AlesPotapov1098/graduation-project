@@ -9,10 +9,9 @@ class CDialogOpenCLConfiguration : public CDialog
 	DECLARE_DYNAMIC(CDialogOpenCLConfiguration)
 
 private:
-	const gp::gpgpu::OpenCLInfo * m_OpenCLInfoStruct;
 		
 public:
-	CDialogOpenCLConfiguration(gp::gpgpu::OpenCLInfo*) noexcept;
+	CDialogOpenCLConfiguration() noexcept;
 	virtual ~CDialogOpenCLConfiguration();
 
 protected:
@@ -21,4 +20,6 @@ protected:
 	afx_msg BOOL OnInitDialog();
 	
 	DECLARE_MESSAGE_MAP()
+public:
+	
 };

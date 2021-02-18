@@ -2,23 +2,10 @@
 
 #include <CL/opencl.hpp>
 
-namespace gp {
-	namespace gpgpu
+namespace gpgpu
+{
+	namespace host
 	{
-		/// <summary>
-		/// Уникальный идентификатор для хоста
-		/// </summary>
-		using ID = int;
-
-		/// <summary>
-		/// Струтктура данных для хранения информации и состояния аппартаной части хоста
-		/// </summary>
-		struct OpenCLHostHardware
-		{
-			cl::Platform m_Platform;
-			cl::Device   m_Device;
-		};
-
 		/// <summary>
 		/// Структура данных для управления хостом
 		/// </summary>
@@ -26,16 +13,16 @@ namespace gp {
 		{
 		public:
 			OpenCLHost() = default;
-			OpenCLHost(ID, OpenCLHostHardware&&);
 			~OpenCLHost();
-
-			ID GetID() const;
-			const OpenCLHostHardware& GetHardware() const;
+			
+			const cl::Platform& GetPlatform() const;
+			const cl::Device& GetDevice() const;
 
 		private:
-			OpenCLHostHardware m_Hardware;
-			ID m_ID;
+			cl::Platform m_Platform;
+			cl::Device   m_Device;
 		};
 	}
 }
+
 

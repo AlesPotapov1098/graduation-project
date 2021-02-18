@@ -1,27 +1,23 @@
 #include "OpenCLHost.h"
 
-namespace gp {
+namespace gpgpu {
 
-	namespace gpgpu {
-
-		OpenCLHost::OpenCLHost(ID id, OpenCLHostHardware&& hardware)
-		{
-			m_ID = id;
-			m_Hardware = hardware;
-		}
-
+	namespace host
+	{
 		OpenCLHost::~OpenCLHost()
 		{
 		}
 
-		ID OpenCLHost::GetID() const
+		const cl::Device& OpenCLHost::GetDevice() const
 		{
-			return m_ID;
+			return m_Device;
 		}
 
-		const OpenCLHostHardware& OpenCLHost::GetHardware() const
+		const cl::Platform& OpenCLHost::GetPlatform() const
 		{
-			return m_Hardware;
+			return m_Platform;
 		}
+
 	}
 }
+

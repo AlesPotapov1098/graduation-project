@@ -18,6 +18,7 @@
 #include <afxcontrolbars.h>
 
 #include "Proportions.h"
+#include "CDialogCreateOpenCLWnd.h"
 
 namespace gp {
 	namespace app {

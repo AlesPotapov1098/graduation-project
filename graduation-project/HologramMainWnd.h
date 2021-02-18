@@ -56,7 +56,7 @@ namespace gp
 			/// <summary>
 			/// Объект класса OpenCLConnection для инициализации OpenCL
 			/// </summary>
-			gp::gpgpu::OpenCLConnection m_OpenCLConncetion;
+			gpgpu::OpenCLConnection m_OpenCLConncetion;
 
 		private:
 
@@ -80,7 +80,7 @@ namespace gp
 			/// </summary>
 			void CreateMDIChild();
 		
-			gp::gpgpu::OpenCLConnection GetConnection() const;
+			gpgpu::OpenCLConnection GetConnection() const;
 
 		public:
 

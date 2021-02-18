@@ -47,7 +47,6 @@ void App::OnCreateFromImage()
 
 void App::OnOpenclConfiguration()
 {
-    auto connection = m_pMainMDIWnd->GetConnection();
-    CDialogOpenCLConfiguration OpenCLConfig(&connection.GetPlatfromInfo());
-    OpenCLConfig.DoModal();
+    gp::app::dlg::CDialogCreateOpenCLWnd dialog;
+    dialog.DoModal();
 }

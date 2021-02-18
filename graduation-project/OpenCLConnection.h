@@ -1,42 +1,40 @@
 #pragma once
 
 #include <CL/cl2.h>
+#include <vector>
 
-namespace gp {
+#include "OpenCLHost.h"
 
-	namespace gpgpu {
+namespace gpgpu {
 
-		using devices = cl::vector<cl::Device>;
+	class OpenCLHardware
+	{
+	private:
+		cl::Platform m_Platform;
+		cl::vector<cl::Device> m_Devices;
+	public:
+		OpenCLHardware() = default;
+		OpenCLHardware(const cl::Platform&);
+		~OpenCLHardware() = default;
 
-		struct OpenCLInfo
-		{
-			cl::string m_PlatformName;
-			cl::string m_PlatformVendor;
-			cl::string m_PlatfromVersion;
-			cl::string m_PlatfromExtensions;
-		};
+		std::size_t GetCountDevices() const;
+		const cl::Device& GetDevice(unsigned int index) const;
+		const cl::Platform& GetPlatform() const;
+	};
 
-		class OpenCLConnection
-		{
-		public:
-			OpenCLConnection();
-			~OpenCLConnection();
+	class OpenCLConnection
+	{
+	private:
+		cl::vector<OpenCLHardware> m_Hardware;
+	
+	public:
+		OpenCLConnection();
+		~OpenCLConnection();
 
-			bool Init();
+		bool Init();
+		std::size_t GetSize() const;
+		const OpenCLHardware& GetHardware(unsigned int index) const;
+	};
 
-			const cl::vector <devices> & GetDevices() const;
-			const cl::vector <cl::Platform> & GetPlatforms() const;
-
-			OpenCLInfo GetPlatfromInfo() const;
-
-		private:
-			
-			cl_int m_CountPlatfroms;
-			cl_int m_CountDevices;
-
-			cl::vector<cl::Platform> m_Platfroms;
-			cl::vector<devices> m_Devices;
-		};
-
-	}
 }
+

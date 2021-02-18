@@ -10,6 +10,7 @@
 
 #include "HologramMainWnd.h"
 #include "CDialogOpenCLConfiguration.h"
+#include "CDialogCreateOpenCLWnd.h"
 
 class App : public CWinApp
 {

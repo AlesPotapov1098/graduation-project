@@ -98,7 +98,7 @@ namespace gp {
 			CreateNewChild(RUNTIME_CLASS(OpenCLWnd), IDR_MAINFRAME);
 		}
 		
-		gp::gpgpu::OpenCLConnection HologramMainWnd::GetConnection() const
+		gpgpu::OpenCLConnection HologramMainWnd::GetConnection() const
 		{
 			return m_OpenCLConncetion;
 		}

@@ -4,10 +4,9 @@
 
 IMPLEMENT_DYNAMIC(CDialogOpenCLConfiguration, CDialog)
 
-CDialogOpenCLConfiguration::CDialogOpenCLConfiguration(gp::gpgpu::OpenCLInfo* info) noexcept 
+CDialogOpenCLConfiguration::CDialogOpenCLConfiguration() noexcept 
 	: CDialog(IDD_OPENCL_CONFIG)
 {
-	m_OpenCLInfoStruct = info;
 }
 
 CDialogOpenCLConfiguration::~CDialogOpenCLConfiguration()
@@ -25,4 +24,6 @@ BOOL CDialogOpenCLConfiguration::OnInitDialog()
 }
 
 BEGIN_MESSAGE_MAP(CDialogOpenCLConfiguration, CDialog)
+	
 END_MESSAGE_MAP()
+

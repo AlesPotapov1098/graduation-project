@@ -19,6 +19,15 @@
     <Filter Include="GPGPU">
       <UniqueIdentifier>{06960dff-a81e-4ebf-94e5-36d1fdd3cbf0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="application\Dialogs">
+      <UniqueIdentifier>{61551902-6e0f-4211-b6ac-eb4636779467}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="application\wnd">
+      <UniqueIdentifier>{3bddd573-1020-4af6-9da1-24adba18995d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="application\wnd\MDI">
+      <UniqueIdentifier>{916d92a7-b5cd-4a80-8af9-f28fcb0e14ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -33,20 +42,26 @@
     <ClCompile Include="OpenCLConnection.cpp">
       <Filter>GPGPU</Filter>
     </ClCompile>
-    <ClCompile Include="OpenCLWnd.cpp">
-      <Filter>application</Filter>
-    </ClCompile>
-    <ClCompile Include="CDigitalHologramDoc.cpp">
-      <Filter>application</Filter>
-    </ClCompile>
-    <ClCompile Include="CDigitalHologramView.cpp">
-      <Filter>application</Filter>
+    <ClCompile Include="CDialogCreateOpenCLWnd.cpp">
+      <Filter>application\Dialogs</Filter>
     </ClCompile>
     <ClCompile Include="CDialogOpenCLConfiguration.cpp">
-      <Filter>application</Filter>
+      <Filter>application\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="CDigitalHologramDoc.cpp">
+      <Filter>application\wnd\MDI</Filter>
+    </ClCompile>
+    <ClCompile Include="CDigitalHologramView.cpp">
+      <Filter>application\wnd\MDI</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenCLWnd.cpp">
+      <Filter>application\wnd\MDI</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenCLHostInfo.cpp">
+      <Filter>GPGPU</Filter>
     </ClCompile>
     <ClCompile Include="HologramMainWnd.cpp">
-      <Filter>application</Filter>
+      <Filter>application\wnd</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -59,17 +74,8 @@
     <ClInclude Include="OpenCLConnection.h">
       <Filter>GPGPU</Filter>
     </ClInclude>
-    <ClInclude Include="OpenCLWnd.h">
-      <Filter>application</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="CDigitalHologramView.h">
-      <Filter>application</Filter>
-    </ClInclude>
-    <ClInclude Include="CDigitalHologramDoc.h">
-      <Filter>application</Filter>
     </ClInclude>
     <ClInclude Include="main.h">
       <Filter>Исходные файлы</Filter>
@@ -77,11 +83,26 @@
     <ClInclude Include="stdafx.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="CDialogCreateOpenCLWnd.h">
+      <Filter>application\Dialogs</Filter>
+    </ClInclude>
     <ClInclude Include="CDialogOpenCLConfiguration.h">
-      <Filter>application</Filter>
+      <Filter>application\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="CDigitalHologramDoc.h">
+      <Filter>application\wnd\MDI</Filter>
+    </ClInclude>
+    <ClInclude Include="CDigitalHologramView.h">
+      <Filter>application\wnd\MDI</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenCLWnd.h">
+      <Filter>application\wnd\MDI</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenCLHostInfo.h">
+      <Filter>GPGPU</Filter>
     </ClInclude>
     <ClInclude Include="HologramMainWnd.h">
-      <Filter>application</Filter>
+      <Filter>application\wnd</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
