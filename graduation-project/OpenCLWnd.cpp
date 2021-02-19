@@ -43,6 +43,7 @@ namespace gp
 		{
 			dlg::CDialogCreateOpenCLWnd dialog;
 			dialog.DoModal();
+			auto host = dialog.GetOpenCLHost();
 
 			return CMDIChildWnd::OnCreate(lpCreateStruct);
 		}
