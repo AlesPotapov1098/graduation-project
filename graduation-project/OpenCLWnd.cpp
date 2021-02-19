@@ -8,7 +8,7 @@ namespace gp
 		IMPLEMENT_DYNCREATE(OpenCLWnd, CMDIChildWnd)
 
 		BEGIN_MESSAGE_MAP(OpenCLWnd, CMDIChildWnd)
-
+			ON_WM_CREATE()
 		END_MESSAGE_MAP()
 
 		OpenCLWnd::OpenCLWnd() noexcept
@@ -37,6 +37,14 @@ namespace gp
 
 
 			return TRUE;
+		}
+
+		int OpenCLWnd::OnCreate(LPCREATESTRUCT lpCreateStruct)
+		{
+			dlg::CDialogCreateOpenCLWnd dialog;
+			dialog.DoModal();
+
+			return CMDIChildWnd::OnCreate(lpCreateStruct);
 		}
 	}
 }

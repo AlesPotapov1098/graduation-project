@@ -5,8 +5,8 @@ namespace gp {
 		namespace dlg {
 			IMPLEMENT_DYNAMIC(CDialogCreateOpenCLWnd, CDialog)
 
-				CDialogCreateOpenCLWnd::CDialogCreateOpenCLWnd(CWnd* pParent /*=nullptr*/)
-				: CDialog(IDD_DIALOG_CREATE_WINDOW, pParent)
+			CDialogCreateOpenCLWnd::CDialogCreateOpenCLWnd(CWnd* pParent /*=nullptr*/)
+			: CDialog(IDD_DIALOG_CREATE_WINDOW, pParent)
 			{
 
 			}
@@ -17,7 +17,7 @@ namespace gp {
 
 			gpgpu::host::OpenCLHost CDialogCreateOpenCLWnd::GetOpenCLHost() const
 			{
-				return gpgpu::host::OpenCLHost();
+				return m_Host;
 			}
 
 			void CDialogCreateOpenCLWnd::DoDataExchange(CDataExchange* pDX)
@@ -44,6 +44,12 @@ namespace gp {
 
 			void CDialogCreateOpenCLWnd::OnOK()
 			{
+				int nPlatform = static_cast<CComboBox*>(this->GetDlgItem(IDC_COMBO_PLATFROMS))->GetCurSel();
+				int nDevice = static_cast<CComboBox*>(this->GetDlgItem(IDC_COMBO_DEVICE))->GetCurSel();
+				auto hard = m_Connect.GetHardware(nPlatform);
+				m_Host.SetPlatform(hard.GetPlatform());
+				m_Host.SetDevice(hard.GetDevice(nDevice));
+
 				CDialog::OnOK();
 			}
 
@@ -65,8 +71,7 @@ namespace gp {
 
 			void CDialogCreateOpenCLWnd::FillInComboPlatforms()
 			{
-				auto comboBox = static_cast<CComboBox*>(
-						this->GetDlgItem(IDC_COMBO_PLATFROMS));
+				auto comboBox = static_cast<CComboBox*>(this->GetDlgItem(IDC_COMBO_PLATFROMS));
 				
 				int countHard = m_Connect.GetSize();
 				gpgpu::OpenCLHardware hard;
@@ -78,12 +83,9 @@ namespace gp {
 					
 					for (int j = 0; j < countDevs; j++)
 					{
-						gpgpu::info::OpenCLHostInfo info(
-							hard.GetPlatform(), 
-							hard.GetDevice(j));
+						gpgpu::info::OpenCLHostInfo info(hard.GetPlatform(), hard.GetDevice(j));
 						
-						comboBox->AddString(
-							info.GetPlatformName().c_str());
+						comboBox->AddString(info.GetPlatformName().c_str());
 					}
 				}
 
@@ -92,8 +94,7 @@ namespace gp {
 
 			void CDialogCreateOpenCLWnd::FillInPlatformPanel()
 			{
-				auto comboBox = static_cast<CComboBox*>(
-					this->GetDlgItem(IDC_COMBO_PLATFROMS));
+				auto comboBox = static_cast<CComboBox*>(this->GetDlgItem(IDC_COMBO_PLATFROMS));
 
 				int CurSell = comboBox->GetCurSel();
 				gpgpu::OpenCLHardware hard = m_Connect.GetHardware(CurSell);
@@ -101,20 +102,15 @@ namespace gp {
 					hard.GetPlatform(),
 					hard.GetDevice(0));
 
-				auto editPlatformVendor = static_cast<CEdit*>(
-					this->GetDlgItem(IDC_EDIT_PLATFORM_VENDOR));
+				auto editPlatformVendor = static_cast<CEdit*>(this->GetDlgItem(IDC_EDIT_PLATFORM_VENDOR));
 
-				editPlatformVendor->SetWindowTextW(
-					info.GetPlatformVendor().c_str());
+				editPlatformVendor->SetWindowTextW(info.GetPlatformVendor().c_str());
 
-				auto editPlatformVersion = static_cast<CEdit*>(
-					this->GetDlgItem(IDC_EDIT_PLATFORM_VERSION));
+				auto editPlatformVersion = static_cast<CEdit*>(this->GetDlgItem(IDC_EDIT_PLATFORM_VERSION));
 
-				editPlatformVersion->SetWindowTextW(
-					info.GetPlatformVersion().c_str());
+				editPlatformVersion->SetWindowTextW(info.GetPlatformVersion().c_str());
 
-				auto listPlatformExtension = static_cast<CListBox*>(
-					this->GetDlgItem(IDC_LIST_PLATFORM_EXTENSIONS));
+				auto listPlatformExtension = static_cast<CListBox*>(this->GetDlgItem(IDC_LIST_PLATFORM_EXTENSIONS));
 
 				std::wstring extension = info.GetPlatformExtensions();
 				int length = extension.length();
@@ -122,28 +118,24 @@ namespace gp {
 					if (extension[i] == ' ')
 						extension[i] = '\n';
 
-				listPlatformExtension->AddString(
-					extension.c_str());
+				listPlatformExtension->AddString(extension.c_str());
 			}
 
 			void CDialogCreateOpenCLWnd::FillInComboDevice()
 			{
-				auto comboBox = static_cast<CComboBox*>(
-					this->GetDlgItem(IDC_COMBO_PLATFROMS));
+				auto comboBox = static_cast<CComboBox*>(this->GetDlgItem(IDC_COMBO_PLATFROMS));
 
 				int curSell = comboBox->GetCurSel();
 				gpgpu::OpenCLHardware hard = m_Connect.GetHardware(curSell);
 				gpgpu::info::OpenCLHostInfo info;
 
-				auto comboDevices = static_cast<CComboBox*>(
-					this->GetDlgItem(IDC_COMBO_DEVICE));
+				auto comboDevices = static_cast<CComboBox*>(this->GetDlgItem(IDC_COMBO_DEVICE));
 				int countDevs = hard.GetCountDevices();
 
 				for (int i = 0; i < countDevs; i++)
 				{
 					info.SetDevice(hard.GetDevice(i));
-					comboDevices->AddString(
-						info.GetDeviceName().c_str());
+					comboDevices->AddString(info.GetDeviceName().c_str());
 				}
 
 				comboDevices->SetCurSel(0);
@@ -151,34 +143,26 @@ namespace gp {
 
 			void CDialogCreateOpenCLWnd::FillInDevicePanel()
 			{
-				auto comboBox = static_cast<CComboBox*>(
-					this->GetDlgItem(IDC_COMBO_PLATFROMS));
+				auto comboBox = static_cast<CComboBox*>(this->GetDlgItem(IDC_COMBO_PLATFROMS));
 
 				int curSell = comboBox->GetCurSel();
 				gpgpu::OpenCLHardware hard = m_Connect.GetHardware(curSell);
 				gpgpu::info::OpenCLHostInfo info;
 
-				auto comboDevice = static_cast<CComboBox*>(
-					this->GetDlgItem(IDC_COMBO_DEVICE));
+				auto comboDevice = static_cast<CComboBox*>(this->GetDlgItem(IDC_COMBO_DEVICE));
 
 				int curSellComboDevices = comboDevice->GetCurSel();
-				info.SetDevice(
-					hard.GetDevice(curSellComboDevices));
+				info.SetDevice(hard.GetDevice(curSellComboDevices));
 
-				auto editDeviceVendor = static_cast<CEdit*>(
-					this->GetDlgItem(IDC_EDIT_DEVICE_VENDOR));
+				auto editDeviceVendor = static_cast<CEdit*>(this->GetDlgItem(IDC_EDIT_DEVICE_VENDOR));
 
-				editDeviceVendor->SetWindowTextW(
-					info.GetDeviceVendor().c_str());
+				editDeviceVendor->SetWindowTextW(info.GetDeviceVendor().c_str());
 
-				auto editDeviceVersion = static_cast<CEdit*>(
-					this->GetDlgItem(IDC_EDIT_DEVICE_VERSION));
+				auto editDeviceVersion = static_cast<CEdit*>(this->GetDlgItem(IDC_EDIT_DEVICE_VERSION));
 
-				editDeviceVersion->SetWindowTextW(
-					info.GetDeviceVersion().c_str());
+				editDeviceVersion->SetWindowTextW(info.GetDeviceVersion().c_str());
 
-				auto listDeviceExtension = static_cast<CListBox*>(
-					this->GetDlgItem(IDC_LIST_DEVICE_EXTENSIONS));
+				auto listDeviceExtension = static_cast<CListBox*>(this->GetDlgItem(IDC_LIST_DEVICE_EXTENSIONS));
 
 				std::wstring extension = info.GetDeviceExtensions();
 				int length = extension.length();
@@ -186,8 +170,7 @@ namespace gp {
 					if (extension[i] == ' ')
 						extension[i] = '\n';
 
-				listDeviceExtension->AddString(
-					extension.c_str());
+				listDeviceExtension->AddString(extension.c_str());
 			}
 
 			BEGIN_MESSAGE_MAP(CDialogCreateOpenCLWnd, CDialog)

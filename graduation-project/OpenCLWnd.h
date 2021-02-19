@@ -35,6 +35,7 @@ namespace gp {
 			~OpenCLWnd();
 
 			afx_msg BOOL PreCreateWindow(CREATESTRUCT& cs);
+			afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 
 			DECLARE_MESSAGE_MAP()
 		};

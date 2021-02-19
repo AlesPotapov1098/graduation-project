@@ -13,8 +13,12 @@ namespace gpgpu
 		{
 		public:
 			OpenCLHost() = default;
+			OpenCLHost(const cl::Platform&, const cl::Device&);
 			~OpenCLHost();
 			
+			void SetPlatform(const cl::Platform&);
+			void SetDevice(const cl::Device&);
+
 			const cl::Platform& GetPlatform() const;
 			const cl::Device& GetDevice() const;
 

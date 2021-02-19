@@ -16,6 +16,7 @@ namespace gp {
 				DECLARE_DYNAMIC(CDialogCreateOpenCLWnd)
 			private:
 				gpgpu::OpenCLConnection m_Connect;
+				gpgpu::host::OpenCLHost m_Host;
 
 			public:
 				CDialogCreateOpenCLWnd(CWnd* pParent = nullptr);
