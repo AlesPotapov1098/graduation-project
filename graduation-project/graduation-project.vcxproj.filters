@@ -28,6 +28,9 @@
     <Filter Include="application\wnd\MDI">
       <UniqueIdentifier>{916d92a7-b5cd-4a80-8af9-f28fcb0e14ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="kernel">
+      <UniqueIdentifier>{f2921ed2-8b99-4d61-877f-bb3309cc2ef2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -62,6 +65,9 @@
     </ClCompile>
     <ClCompile Include="HologramMainWnd.cpp">
       <Filter>application\wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenCLExec.cpp">
+      <Filter>GPGPU</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +110,9 @@
     <ClInclude Include="HologramMainWnd.h">
       <Filter>application\wnd</Filter>
     </ClInclude>
+    <ClInclude Include="OpenCLExec.h">
+      <Filter>GPGPU</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="graduation-project.rc">
@@ -130,6 +139,9 @@
   <ItemGroup>
     <None Include="idr_main.bin">
       <Filter>Файлы ресурсов</Filter>
+    </None>
+    <None Include="first.cl">
+      <Filter>kernel</Filter>
     </None>
   </ItemGroup>
 </Project>

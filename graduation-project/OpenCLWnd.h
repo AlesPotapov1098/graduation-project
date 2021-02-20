@@ -19,6 +19,7 @@
 
 #include "Proportions.h"
 #include "CDialogCreateOpenCLWnd.h"
+#include "OpenCLExec.h"
 
 #define FAIL	-1
 

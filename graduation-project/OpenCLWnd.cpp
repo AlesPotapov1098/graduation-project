@@ -58,6 +58,9 @@ namespace gp
 					break;
 			}
 
+			gpgpu::exec::OpenCLExec exec(m_Host);
+			exec.LoadSourceCode(L"first.cl");
+
 			return CMDIChildWnd::OnCreate(lpCreateStruct);
 		}
 	}

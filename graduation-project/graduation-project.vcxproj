@@ -175,6 +175,7 @@
     <ClCompile Include="CDialogOpenCLConfiguration.cpp" />
     <ClCompile Include="CDigitalHologramDoc.cpp" />
     <ClCompile Include="CDigitalHologramView.cpp" />
+    <ClCompile Include="OpenCLExec.cpp" />
     <ClCompile Include="OpenCLHostInfo.cpp" />
     <ClCompile Include="OpenCLWnd.cpp" />
     <ClCompile Include="HologramMainWnd.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="CDigitalHologramDoc.h" />
     <ClInclude Include="CDigitalHologramView.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="OpenCLExec.h" />
     <ClInclude Include="OpenCLHostInfo.h" />
     <ClInclude Include="OpenCLWnd.h" />
     <ClInclude Include="HologramMainWnd.h" />
@@ -209,6 +211,7 @@
     <Image Include="Toolbar256.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="first.cl" />
     <None Include="idr_main.bin" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
