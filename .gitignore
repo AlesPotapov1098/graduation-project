@@ -341,3 +341,5 @@ healthchecksdb
 /graduation-project/OpenCL.lib
 *.pdf
 теория/
+.vcxproj
+.vcxproj.filters
