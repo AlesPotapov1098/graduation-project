@@ -3,6 +3,7 @@
 #include <CL\cl2.h>
 #include <string>
 #include <fstream>
+#include <vector>
 
 #include "OpenCLHost.h"
 
@@ -23,6 +24,7 @@ namespace gpgpu {
 			OpenCLExec(const host::OpenCLHost&);
 			~OpenCLExec();
 
+			void Init();
 			bool LoadSourceCode(const std::wstring&);
 			bool Build();
 			std::wstring GetBuilError();

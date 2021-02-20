@@ -59,7 +59,13 @@ namespace gp
 			}
 
 			gpgpu::exec::OpenCLExec exec(m_Host);
-			exec.LoadSourceCode(L"first.cl");
+
+			exec.Init();
+
+			if (!exec.LoadSourceCode(L"first.cl"))
+				return FAIL;
+
+			exec.Build();
 
 			return CMDIChildWnd::OnCreate(lpCreateStruct);
 		}
