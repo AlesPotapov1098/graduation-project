@@ -20,6 +20,8 @@
 #include "Proportions.h"
 #include "CDialogCreateOpenCLWnd.h"
 
+#define FAIL	-1
+
 namespace gp {
 	namespace app {
 		class OpenCLWnd : public CMDIChildWnd
@@ -29,6 +31,8 @@ namespace gp {
 			MDIChildWindowProportion m_WindowProportion;
 
 			LPCWSTR m_MDIWindowName = L"MDIChildWnd";
+
+			gpgpu::host::OpenCLHost m_Host;
 
 		public:
 			OpenCLWnd() noexcept;

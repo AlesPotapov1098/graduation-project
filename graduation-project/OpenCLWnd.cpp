@@ -42,8 +42,21 @@ namespace gp
 		int OpenCLWnd::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		{
 			dlg::CDialogCreateOpenCLWnd dialog;
-			dialog.DoModal();
-			auto host = dialog.GetOpenCLHost();
+			auto nRes = dialog.DoModal();
+
+			switch (nRes)
+			{
+				case FAIL:
+				case IDCANCEL:
+					return FAIL;
+
+				case IDOK:
+					m_Host = dialog.GetOpenCLHost();
+					break;
+
+				default:
+					break;
+			}
 
 			return CMDIChildWnd::OnCreate(lpCreateStruct);
 		}
