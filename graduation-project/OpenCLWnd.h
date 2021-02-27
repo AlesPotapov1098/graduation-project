@@ -1,13 +1,8 @@
-
-
 #ifndef VC_EXTRALEAN
 #define VC_EXTRALEAN            // Исключите редко используемые компоненты из заголовков Windows
 #endif
 
 #define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS      // некоторые конструкторы CString будут явными
-
-// отключает функцию скрытия некоторых общих и часто пропускаемых предупреждений MFC
-#define _AFX_ALL_WARNINGS
 
 #include <afxwin.h>
 #include <afxext.h>
@@ -16,6 +11,8 @@
 #include <afxcmn.h>
 
 #include <afxcontrolbars.h>
+
+#include <d2d1.h>
 
 #include "Proportions.h"
 #include "CDialogCreateOpenCLWnd.h"
@@ -34,6 +31,9 @@ namespace gp {
 			LPCWSTR m_MDIWindowName = L"MDIChildWnd";
 
 			gpgpu::host::OpenCLHost m_Host;
+
+			ID2D1Factory * m_d2d1Factory;
+			ID2D1HwndRenderTarget * m_d2d1HWNDRenderTarget;
 
 		public:
 			OpenCLWnd() noexcept;

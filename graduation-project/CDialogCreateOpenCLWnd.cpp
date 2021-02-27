@@ -1,5 +1,8 @@
 ﻿#include "CDialogCreateOpenCLWnd.h"
 
+#include <algorithm>
+#include <iostream>
+
 namespace gp {
 	namespace app {
 		namespace dlg {
@@ -44,8 +47,10 @@ namespace gp {
 
 			void CDialogCreateOpenCLWnd::OnOK()
 			{
-				int nPlatform = static_cast<CComboBox*>(this->GetDlgItem(IDC_COMBO_PLATFROMS))->GetCurSel();
-				int nDevice = static_cast<CComboBox*>(this->GetDlgItem(IDC_COMBO_DEVICE))->GetCurSel();
+				int nPlatform = \
+					static_cast<CComboBox*>(this->GetDlgItem(IDC_COMBO_PLATFROMS))->GetCurSel();
+				int nDevice = \
+					static_cast<CComboBox*>(this->GetDlgItem(IDC_COMBO_DEVICE))->GetCurSel();
 				auto hard = m_Connect.GetHardware(nPlatform);
 				m_Host.SetPlatform(hard.GetPlatform());
 				m_Host.SetDevice(hard.GetDevice(nDevice));
@@ -102,34 +107,52 @@ namespace gp {
 					hard.GetPlatform(),
 					hard.GetDevice(0));
 
-				auto editPlatformVendor = static_cast<CEdit*>(this->GetDlgItem(IDC_EDIT_PLATFORM_VENDOR));
-
+				auto editPlatformVendor = \
+					static_cast<CEdit*>(this->GetDlgItem(IDC_EDIT_PLATFORM_VENDOR));
 				editPlatformVendor->SetWindowTextW(info.GetPlatformVendor().c_str());
 
-				auto editPlatformVersion = static_cast<CEdit*>(this->GetDlgItem(IDC_EDIT_PLATFORM_VERSION));
-
+				auto editPlatformVersion = \
+					static_cast<CEdit*>(this->GetDlgItem(IDC_EDIT_PLATFORM_VERSION));
 				editPlatformVersion->SetWindowTextW(info.GetPlatformVersion().c_str());
 
-				auto listPlatformExtension = static_cast<CListBox*>(this->GetDlgItem(IDC_LIST_PLATFORM_EXTENSIONS));
-
+				auto listPlatformExtension = \
+					static_cast<CListBox*>(this->GetDlgItem(IDC_LIST_PLATFORM_EXTENSIONS));
 				std::wstring extension = info.GetPlatformExtensions();
-				int length = extension.length();
-				for (int i = 0; i < length; i++)
-					if (extension[i] == ' ')
-						extension[i] = '\n';
 
-				listPlatformExtension->AddString(extension.c_str());
+				if (extension.empty())
+				{
+					m_IsConteinsDirectXSharging = false;
+					return;
+				}
+
+				int length = extension.length();
+				size_t pos = extension.find(L' ');
+				size_t initPos = 0;
+
+				while (pos != std::wstring::npos)
+				{
+					listPlatformExtension->AddString(extension.substr(initPos, pos - initPos).c_str());
+					initPos = pos + 1;
+
+					pos = extension.find(L' ', initPos);
+				}
+
+				//TODO: переделать добавление последней подстроки!!!
+				listPlatformExtension->AddString(
+					extension.substr(initPos, pos < extension.size() ? pos : extension.size() - initPos + 1).c_str());
 			}
 
 			void CDialogCreateOpenCLWnd::FillInComboDevice()
 			{
-				auto comboBox = static_cast<CComboBox*>(this->GetDlgItem(IDC_COMBO_PLATFROMS));
+				auto comboBox = \
+					static_cast<CComboBox*>(this->GetDlgItem(IDC_COMBO_PLATFROMS));
 
 				int curSell = comboBox->GetCurSel();
 				gpgpu::OpenCLHardware hard = m_Connect.GetHardware(curSell);
 				gpgpu::info::OpenCLHostInfo info;
 
-				auto comboDevices = static_cast<CComboBox*>(this->GetDlgItem(IDC_COMBO_DEVICE));
+				auto comboDevices = \
+					static_cast<CComboBox*>(this->GetDlgItem(IDC_COMBO_DEVICE));
 				int countDevs = hard.GetCountDevices();
 
 				for (int i = 0; i < countDevs; i++)
@@ -143,34 +166,45 @@ namespace gp {
 
 			void CDialogCreateOpenCLWnd::FillInDevicePanel()
 			{
-				auto comboBox = static_cast<CComboBox*>(this->GetDlgItem(IDC_COMBO_PLATFROMS));
+				auto comboBox = \
+					static_cast<CComboBox*>(this->GetDlgItem(IDC_COMBO_PLATFROMS));
 
 				int curSell = comboBox->GetCurSel();
 				gpgpu::OpenCLHardware hard = m_Connect.GetHardware(curSell);
 				gpgpu::info::OpenCLHostInfo info;
 
-				auto comboDevice = static_cast<CComboBox*>(this->GetDlgItem(IDC_COMBO_DEVICE));
+				auto comboDevice = \
+					static_cast<CComboBox*>(this->GetDlgItem(IDC_COMBO_DEVICE));
 
 				int curSellComboDevices = comboDevice->GetCurSel();
 				info.SetDevice(hard.GetDevice(curSellComboDevices));
 
-				auto editDeviceVendor = static_cast<CEdit*>(this->GetDlgItem(IDC_EDIT_DEVICE_VENDOR));
-
+				auto editDeviceVendor = \
+					static_cast<CEdit*>(this->GetDlgItem(IDC_EDIT_DEVICE_VENDOR));
 				editDeviceVendor->SetWindowTextW(info.GetDeviceVendor().c_str());
 
-				auto editDeviceVersion = static_cast<CEdit*>(this->GetDlgItem(IDC_EDIT_DEVICE_VERSION));
-
+				auto editDeviceVersion = \
+					static_cast<CEdit*>(this->GetDlgItem(IDC_EDIT_DEVICE_VERSION));
 				editDeviceVersion->SetWindowTextW(info.GetDeviceVersion().c_str());
 
-				auto listDeviceExtension = static_cast<CListBox*>(this->GetDlgItem(IDC_LIST_DEVICE_EXTENSIONS));
+				auto listDeviceExtension = \
+					static_cast<CListBox*>(this->GetDlgItem(IDC_LIST_DEVICE_EXTENSIONS));
 
 				std::wstring extension = info.GetDeviceExtensions();
 				int length = extension.length();
-				for (int i = 0; i < length; i++)
-					if (extension[i] == ' ')
-						extension[i] = '\n';
+				size_t pos = extension.find(L' ');
+				size_t initPos = 0;
+				
+				while (pos != std::wstring::npos)
+				{
+					listDeviceExtension->AddString(extension.substr(initPos, pos - initPos).c_str());
+					initPos = pos + 1;
 
-				listDeviceExtension->AddString(extension.c_str());
+					pos = extension.find(L' ', initPos);
+				}
+
+				listDeviceExtension->AddString(
+					extension.substr(initPos, pos < extension.size() ? pos : extension.size() - initPos + 1).c_str());
 			}
 
 			BEGIN_MESSAGE_MAP(CDialogCreateOpenCLWnd, CDialog)
