@@ -77,6 +77,10 @@ namespace gp {
 			void CDialogCreateOpenCLWnd::FillInComboPlatforms()
 			{
 				auto comboBox = static_cast<CComboBox*>(this->GetDlgItem(IDC_COMBO_PLATFROMS));
+				ASSERT(comboBox != nullptr);
+
+				if (comboBox->GetCount() != 0)
+					comboBox->ResetContent();
 				
 				int countHard = m_Connect.GetSize();
 				gpgpu::OpenCLHardware hard;
@@ -117,29 +121,10 @@ namespace gp {
 
 				auto listPlatformExtension = \
 					static_cast<CListBox*>(this->GetDlgItem(IDC_LIST_PLATFORM_EXTENSIONS));
+
 				std::wstring extension = info.GetPlatformExtensions();
 
-				if (extension.empty())
-				{
-					m_IsConteinsDirectXSharging = false;
-					return;
-				}
-
-				int length = extension.length();
-				size_t pos = extension.find(L' ');
-				size_t initPos = 0;
-
-				while (pos != std::wstring::npos)
-				{
-					listPlatformExtension->AddString(extension.substr(initPos, pos - initPos).c_str());
-					initPos = pos + 1;
-
-					pos = extension.find(L' ', initPos);
-				}
-
-				//TODO: переделать добавление последней подстроки!!!
-				listPlatformExtension->AddString(
-					extension.substr(initPos, pos < extension.size() ? pos : extension.size() - initPos + 1).c_str());
+				FillListBox(listPlatformExtension, extension);
 			}
 
 			void CDialogCreateOpenCLWnd::FillInComboDevice()
@@ -189,22 +174,36 @@ namespace gp {
 
 				auto listDeviceExtension = \
 					static_cast<CListBox*>(this->GetDlgItem(IDC_LIST_DEVICE_EXTENSIONS));
-
-				std::wstring extension = info.GetDeviceExtensions();
-				int length = extension.length();
-				size_t pos = extension.find(L' ');
-				size_t initPos = 0;
 				
+				std::wstring extension = info.GetDeviceExtensions();
+				
+				FillListBox(listDeviceExtension, extension);
+			}
+
+			void CDialogCreateOpenCLWnd::FillListBox(CListBox * listBox, const std::wstring& str)
+			{
+				ASSERT(listBox != nullptr);
+				if (str.empty())
+					return;
+
+				if (listBox->GetCount() != 0)
+					listBox->ResetContent();
+
+				int length = str.length();
+				size_t pos = str.find(L' ');
+				size_t initPos = 0;
+
 				while (pos != std::wstring::npos)
 				{
-					listDeviceExtension->AddString(extension.substr(initPos, pos - initPos).c_str());
+					listBox->AddString(str.substr(initPos, pos - initPos).c_str());
 					initPos = pos + 1;
 
-					pos = extension.find(L' ', initPos);
+					pos = str.find(L' ', initPos);
 				}
 
-				listDeviceExtension->AddString(
-					extension.substr(initPos, pos < extension.size() ? pos : extension.size() - initPos + 1).c_str());
+				// TODO: починить добавление последней строки
+				listBox->AddString(
+					str.substr(initPos, pos < str.size() ? pos : str.size() - initPos + 1).c_str());
 			}
 
 			BEGIN_MESSAGE_MAP(CDialogCreateOpenCLWnd, CDialog)
